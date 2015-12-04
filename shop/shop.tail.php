@@ -45,6 +45,8 @@ $admin = get_admin("super");
                 <li><a href="https://www.pinterest.com/vogos_style" target="_blank"><span class="ft_sns_pt">Pinterest</span></a></li>
                 <!-- <li><a href="http://"><span>Tumblr</span></a></li> -->                
             </ul>
+        <!-- KG이니시스 인증마크 적용 시작 -->
+        <img src="http://image.inicis.com/mkt/certmark/inipay/inipay_43x43_gray.png" border="0" alt="클릭하시면 이니시스 결제시스템의 유효성을 확인하실 수 있습니다." style="cursor:pointer;margin-top:25px;" onclick="javascript:window.open(&quot;https://mark.inicis.com/mark/popup_v1.php?mid=SIRvogos00&quot;,&quot;mark&quot;,&quot;scrollbars=no,resizable=no,width=565,height=683&quot;);">
         </div>
     </div>
     <div class="ft_bottom">
