@@ -39,7 +39,7 @@ if ($csv == 'csv')
     $to_date = date_conv($to_date);
 
 
-    $sql = " SELECT a.od_id, od_b_zip1, od_b_zip2, od_b_addr1, od_b_addr2, od_b_addr3, od_b_addr_jibeon, od_b_name, od_b_tel, od_b_hp, b.it_name_kr, ct_qty, b.it_id, a.od_id, od_memo, od_invoice, b.ct_option, b.ct_send_cost, b.it_sc_type
+    $sql = " SELECT a.od_id, od_b_zip1, od_b_zip2, od_b_addr1, od_b_addr2, od_b_addr3, od_b_addr_jibeon, od_b_name, od_b_tel, od_b_hp, b.it_name, ct_qty, b.it_id, a.od_id, od_memo, od_invoice, b.ct_option, b.ct_send_cost, b.it_sc_type
                FROM {$g5['g5_shop_order_table']} a, {$g5['g5_shop_cart_table']} b
               where a.od_id = b.od_id ";
     if ($case == 1) // 출력기간
@@ -71,7 +71,7 @@ if ($csv == 'csv')
 
         if($save_it_id != $row['it_id']) {
             // 합계금액 계산
-            $sql = " select SUM(IF(io_type = 1, (io_price * ct_qty), ((ct_price_kr + io_price) * ct_qty))) as price,
+            $sql = " select SUM(IF(io_type = 1, (io_price * ct_qty), ((ct_price + io_price) * ct_qty))) as price,
                             SUM(ct_qty) as qty
                         from {$g5['g5_shop_cart_table']}
                         where it_id = '{$row['it_id']}'
@@ -111,7 +111,7 @@ if ($csv == 'csv')
         //echo '"'.multibyte_digit((string)$row[od_b_hp]).'"'.',';
         echo '"'.conv_telno($row['od_b_tel']) . '"'.',';
         echo '"'.conv_telno($row['od_b_hp']) . '"'.',';
-        echo '"'.preg_replace("/\"/", "&#034;", $row['it_name_kr']) . '"'.',';
+        echo '"'.preg_replace("/\"/", "&#034;", $row['it_name']) . '"'.',';
         echo '"'.$row['ct_qty'].'"'.',';
         echo '"'.$row['ct_option'].'"'.',';
         echo '"'.$ct_send_cost.'"'.',';
@@ -134,7 +134,7 @@ if ($csv == 'xls')
     $fr_date = date_conv($fr_date);
     $to_date = date_conv($to_date);
 
-    $sql = " SELECT a.od_id, od_b_zip1, od_b_zip2, od_b_addr1, od_b_addr2, od_b_addr3, od_b_addr_jibeon, od_b_name, od_b_tel, od_b_hp, b.it_name_kr, ct_qty, b.it_id, a.od_id, od_memo, od_invoice, b.ct_option, b.ct_send_cost, b.it_sc_type
+    $sql = " SELECT a.od_id, od_b_zip1, od_b_zip2, od_b_addr1, od_b_addr2, od_b_addr3, od_b_addr_jibeon, od_b_name, od_b_tel, od_b_hp, b.it_name, ct_qty, b.it_id, a.od_id, od_memo, od_invoice, b.ct_option, b.ct_send_cost, b.it_sc_type
                FROM {$g5['g5_shop_order_table']} a, {$g5['g5_shop_cart_table']} b
               where a.od_id = b.od_id ";
     if ($case == 1) // 출력기간
@@ -174,7 +174,7 @@ if ($csv == 'xls')
     {
         if($save_it_id != $row['it_id']) {
             // 합계금액 계산
-            $sql = " select SUM(IF(io_type = 1, (io_price * ct_qty), ((ct_price_kr + io_price) * ct_qty))) as price,
+            $sql = " select SUM(IF(io_type = 1, (io_price * ct_qty), ((ct_price + io_price) * ct_qty))) as price,
                             SUM(ct_qty) as qty
                         from {$g5['g5_shop_cart_table']}
                         where it_id = '{$row['it_id']}'
@@ -214,7 +214,7 @@ if ($csv == 'xls')
         $worksheet->write($i, 2, $row['od_b_name']);
         $worksheet->write($i, 3, ' '.$row['od_b_tel']);
         $worksheet->write($i, 4, ' '.$row['od_b_hp']);
-        $worksheet->write($i, 5, $row['it_name_kr']);
+        $worksheet->write($i, 5, $row['it_name']);
         $worksheet->write($i, 6, $row['ct_qty']);
         $worksheet->write($i, 7, $row['ct_option']);
         $worksheet->write($i, 8, $ct_send_cost);
@@ -368,18 +368,18 @@ if (mysql_num_rows($result) == 0)
                     $it_price = $row2['io_price'];
                     $row2_tot_price = $row2['io_price'] * $row2['ct_qty'];
                 } else {
-                    $it_price = $row2['ct_price_kr'] + $row2['io_price'];
-                    $row2_tot_price = ($row2['ct_price_kr'] + $row2['io_price']) * $row2['ct_qty'];
+                    $it_price = $row2['ct_price'] + $row2['io_price'];
+                    $row2_tot_price = ($row2['ct_price'] + $row2['io_price']) * $row2['ct_qty'];
                 }
                 $sub_tot_qty += $row2['ct_qty'];
                 $sub_tot_price += $row2_tot_price;
 
-                $it_name_kr = stripslashes($row2['it_name_kr']);
+                $it_name = stripslashes($row2['it_name']);
                 $price_plus = '';
                 if($row2['io_price'] >= 0)
                     $price_plus = '+';
 
-                $it_name_kr = "$it_name_kr ({$row2['ct_option']} ".$price_plus.display_price($row2['io_price']).")";
+                $it_name = "$it_name ({$row2['ct_option']} ".$price_plus.display_price($row2['io_price']).")";
 
                 if($save_it_id != $row2['it_id']) {
                     switch($row2['ct_send_cost'])
@@ -396,7 +396,7 @@ if (mysql_num_rows($result) == 0)
                     }
 
                     // 합계금액 계산
-                    $sql = " select SUM(IF(io_type = 1, (io_price * ct_qty), ((ct_price_kr + io_price) * ct_qty))) as price,
+                    $sql = " select SUM(IF(io_type = 1, (io_price * ct_qty), ((ct_price + io_price) * ct_qty))) as price,
                                     SUM(ct_qty) as qty
                                 from {$g5['g5_shop_cart_table']}
                                 where it_id = '{$row2['it_id']}'
@@ -423,7 +423,7 @@ if (mysql_num_rows($result) == 0)
 
             ?>
             <tr>
-                <td><?php echo $it_name_kr; ?></td>
+                <td><?php echo $it_name; ?></td>
                 <td class="td_num"><?php echo number_format($it_price); ?></td>
                 <td class="td_cntsmall"><?php echo $fontqty1; ?><?php echo number_format($row2['ct_qty']); ?><?php echo $fontqty2; ?></td>
                 <td class="td_num td_numsum"><?php echo number_format($row2_tot_price); ?></td>

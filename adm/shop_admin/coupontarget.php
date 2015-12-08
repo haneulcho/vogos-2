@@ -32,9 +32,9 @@ if($_GET['sch_target'] == 1) {
     $sql_common = " from {$g5['g5_shop_item_table']} ";
     $sql_where = " where it_use = '1' and it_nocoupon = '0' ";
     if($_GET['sch_word'])
-        $sql_where .= " and it_name_kr like '%$sch_word%' ";
-    $sql_select = " select it_id as t_id, it_name_kr as t_name ";
-    $sql_order = " order by it_order, it_name_kr ";
+        $sql_where .= " and it_name like '%$sch_word%' ";
+    $sql_select = " select it_id as t_id, it_name as t_name ";
+    $sql_order = " order by it_order, it_name ";
 }
 
 // 테이블의 전체 레코드수만 얻음

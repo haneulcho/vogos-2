@@ -45,7 +45,7 @@ include_once('./_head.php');
             if($tmp['cnt'])
                 $out_cd = 'no';
 
-            $it_price_kr = get_price($row);
+            $it_price = get_price($row);
 
             if ($row['it_tel_inq']) $out_cd = 'tel_inq';
 
@@ -61,17 +61,17 @@ include_once('./_head.php');
                 ?>
                 품절
                 <?php } else { //품절이 아니면 체크할수 있도록한다 ?>
-                <label for="chk_it_id_<?php echo $i; ?>" class="sound_only"><?php echo $row['it_name_kr']; ?></label>
+                <label for="chk_it_id_<?php echo $i; ?>" class="sound_only"><?php echo $row['it_name']; ?></label>
                 <input type="checkbox" name="chk_it_id[<?php echo $i; ?>]" value="1" id="chk_it_id_<?php echo $i; ?>" onclick="out_cd_check(this, '<?php echo $out_cd; ?>');">
                 <?php } ?>
                 <input type="hidden" name="it_id[<?php echo $i; ?>]" value="<?php echo $row['it_id']; ?>">
                 <input type="hidden" name="io_type[<?php echo $row['it_id']; ?>][0]" value="0">
                 <input type="hidden" name="io_id[<?php echo $row['it_id']; ?>][0]" value="">
-                <input type="hidden" name="io_value[<?php echo $row['it_id']; ?>][0]" value="<?php echo $row['it_name_kr']; ?>">
+                <input type="hidden" name="io_value[<?php echo $row['it_id']; ?>][0]" value="<?php echo $row['it_name']; ?>">
                 <input type="hidden"   name="ct_qty[<?php echo $row['it_id']; ?>][0]" value="1">
             </td>
             <td class="sod_ws_img"><?php echo $image; ?></td>
-            <td><a href="./item.php?it_id=<?php echo $row['it_id']; ?>"><?php echo stripslashes($row['it_name_kr']); ?></a></td>
+            <td><a href="./item.php?it_id=<?php echo $row['it_id']; ?>"><?php echo stripslashes($row['it_name']); ?></a></td>
             <td class="td_datetime"><?php echo $row['wi_time']; ?></td>
             <td class="td_mngsmall"><a href="./wishupdate.php?w=d&amp;wi_id=<?php echo $row['wi_id']; ?>">삭제</a></td>
         </tr>

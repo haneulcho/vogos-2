@@ -37,19 +37,19 @@ if (!defined("_ORDERINQUIRY_")) exit; // 개별 페이지 접근 불가
                 $od_status = '입금확인중';
                 break;
             case '입금':
-                $od_status = 'Payment Completed';
+                $od_status = '입금완료';
                 break;
             case '준비':
-                $od_status = 'On hold';
+                $od_status = '상품준비중';
                 break;
             case '배송':
-                $od_status = 'Out for Delivery';
+                $od_status = '상품배송';
                 break;
             case '완료':
-                $od_status = 'Delivered';
+                $od_status = '배송완료';
                 break;
             default:
-                $od_status = 'Canceled';
+                $od_status = '주문취소';
                 break;
         }
         if ($row['od_invoice'] && $row['od_delivery_company']) {
@@ -63,17 +63,17 @@ if (!defined("_ORDERINQUIRY_")) exit; // 개별 페이지 접근 불가
         </td>
         <td><a href="<?php echo $dhl_link; ?>" target="_blank" class="tracking_num" onclick="return popitup('<?php echo $dhl_link; ?>', 'VOGOS SHIPPING INFORMATION - <?php echo $od['od_invoice']; ?>', '550', '400')"><i class="ion-paper-airplane"></i> <?php echo $row['od_invoice']; ?></a></td>
         <td><?php echo $row['od_time']; ?></td>
-        <td class="td_numbig"><?php echo display_price($row['od_cart_price']); ?></td>
-        <td class="td_numbig"><?php echo display_price($row['od_send_cost'] + $row['od_send_cost2']); ?></td>
-        <td class="td_numbig"><?php echo display_price($row['od_receipt_price']); ?></td>
-        <td class="tomato"><a class="view_order" href="<?php echo G5_SHOP_URL; ?>/orderinquiryview.php?od_id=<?php echo $row['od_id']; ?>&amp;uid=<?php echo $uid; ?>"><?php echo $od_status; ?><span><i class="ion-ios-eye"></i> VIEW ORDER DETAILS</span></a></td>
+        <td><?php echo substr($row['od_time'],2,14); ?></td>
+        <td class="td_num"><?php echo $row['od_cart_count']; ?></td>
+        <td class="td_numbig"><?php echo display_price($row['od_cart_price'] + $row['od_send_cost'] + $row['od_send_cost2']); ?></td>
+        <td class="tomato"><a class="view_order" href="<?php echo G5_SHOP_URL; ?>/orderinquiryview.php?od_id=<?php echo $row['od_id']; ?>&amp;uid=<?php echo $uid; ?>"><?php echo $od_status; ?><span><i class="ion-ios-eye"></i> 상세 내역 더보기</span></a></td>
     </tr>
 
     <?php
     }
 
     if ($i == 0)
-        echo '<tr><td colspan="7" class="empty_table">Your order list is empty.</td></tr>';
+        echo '<tr><td colspan="7" class="empty_table">주문 내역이 없습니다.</td></tr>';
     ?>
     </tbody>
     </table>

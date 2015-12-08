@@ -15,7 +15,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_SKIN_URL.'/style.css">', 
     <label for="sfl" class="sound_only">검색항목<strong class="sound_only"> 필수</strong></label>
     <select name="sfl" id="sfl" required class="required">
         <option value="">선택</option>
-        <option value="b.it_name_kr"    <?php echo get_selected($sfl, "b.it_name_kr", true); ?>>상품명</option>
+        <option value="b.it_name"    <?php echo get_selected($sfl, "b.it_name", true); ?>>상품명</option>
         <option value="a.it_id"      <?php echo get_selected($sfl, "a.it_id"); ?>>상품코드</option>
         <option value="a.iq_subject" <?php echo get_selected($sfl, "a.is_subject"); ?>>문의제목</option>
         <option value="a.iq_question"<?php echo get_selected($sfl, "a.iq_question"); ?>>문의내용</option>
@@ -77,7 +77,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_SKIN_URL.'/style.css">', 
         <div class="sqa_img">
             <a href="<?php echo $it_href; ?>">
                 <?php echo get_it_image($row['it_id'], 70, 70); ?>
-                <span><?php echo $row['it_name_kr']; ?></span>
+                <span><?php echo $row['it_name']; ?></span>
             </a>
         </div>
 

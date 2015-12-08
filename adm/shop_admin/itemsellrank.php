@@ -133,7 +133,7 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
         ?>
         <tr class="<?php echo $bg; ?>">
             <td class="td_num"><?php echo $num; ?></td>
-            <td><a href="<?php echo $href; ?>"><?php echo get_it_image($row['it_id'], 50, 50); ?> <?php echo cut_str($row['it_name_kr'],30); ?></a></td>
+            <td><a href="<?php echo $href; ?>"><?php echo get_it_image($row['it_id'], 50, 50); ?> <?php echo cut_str($row['it_name'],30); ?></a></td>
             <td class="td_num"><?php echo $row['ct_status_1']; ?></td>
             <td class="td_num"><?php echo $row['ct_status_2']; ?></td>
             <td class="td_num"><?php echo $row['ct_status_3']; ?></td>

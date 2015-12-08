@@ -29,8 +29,8 @@ for ($i=1; $row=sql_fetch_array($result); $i++) {
     }
 
     if ($this->view_it_img) {
-        echo get_it_image_best($row['it_id'], 222, 300, 8, '', '', 'original', stripslashes($row['it_name_kr']))."\n";
-        echo get_it_image_best($row['it_id'], 222, 300, 2, '', '', 'sub', stripslashes($row['it_name_kr']))."\n";
+        echo get_it_image_best($row['it_id'], 222, 300, 8, '', '', 'original', stripslashes($row['it_name']))."\n";
+        echo get_it_image_best($row['it_id'], 222, 300, 2, '', '', 'sub', stripslashes($row['it_name']))."\n";
     }
 
     if ($this->href) {
@@ -41,17 +41,17 @@ for ($i=1; $row=sql_fetch_array($result); $i++) {
         echo "<div class=\"slider_txt\"><a href=\"{$this->href}{$row['it_id']}\" class=\"sct_a\">\n";
     }
 
-    if ($this->view_it_name_kr) {
-        echo stripslashes($row['it_name_kr'])."\n";
+    if ($this->view_it_name) {
+        echo stripslashes($row['it_name'])."\n";
     }
 
     echo "<div class=\"sct_cost\">\n";
 
-    if ($this->view_it_cust_price_kr && $row['it_cust_price_kr']) {
-        echo "<strike>".display_price($row['it_cust_price_kr'])."</strike>\n";
+    if ($this->view_it_cust_price && $row['it_cust_price']) {
+        echo "<strike>".display_price($row['it_cust_price'])."</strike>\n";
     }
 
-    if ($this->view_it_price_kr) {
+    if ($this->view_it_price) {
         echo display_price(get_price($row), $row['it_tel_inq'])."\n";
     }
 

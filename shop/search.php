@@ -6,7 +6,7 @@ if (G5_IS_MOBILE) {
     return;
 }
 
-$g5['title'] = "Search";
+$g5['title'] = "상품 검색 결과";
 include_once('./_head.php');
 
 // QUERY 문에 공통적으로 들어가는 내용
@@ -70,7 +70,7 @@ if ($q) {
 
         $concat = array();
         if ($search_all || $qname)
-            $concat[] = "a.it_name_kr";
+            $concat[] = "a.it_name";
         if ($search_all || $qexplan)
             $concat[] = "a.it_explan2";
         if ($search_all || $qid)
@@ -90,7 +90,7 @@ if ($qcaid)
     $where[] = " a.ca_id like '$qcaid%' ";
 
 if ($qfrom && $qto)
-    $where[] = " a.it_price_kr between '$qfrom' and '$qto' ";
+    $where[] = " a.it_price between '$qfrom' and '$qto' ";
 
 $sql_where = " where " . implode(" and ", $where);
 
@@ -99,7 +99,7 @@ $qsort  = strtolower($qsort);
 $qorder = strtolower($qorder);
 $order_by = "";
 // 아래의 $qsort 필드만 정렬이 가능하게 하여 다른 필드로 하여금 유추해 볼수 없게함
-if (($qsort == "it_sum_qty" || $qsort == "it_price_kr" || $qsort == "it_use_avg" || $qsort == "it_use_cnt" || $qsort == "it_update_time") &&
+if (($qsort == "it_sum_qty" || $qsort == "it_price" || $qsort == "it_use_avg" || $qsort == "it_use_cnt" || $qsort == "it_update_time") &&
     ($qorder == "asc" || $qorder == "desc")) {
     $order_by = ' order by ' . $qsort . ' ' . $qorder . ' , it_order, it_id desc';
 }
@@ -129,7 +129,7 @@ $total_page  = ceil($total_count / $items); // 전체 페이지 계산
             echo '<div class="sit_admin"><a href="'.G5_ADMIN_URL.'/shop_admin/configform.php#anc_scf_etc'.'" class="btn_admin">검색 설정</a></div>';
         }
     ?>
-        <h3>Your search for <span class="empha"><?php echo $q; ?></span> returned <?php echo $total_count; ?> results</h3>
+        <h3>'<span class="empha"><?php echo $q; ?></span>'에 대한 검색 결과 <?php echo $total_count; ?>건</h3>
     </div>
     <div id="ssch_frm">
         <form name="frmdetailsearch">
@@ -137,20 +137,20 @@ $total_page  = ceil($total_count / $items); // 전체 페이지 계산
         <input type="hidden" name="qorder" id="qorder" value="<?php echo $qorder ?>">
         <input type="hidden" name="qcaid" id="qcaid" value="<?php echo $qcaid ?>">
         <div>
-            <strong>Scope</strong>
-            <input type="checkbox" name="qname" id="ssch_qname" value="1" <?php echo $qname_check?'checked="checked"':'';?>> <label for="ssch_qname">Product Name</label>
-            <input type="checkbox" name="qexplan" id="ssch_qexplan" value="1" <?php echo $qexplan_check?'checked="checked"':'';?>> <label for="ssch_qexplan">Product Description</label>
-            <input type="checkbox" name="qid" id="ssch_qid" value="1" <?php echo $qid_check?'checked="checked"':'';?>> <label for="ssch_qid">Product No. (ex 15CD-0065)</label>
+            <strong>검색범위</strong>
+            <input type="checkbox" name="qname" id="ssch_qname" value="1" <?php echo $qname_check?'checked="checked"':'';?>> <label for="ssch_qname">상품이름</label>
+            <input type="checkbox" name="qexplan" id="ssch_qexplan" value="1" <?php echo $qexplan_check?'checked="checked"':'';?>> <label for="ssch_qexplan">상품설명</label>
+            <input type="checkbox" name="qid" id="ssch_qid" value="1" <?php echo $qid_check?'checked="checked"':'';?>> <label for="ssch_qid">상품고유번호 (ex 15CD-0065)</label>
         </div>
         <div>
-            <strong>Price</strong>
-            <label for="ssch_qfrom" class="sound_only">Min</label>
+            <strong>상품가격(원)</strong>
+            <label for="ssch_qfrom" class="sound_only">최소 가격</label>
             <input type="text" name="qfrom" value="<?php echo $qfrom; ?>" id="ssch_qfrom" class="frm_input" size="10"> ~
-            <label for="ssch_qto" class="sound_only">Max</label>
+            <label for="ssch_qto" class="sound_only">최대 가격</label>
             <input type="text" name="qto" value="<?php echo $qto; ?>" id="ssch_qto" class="frm_input" size="10">
         </div>
         <div>
-            <strong>Search:</strong>
+            <strong>검색어:</strong>
             <input type="text" name="q" value="<?php echo $q; ?>" id="ssch_q" class="frm_input" size="40" maxlength="30">
             <input type="submit" value="SEARCH" class="btn_submit">
         </div>
@@ -175,8 +175,8 @@ $total_page  = ceil($total_count / $items); // 전체 페이지 계산
     </div>
     <ul id="ssch_sort">
         <li><a href="#" class="btn01" onclick="set_sort('it_sum_qty', 'desc'); return false;">most popular</a></li>
-        <li><a href="#" class="btn01" onclick="set_sort('it_price_kr', 'asc'); return false;">price (Low to High)</a></li>
-        <li><a href="#" class="btn01" onclick="set_sort('it_price_kr', 'desc'); return false;">price (High to Low)</a></li>
+        <li><a href="#" class="btn01" onclick="set_sort('it_price', 'asc'); return false;">price (Low to High)</a></li>
+        <li><a href="#" class="btn01" onclick="set_sort('it_price', 'desc'); return false;">price (High to Low)</a></li>
         <li><a href="#" class="btn01" onclick="set_sort('it_update_time', 'desc'); return false;">latest</a></li>
     </ul>
     <!-- } 검색된 분류 끝 -->
@@ -193,10 +193,10 @@ $total_page  = ceil($total_count / $items); // 전체 페이지 계산
             $list->set_is_page(true);
             $list->set_view('it_img', true);
             $list->set_view('it_id', false);
-            $list->set_view('it_name_kr', true);
-            $list->set_view('it_basic_kr', true);
-            $list->set_view('it_cust_price_kr', true); // 원 가격 보이게
-            $list->set_view('it_price_kr', true);
+            $list->set_view('it_name', true);
+            $list->set_view('it_basic', true);
+            $list->set_view('it_cust_price', true); // 원 가격 보이게
+            $list->set_view('it_price', true);
             $list->set_view('it_icon', false); // 추천, 신상, 베스트 아이콘 안 보이게
             $list->set_view('sns', false); // sns 아이콘 안 보이게
             echo $list->run();

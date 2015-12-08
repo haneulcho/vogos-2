@@ -16,7 +16,7 @@ $sql_common = " from `{$g5['g5_shop_item_qa_table']}` a join `{$g5['g5_shop_item
 $sql_search = " where (1) ";
 
 if(!$sfl)
-    $sfl = 'b.it_name_kr';
+    $sfl = 'b.it_name';
 
 if ($stx) {
     $sql_search .= " and ( ";
@@ -53,7 +53,7 @@ $total_page  = ceil($total_count / $rows);  // 전체 페이지 계산
 if ($page < 1) { $page = 1; } // 페이지가 없으면 첫 페이지 (1 페이지)
 $from_record = ($page - 1) * $rows; // 시작 열을 구함
 
-$sql = " select a.*, b.it_name_kr
+$sql = " select a.*, b.it_name
           $sql_common
           $sql_search
           $sql_order

@@ -28,10 +28,8 @@ $tot_sell_price = 0;
 // $s_cart_id 로 현재 장바구니 자료 쿼리
 $sql = " select a.ct_id,
                 a.it_id,
-                a.it_name_kr,
-                a.it_name_en,
-                a.ct_price_kr,
-                a.ct_price_en,
+                a.it_name,
+                a.ct_price,
                 a.ct_point,
                 a.ct_qty,
                 a.ct_status,
@@ -86,7 +84,7 @@ $it_send_cost = 0;
         for ($i=0; $row=mysql_fetch_array($result); $i++)
         {
             // 합계금액 계산
-            $sql = " select SUM(IF(io_type = 1, (io_price * ct_qty), ((ct_price_kr + io_price) * ct_qty))) as price,
+            $sql = " select SUM(IF(io_type = 1, (io_price * ct_qty), ((ct_price + io_price) * ct_qty))) as price,
                             SUM(ct_point * ct_qty) as point,
                             SUM(ct_qty) as qty
                         from {$g5['g5_shop_cart_table']}
@@ -100,12 +98,12 @@ $it_send_cost = 0;
 
             $a1 = '<a class="cart_it_name" href="./item.php?it_id='.$row['it_id'].'"><b>';
             $a2 = '</b></a>';
-            $image = get_it_image_best($row['it_id'], 105, 140, 8, '', '', 'original', stripslashes($row['it_name_kr']));
+            $image = get_it_image_best($row['it_id'], 105, 140, 8, '', '', 'original', stripslashes($row['it_name']));
 
-            $it_name_kr = $a1 . stripslashes($row['it_name_kr']) . $a2; // 상품명
+            $it_name = $a1 . stripslashes($row['it_name']) . $a2; // 상품명
             $it_options = print_item_options_cart($row['it_id'], $s_cart_id);
             if($it_options) {
-                $it_name_kr .= '<div class="sod_opt">'.$it_options.'</div>';
+                $it_name .= '<div class="sod_opt">'.$it_options.'</div>';
                 $mod_options = '<div class="sod_option_btn"><button type="button" class="mod_options"><img src="'.G5_SHOP_SKIN_URL.'/img/cart/btn_change.jpg" alt="Change Details"></button>';
             }
 
@@ -139,13 +137,13 @@ $it_send_cost = 0;
             <td class="cart_img"><?php echo $image; ?></td>
             <td class="cart_des">
                 <input type="hidden" name="it_id[<?php echo $i; ?>]" value="<?php echo $row['it_id']; ?>">
-                <input type="hidden" name="it_name_kr[<?php echo $i; ?>]" value="<?php echo get_text($row['it_name_kr']); ?>">
-                <?php echo $it_name_kr.$mod_options; ?>
+                <input type="hidden" name="it_name[<?php echo $i; ?>]" value="<?php echo get_text($row['it_name']); ?>">
+                <?php echo $it_name.$mod_options; ?>
                 <button type="button" onclick="remove_item('<?php echo $row['it_id']; ?>');" class="mod_remove"><?php echo '<img src="'.G5_SHOP_SKIN_URL.'/img/cart/btn_remove_option.jpg" alt="Remove Items">' ?></button></div>
             </td>
             <td class="cart_qty"><?php echo number_format($sum['qty']); ?></td>
-            <td class="cart_num">$<?php echo number_format($row['ct_price_kr'], 2); ?></td>
-            <td class="cart_num"><span id="sell_price_<?php echo $i; ?>">$<?php echo number_format($sell_price, 2); ?></span></td>
+            <td class="cart_num"><?php echo number_format($row['ct_price']); ?></td>
+            <td class="cart_num"><span id="sell_price_<?php echo $i; ?>">$<?php echo number_format($sell_price); ?></span></td>
             <td class="cart_chk">
                 <label for="ct_chk_<?php echo $i; ?>" class="sound_only">Select</label>
                 <input type="checkbox" name="ct_chk[<?php echo $i; ?>]" value="1" id="ct_chk_<?php echo $i; ?>" checked="checked">
@@ -157,7 +155,7 @@ $it_send_cost = 0;
             $tot_sell_price += $sell_price;
 
             // 로그분석기 변수 전달
-            $http_PA .= $row['it_name_kr']."_";
+            $http_PA .= $row['it_name']."_";
 
             if ($i < $row_count-1) {
                 $http_PA .= number_format($sum['qty']).";";
@@ -169,7 +167,7 @@ $it_send_cost = 0;
         } // for 끝
 
         if ($i == 0) {
-            echo '<tr><td colspan="8" class="empty_table">Your shopping cart is empty.</td></tr>';
+            echo '<tr><td colspan="8" class="empty_table">장바구니에 담긴 상품이 없습니다.</td></tr>';
         } else {
             // 배송비 계산
             $send_cost = get_sendcost($s_cart_id, 0);
@@ -186,14 +184,14 @@ $it_send_cost = 0;
     <table id="sod_bsk_tot">
         <?php if ($send_cost > 0) { // 배송비가 0 보다 크다면 (있다면) ?>
         <tr class="sod_shipping">
-            <td class="sod_bsk_dvr">SHIPPING COST</td>
-            <td class="sod_bsk_cnt"><strong>$<?php echo number_format($send_cost, 2); ?></strong></td>
+            <td class="sod_bsk_dvr">배송비</td>
+            <td class="sod_bsk_cnt"><strong><?php echo number_format($send_cost); ?> 원</strong></td>
         </tr>
         <?php } ?>
         <?php if ($tot_price > 0) { ?>
         <tr class="sod_subtotal">
             <td class="sod_bsk_dvr">SUBTOTAL</td>
-            <td class="sod_bsk_cnt"><strong>$<?php echo number_format($tot_price, 2); ?></strong></td>
+            <td class="sod_bsk_cnt"><strong><?php echo number_format($tot_price); ?> 원 / <?php echo number_format($tot_point); ?> 점</strong></td>
         </tr>
         <?php } ?>
         <?php if ($i > 0) { ?>
@@ -206,14 +204,14 @@ $it_send_cost = 0;
 
     <?php if ($i == 0) { ?>
     <div id="sod_bsk_act_con">
-        <a href="<?php echo G5_SHOP_URL; ?>/list.php?ca_id=10" class="continue">Continue Shopping</a>
+        <a href="<?php echo G5_SHOP_URL; ?>/list.php?ca_id=10" class="continue">쇼핑 계속하기</a>
     <?php } else { ?>
     <div id="sod_bsk_act">
         <input type="hidden" name="url" value="./orderform.php">
         <input type="hidden" name="records" value="<?php echo $i; ?>">
         <input type="hidden" name="act" value="">
         <input type="hidden" name="it_del_id" value="">
-        <a href="<?php echo G5_SHOP_URL; ?>/list.php?ca_id=<?php echo $continue_ca_id; ?>" class="btn_act"><?php echo '<img src="'.G5_SHOP_SKIN_URL.'/img/cart/btn_continue.jpg" alt="Continue Shopping">' ?></a>
+        <a href="<?php echo G5_SHOP_URL; ?>/list.php?ca_id=<?php echo $continue_ca_id; ?>" class="btn_act"><?php echo '<img src="'.G5_SHOP_SKIN_URL.'/img/cart/btn_continue.jpg" alt="쇼핑 계속하기">' ?></a>
         <button type="button" onclick="return form_check('alldelete');" class="btn_act"><?php echo '<img src="'.G5_SHOP_SKIN_URL.'/img/cart/btn_empty.jpg" alt="Empty cart">' ?></button>
         <?php } ?>
     </div>
@@ -295,7 +293,7 @@ function form_check(act) {
     if (act == "buy")
     {
         if($("input[name^=ct_chk]:checked").size() < 1) {
-            alert("Please select at least one item.");
+            alert("주문하실 상품을 하나이상 선택해 주십시오.");
             return false;
         }
 
@@ -310,7 +308,7 @@ function form_check(act) {
     else if (act == "seldelete")
     {
         if($("input[name^=ct_chk]:checked").size() < 1) {
-            alert("Please select at least one item.");
+            alert("삭제하실 상품을 하나이상 선택해 주십시오.");
             return false;
         }
 

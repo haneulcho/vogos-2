@@ -4,17 +4,17 @@ include_once(G5_CAPTCHA_PATH.'/captcha.lib.php');
 include_once(G5_LIB_PATH.'/mailer.lib.php');
 
 if ($is_member) {
-    alert('Signed in already.');
+    alert('이미 로그인중입니다.');
 }
 
 if (!chk_captcha()) {
-    alert('Incorrect Captcha Number, Please try again');
+    alert('자동등록방지 숫자가 틀렸습니다.');
 }
 
 $email = trim($_POST['mb_email']);
 
 if (!$email)
-    alert_close('Invalid E-mail address.');
+    alert_close('메일주소 오류입니다.');
 
 $sql = " select count(*) as cnt from {$g5['member_table']} where mb_email = '$email' ";
 $row = sql_fetch($sql);
@@ -24,7 +24,7 @@ if ($row['cnt'] > 1)
 $sql = " select mb_no, mb_id, mb_name, mb_nick, mb_email, mb_datetime from {$g5['member_table']} where mb_email = '$email' ";
 $mb = sql_fetch($sql);
 if (!$mb['mb_id'])
-    alert('Either the ID or password is incorrect');
+    alert('존재하지 않는 회원입니다.');
 else if (is_admin($mb['mb_id']))
     alert('관리자 아이디는 접근 불가합니다.');
 

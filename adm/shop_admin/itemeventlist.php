@@ -21,7 +21,7 @@ if ($sel_ca_id != "") {
 }
 
 if ($sel_field == "")  {
-    $sel_field = "it_name_kr";
+    $sel_field = "it_name";
 }
 
 $sql_common = " from {$g5['g5_shop_item_table']} a
@@ -110,7 +110,7 @@ if($ev_id) {
 
 <label for="sel_field" class="sound_only">검색대상</label>
 <select name="sel_field" id="sel_field">
-    <option value="it_name_kr" <?php echo get_selected($sel_field, 'it_name_kr'); ?>>상품명</option>
+    <option value="it_name" <?php echo get_selected($sel_field, 'it_name'); ?>>상품명</option>
     <option value="a.it_id" <?php echo get_selected($sel_field, 'a.it_id'); ?>>상품코드</option>
 </select>
 
@@ -140,7 +140,7 @@ if($ev_id) {
     <tr>
         <th scope="col">이벤트</th>
         <th scope="col"><a href="<?php echo title_sort("a.it_id") . '&amp;'.$qstr1.'&amp;ev_id='.$ev_id; ?>">상품코드</a></th>
-        <th scope="col"><a href="<?php echo title_sort("it_name_kr") . '&&amp;'.$qstr1.'&amp;ev_id='.$ev_id; ?>">상품명</a></th>
+        <th scope="col"><a href="<?php echo title_sort("it_name") . '&&amp;'.$qstr1.'&amp;ev_id='.$ev_id; ?>">상품명</a></th>
     </tr>
     </thead>
     <tbody>
@@ -162,7 +162,7 @@ if($ev_id) {
             <input type="checkbox" name="ev_chk[<?php echo $i; ?>]" value="1" id="ev_chk_<?php echo $i; ?>" <?php echo ($row['ev_id'] ? "checked" : ""); ?>>
         </td>
         <td class="td_num"><a href="<?php echo $href; ?>"><?php echo $row['it_id']; ?></a></td>
-        <td><a href="<?php echo $href; ?>"><?php echo get_it_image($row['it_id'], 50, 50); ?> <?php echo cut_str(stripslashes($row['it_name_kr']), 60, "&#133"); ?></a></td>
+        <td><a href="<?php echo $href; ?>"><?php echo get_it_image($row['it_id'], 50, 50); ?> <?php echo cut_str(stripslashes($row['it_name']), 60, "&#133"); ?></a></td>
     </tr>
 
     <?php

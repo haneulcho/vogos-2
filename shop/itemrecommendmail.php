@@ -39,7 +39,7 @@ $content = nl2br(stripslashes($content));
 $from_name = get_text($member['mb_name']);
 $from_email = $member['mb_email'];
 $it_id = $it['it_id'];
-$it_name_kr = $it['it_name_kr'];
+$it_name = $it['it_name'];
 $it_mimg = get_it_image($it_id, $default['de_mimg_width'], $default['de_mimg_height']);
 
 ob_start();

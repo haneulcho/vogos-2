@@ -28,31 +28,31 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
 
     <div class="tbl">
         <table>
-        <caption>Basic Information</caption>
+        <caption>기본정보 입력</caption>
         <tr>
-            <th scope="row"><label for="reg_mb_id">ID<strong class="sound_only">Required</strong></label></th>
+            <th scope="row"><label for="reg_mb_id">ID<strong class="sound_only">필수</strong></label></th>
             <td>
                 <input type="text" name="mb_id" value="<?php echo $member['mb_id'] ?>" id="reg_mb_id" class="frm_input <?php echo $required ?> <?php echo $readonly ?>" minlength="3" maxlength="20" placeholder="A-Z, 0-9" <?php echo $required ?> <?php echo $readonly ?>>
                 <span id="msg_mb_id"></span>
             </td>
         </tr>
         <tr>
-            <th scope="row"><label for="reg_mb_email">E-mail<strong class="sound_only">required</strong></label></th>
+            <th scope="row"><label for="reg_mb_email">E-mail<strong class="sound_only">필수</strong></label></th>
             <td>
                 <input type="hidden" name="old_email" value="<?php echo $member['mb_email'] ?>">
                 <input type="text" name="mb_email" value="<?php echo isset($member['mb_email'])?$member['mb_email']:''; ?>" id="reg_mb_email" required class="frm_input email required" size="50" maxlength="100">
             </td>
         </tr>
         <tr>
-            <th scope="row"><label for="reg_mb_password">Password<strong class="sound_only">*Required</strong></label></th>
+            <th scope="row"><label for="reg_mb_password">Password<strong class="sound_only">필수</strong></label></th>
             <td><input type="password" name="mb_password" id="reg_mb_password" class="frm_input <?php echo $required ?>" minlength="3" maxlength="20" <?php echo $required ?>></td>
         </tr>
         <tr>
-            <th scope="row"><label for="reg_mb_password_re">Verify Password<strong class="sound_only">Required</strong></label></th>
+            <th scope="row"><label for="reg_mb_password_re">Verify Password(비밀번호 확인)<strong class="sound_only">필수</strong></label></th>
             <td><input type="password" name="mb_password_re" id="reg_mb_password_re" class="frm_input <?php echo $required ?>" minlength="3" maxlength="20" <?php echo $required ?>></td>
         </tr>
         <tr>
-            <th scope="row"><label for="reg_mb_country">Country<strong class="sound_only">Required</strong></label></th>
+            <th scope="row"><label for="reg_mb_country">Country<strong class="sound_only">필수</strong></label></th>
             <td>
                 <select id="reg_mb_country" name="mb_country" <?php echo $required ?>>
                 <option value="">SELECT YOUR COUNTRY</option>
@@ -298,7 +298,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
 <?php if(!$w=='') { ?>
     <div class="tbl">
         <table>
-        <caption>Additional Information</caption>
+        <caption>부가정보 입력</caption>
         <tr>
             <th scope="row"><label for="reg_mb_name">First Name<strong class="sound_only">*</strong></label></th>
             <td>
@@ -329,21 +329,28 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
         <?php } ?>
         <?php if ($config['cf_use_addr']) { ?>
         <tr>
-            <th scope="row"><label for="reg_mb_addr1">Address Line 1</label></th>
+            <th scope="row"><label for="reg_mb_zip">우편번호</label></th>
             <td>
-                <input type="text" name="mb_addr1" value="<?php echo $member['mb_addr1']; ?>" id="reg_mb_addr1" class="frm_input" size="5" maxlength="65">
+                <input type="text" name="mb_zip" value="<?php echo $member['mb_zip1'].$member['mb_zip2']; ?>" id="reg_mb_zip" <?php echo $config['cf_req_addr']?"required":""; ?> class="frm_input <?php echo $config['cf_req_addr']?"required":""; ?>" size="5" maxlength="6">
+            </td>
+        </tr>
+
+        <tr>
+            <th scope="row"><label for="reg_mb_addr1">기본주소</label></th>
+            <td>
+                <button type="button" class="btn_frmline" onclick="win_zip('fregisterform', 'mb_zip', 'mb_addr1', 'mb_addr2', 'mb_addr3', 'mb_addr_jibeon');">주소 검색</button><br><input type="text" name="mb_addr1" value="<?php echo $member['mb_addr1'] ?>" id="reg_mb_addr1" <?php echo $config['cf_req_addr']?"required":""; ?> class="frm_input frm_address <?php echo $config['cf_req_addr']?"required":""; ?>" placeholder="주소검색을 눌러주세요." size="50">
             </td>
         </tr>
         <tr>
-            <th scope="row"><label for="reg_mb_addr2">Address Line 2</label></th>
+            <th scope="row"><label for="reg_mb_addr2">상세주소</label></th>
             <td>
-                <input type="text" name="mb_addr2" value="<?php echo $member['mb_addr2']; ?>" id="reg_mb_addr2" class="frm_input" size="5" maxlength="65">
+                <input type="text" name="mb_addr2" value="<?php echo $member['mb_addr2'] ?>" id="reg_mb_addr2" class="frm_input frm_address" placeholder="상세주소" size="50">
             </td>
         </tr>
         <tr>
-            <th scope="row"><label for="reg_mb_zip">Postal Code</label></th>
+            <th scope="row"><label for="reg_mb_addr3">참고항목</label></th>
             <td>
-                <input type="text" name="mb_zip" value="<?php echo $member['mb_zip']; ?>" id="reg_mb_zip" class="frm_input" size="5" maxlength="15">
+                <input type="text" name="mb_addr3" value="<?php echo $member['mb_addr3'] ?>" id="reg_mb_addr3" class="frm_input frm_address" placeholder="상세주소 참고항목" size="50" readonly="readonly"><input type="hidden" name="mb_addr_jibeon" value="<?php echo $member['mb_addr_jibeon']; ?>">
             </td>
         </tr>
         <?php } ?>
@@ -354,10 +361,10 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
     <div class="tbl" style="margin-bottom:20px;">
         <table>
         <tr>
-            <th scope="row">I'd like to receive exclusive discounts and news from VOGOS by email and post</th>
+            <th scope="row">이메일, SNS 알림을 수신하시겠습니까?</th>
             <td>
-                <input type="radio" name="mb_mailling" value="1" id="reg_mb_mailling1" <?php echo ($w=='' || $member['mb_mailling'])?'checked':''; ?>> <label for="reg_mb_mailling1" style="margin-right:10px;">Yes</label>
-                <input type="radio" name="mb_mailling" value="0" id="reg_mb_mailling0"> <label for="reg_mb_mailling0">No thanks</label>
+                <input type="radio" name="mb_mailling" value="1" id="reg_mb_mailling1" <?php echo ($w=='' || $member['mb_mailling'])?'checked':''; ?>> <label for="reg_mb_mailling1" style="margin-right:10px;">네</label>
+                <input type="radio" name="mb_mailling" value="0" id="reg_mb_mailling0"> <label for="reg_mb_mailling0">아니오</label>
             </td>
         </tr>
 
@@ -370,7 +377,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
 
     <div class="btn_confirm">
         <!-- <a href="<?php //echo G5_URL; ?>/" class="btn_cancel">취소</a> -->
-        <input type="submit" value="<?php echo $w==''?'Sign Up':'Confirm'; ?>" id="btn_submit" class="btn_submit" accesskey="s">
+        <input type="submit" value="<?php echo $w==''?'가입하기':'정보수정'; ?>" id="btn_submit" class="btn_submit" accesskey="s">
     </div>
     </form>
 
@@ -442,21 +449,21 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
 
         if (f.w.value == "") {
             if (f.mb_password.value.length < 3) {
-                alert("Please enter your password at least 3 characters.");
+                alert("비밀번호를 3글자 이상 입력하십시오.");
                 f.mb_password.focus();
                 return false;
             }
         }
 
         if (f.mb_password.value != f.mb_password_re.value) {
-            alert("Please check that passwords match.");
+            alert("비밀번호가 같지 않습니다.");
             f.mb_password_re.focus();
             return false;
         }
 
         if (f.mb_password.value.length > 0) {
             if (f.mb_password_re.value.length < 3) {
-                alert("Please enter your password at least 3 characters.");
+                alert("비밀번호를 3글자 이상 입력하십시오.");
                 f.mb_password_re.focus();
                 return false;
             }
@@ -465,7 +472,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
         // 국가 검사
         if (f.w.value=="") {
             if (f.mb_country.value.length < 1) {
-                alert("Please select your country.");
+                alert("국가를 선택하십시오.");
                 f.mb_country.focus();
                 return false;
             }

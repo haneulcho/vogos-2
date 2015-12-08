@@ -19,7 +19,7 @@ Field   Status  Notes
 $lt = "<<<";
 $gt = ">>>";
 
-$sql =" select it_id, it_name_kr, it_price_kr, it_time from {$g5['g5_shop_item_table']} where it_use = '1' order by ca_id";
+$sql =" select it_id, it_name, it_price, it_time from {$g5['g5_shop_item_table']} where it_use = '1' order by ca_id";
 $result = sql_query($sql);
 
 for ($i=0; $row=sql_fetch_array($result); $i++)
@@ -36,8 +36,8 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     else
     {
         // 업데이트 상품 양식 & 품절 복구 상품 양식
-        echo "{$lt}pname{$gt}{$row['it_name_kr']}\n";
-        echo "{$lt}price{$gt}{$row['it_price_kr']}\n";
+        echo "{$lt}pname{$gt}{$row['it_name']}\n";
+        echo "{$lt}price{$gt}{$row['it_price']}\n";
         echo "{$lt}class{$gt}U\n";
     }
     echo "{$lt}utime{$gt}{$row['it_time']}\n";

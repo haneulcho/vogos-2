@@ -22,7 +22,7 @@ if ($sca != "") {
     $sql_search .= " and ca_id like '$sca%' ";
 }
 
-if ($sfl == "")  $sfl = "a.it_name_kr";
+if ($sfl == "")  $sfl = "a.it_name";
 if (!$sst) {
     $sst = "is_id";
     $sod = "desc";
@@ -82,7 +82,7 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
 
 <label for="sfl" class="sound_only">검색대상</label>
 <select name="sfl" id="sfl">
-    <option value="it_name_kr" <?php echo get_selected($sfl, 'it_name_kr'); ?>>상품명</option>
+    <option value="it_name" <?php echo get_selected($sfl, 'it_name'); ?>>상품명</option>
     <option value="a.it_id" <?php echo get_selected($sfl, 'a.it_id'); ?>>상품코드</option>
     <option value="is_name" <?php echo get_selected($sfl, 'is_name'); ?>>이름</option>
 </select>
@@ -110,7 +110,7 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
             <label for="chkall" class="sound_only">사용후기 전체</label>
             <input type="checkbox" name="chkall" value="1" id="chkall" onclick="check_all(this.form)">
         </th>
-        <th scope="col"><?php echo subject_sort_link("it_name_kr"); ?>상품명</a></th>
+        <th scope="col"><?php echo subject_sort_link("it_name"); ?>상품명</a></th>
         <th scope="col"><?php echo subject_sort_link("mb_name"); ?>이름</a></th>
         <th scope="col"><?php echo subject_sort_link("is_subject"); ?>제목</a></th>
         <th scope="col"><?php echo subject_sort_link("is_score"); ?>평점</a></th>
@@ -136,7 +136,7 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
             <input type="hidden" name="is_id[<?php echo $i; ?>]" value="<?php echo $row['is_id']; ?>">
             <input type="hidden" name="it_id[<?php echo $i; ?>]" value="<?php echo $row['it_id']; ?>">
         </td>
-        <td><a href="<?php echo $href; ?>"><?php echo get_it_image($row['it_id'], 50, 50); ?><?php echo cut_str($row['it_name_kr'],30); ?></a></td>
+        <td><a href="<?php echo $href; ?>"><?php echo get_it_image($row['it_id'], 50, 50); ?><?php echo cut_str($row['it_name'],30); ?></a></td>
         <td class="td_name"><?php echo $name; ?></td>
         <td class="sit_use_subject">
             <a href="#" class="use_href" onclick="return false;" target="<?php echo $i; ?>"><?php echo get_text($row['is_subject']); ?></a>

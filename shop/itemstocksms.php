@@ -5,7 +5,7 @@ $g5['title'] = '상품 재입고 알림 (SMS)';
 include_once(G5_PATH.'/head.sub.php');
 
 // 상품정보
-$sql = " select it_id, it_name_kr, it_soldout, it_stock_sms
+$sql = " select it_id, it_name, it_soldout, it_stock_sms
             from {$g5['g5_shop_item_table']}
             where it_id = '$it_id' ";
 $it = sql_fetch($sql);
@@ -35,7 +35,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_SKIN_URL.'/style.css">', 
         <tbody>
         <tr>
             <th scope="row">상품</th>
-            <td><?php echo $it['it_name_kr']; ?></td>
+            <td><?php echo $it['it_name']; ?></td>
         </tr>
         <tr>
             <th scope="row"><label for="ss_hp">휴대폰번호<strong class="sound_only"> 필수</strong></label></th>

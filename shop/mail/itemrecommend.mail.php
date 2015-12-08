@@ -27,7 +27,7 @@ $ft_a_st = 'display:block;padding:30px 0;background:#484848;color:#fff;text-alig
 
         <div style="margin:0 0 10px;text-align:center">
             <a href="<?php echo G5_SHOP_URL.'/item.php?it_id='.$it_id; ?>" target="_blank" style="display:inline-block;margin:0 0 10px"><?php echo $it_mimg; ?></a><br>
-            <?php echo $it_name_kr; ?>
+            <?php echo $it_name; ?>
         </div>
 
         <p style="<?php echo $cont_st; ?>">

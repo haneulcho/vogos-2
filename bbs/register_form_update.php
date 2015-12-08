@@ -25,17 +25,15 @@ if($w == 'u')
 else if($w == '')
     $mb_id = trim($_POST['mb_id']);
 else
-    alert('We could not process your request.', G5_URL);
+    alert('잘못된 접근입니다', G5_URL);
 
 if(!$mb_id)
-    alert('Invalid ID value, Please try again');
+    alert('회원아이디 값이 없습니다. 올바른 방법으로 이용해 주십시오.');
 
 $mb_password    = trim($_POST['mb_password']);
 $mb_password_re = trim($_POST['mb_password_re']);
-$mb_name        = isset($_POST['mb_name'])           ? trim($_POST['mb_name'])         : "";
+$mb_name        = trim($_POST['mb_name']);
 $mb_name_last   = trim($_POST['mb_name_last']);
-$mb_country     = trim($_POST['mb_country']);
-$mb_city        = trim($_POST['mb_city']);
 // $mb_nick        = trim($_POST['mb_nick']); 보고스 쇼핑몰에서는 닉네임과 이름을 동기화 함
 $mb_nick        = trim($_POST['mb_name']);
 $mb_email       = trim($_POST['mb_email']);
@@ -44,9 +42,12 @@ $mb_birth       = isset($_POST['mb_birth'])         ? trim($_POST['mb_birth'])  
 $mb_homepage    = isset($_POST['mb_homepage'])      ? trim($_POST['mb_homepage'])    : "";
 $mb_tel         = isset($_POST['mb_tel'])           ? trim($_POST['mb_tel'])         : "";
 $mb_hp          = isset($_POST['mb_hp'])            ? trim($_POST['mb_hp'])          : "";
-$mb_zip         = isset($_POST['mb_zip'])           ? trim($_POST['mb_zip'])         : "";
+$mb_zip1        = isset($_POST['mb_zip'])           ? substr(trim($_POST['mb_zip']), 0, 3) : "";
+$mb_zip2        = isset($_POST['mb_zip'])           ? substr(trim($_POST['mb_zip']), 3)    : "";
 $mb_addr1       = isset($_POST['mb_addr1'])         ? trim($_POST['mb_addr1'])       : "";
 $mb_addr2       = isset($_POST['mb_addr2'])         ? trim($_POST['mb_addr2'])       : "";
+$mb_addr3       = isset($_POST['mb_addr3'])         ? trim($_POST['mb_addr3'])       : "";
+$mb_addr_jibeon = isset($_POST['mb_addr_jibeon'])   ? trim($_POST['mb_addr_jibeon']) : "";
 $mb_signature   = isset($_POST['mb_signature'])     ? trim($_POST['mb_signature'])   : "";
 $mb_profile     = isset($_POST['mb_profile'])       ? trim($_POST['mb_profile'])     : "";
 $mb_recommend   = isset($_POST['mb_recommend'])     ? trim($_POST['mb_recommend'])   : "";
@@ -70,11 +71,11 @@ if ($w == '' || $w == 'u') {
     if ($msg = count_mb_id($mb_id))         alert($msg, "", true, true);
 
     if ($w == '' && !$mb_password)
-        alert('Invalid Password.');
+        alert('비밀번호가 넘어오지 않았습니다.');
     if($w == '' && $mb_password != $mb_password_re)
-        alert('Password is Incorrect.');
+        alert('비밀번호가 일치하지 않습니다.');
 
-    //if ($msg = empty_mb_name($mb_id))       alert($msg, "", true, true);
+    if ($msg = empty_mb_name($mb_id))       alert($msg, "", true, true);
     if ($msg = empty_mb_nick($mb_nick))     alert($msg, "", true, true);
     if ($msg = empty_mb_email($mb_email))   alert($msg, "", true, true);
     if ($msg = reserve_mb_id($mb_id))       alert($msg, "", true, true);
@@ -125,11 +126,12 @@ $mb_name_last   = clean_xss_tags($mb_name_last);
 $mb_email       = get_email_address($mb_email);
 $mb_homepage    = clean_xss_tags($mb_homepage);
 $mb_tel         = clean_xss_tags($mb_tel);
-$mb_zip         = preg_replace('/[^0-9]/', '', $mb_zip);
-$mb_country     = clean_xss_tags($mb_country);
-$mb_city     = clean_xss_tags($mb_city);
+$mb_zip1        = preg_replace('/[^0-9]/', '', $mb_zip1);
+$mb_zip2        = preg_replace('/[^0-9]/', '', $mb_zip2);
 $mb_addr1       = clean_xss_tags($mb_addr1);
 $mb_addr2       = clean_xss_tags($mb_addr2);
+$mb_addr3       = clean_xss_tags($mb_addr3);
+$mb_addr_jibeon = preg_match("/^(N|R)$/", $mb_addr_jibeon) ? $mb_addr_jibeon : '';
 
 // 사용자 코드 실행
 @include_once($member_skin_path.'/register_form_update.head.skin.php');
@@ -137,13 +139,13 @@ $mb_addr2       = clean_xss_tags($mb_addr2);
 //===============================================================
 //  본인확인
 //---------------------------------------------------------------
-
+$mb_hp = hyphen_hp_number($mb_hp);
 if($config['cf_cert_use'] && $_SESSION['ss_cert_type'] && $_SESSION['ss_cert_dupinfo']) {
     // 중복체크
     $sql = " select mb_id from {$g5['member_table']} where mb_id <> '{$member['mb_id']}' and mb_dupinfo = '{$_SESSION['ss_cert_dupinfo']}' ";
     $row = sql_fetch($sql);
     if ($row['mb_id']) {
-        alert("ID is already being used.");
+        alert("입력하신 본인확인 정보로 가입된 내역이 존재합니다.\\n회원아이디 : ".$row['mb_id']);
     }
 }
 
@@ -188,13 +190,14 @@ if ($w == '') {
                      mb_nick = '{$mb_nick}',
                      mb_nick_date = '".G5_TIME_YMD."',
                      mb_email = '{$mb_email}',
-                     mb_country = '{$mb_country}',
-                     mb_city = '{$mb_city}',
                      mb_homepage = '{$mb_homepage}',
                      mb_tel = '{$mb_tel}',
-                     mb_zip = '{$mb_zip}',
+                     mb_zip1 = '{$mb_zip1}',
+                     mb_zip2 = '{$mb_zip2}',
                      mb_addr1 = '{$mb_addr1}',
                      mb_addr2 = '{$mb_addr2}',
+                     mb_addr3 = '{$mb_addr3}',
+                     mb_addr_jibeon = '{$mb_addr_jibeon}',
                      mb_signature = '{$mb_signature}',
                      mb_profile = '{$mb_profile}',
                      mb_today_login = '".G5_TIME_YMDHIS."',
@@ -225,7 +228,7 @@ if ($w == '') {
     sql_query($sql);
 
     // 회원가입 포인트 부여
-    insert_point($mb_id, $config['cf_register_point'], 'First Sign In', '@member', $mb_id, '회원가입');
+    insert_point($mb_id, $config['cf_register_point'], '회원가입 축하', '@member', $mb_id, '회원가입');
 
     // 추천인에게 포인트 부여
     if ($config['cf_use_recommend'] && $mb_recommend)
@@ -233,7 +236,7 @@ if ($w == '') {
 
     // 회원님께 메일 발송
     if ($config['cf_email_mb_member']) {
-        $subject = '[VOGOS Sign Up] Congratulations!';
+        $subject = '['.$config['cf_title'].'] 회원가입을 축하드립니다.';
 
         $mb_md5 = md5($mb_id.$mb_email.G5_TIME_YMDHIS);
         $certify_href = G5_BBS_URL.'/email_certify.php?mb_id='.$mb_id.'&amp;mb_md5='.$mb_md5;
@@ -270,10 +273,10 @@ if ($w == '') {
 
 } else if ($w == 'u') {
     if (!trim($_SESSION['ss_mb_id']))
-        alert('Please sign in first!');
+        alert('로그인 되어 있지 않습니다.');
 
     if (trim($_POST['mb_id']) != $mb_id)
-        alert("Error Occured! Please try again.");
+        alert("로그인된 정보와 수정하려는 정보가 틀리므로 수정할 수 없습니다.\\n만약 올바르지 않은 방법을 사용하신다면 바로 중지하여 주십시오.");
 
     $sql_password = "";
     if ($mb_password)
@@ -300,13 +303,14 @@ if ($w == '') {
                     mb_sms = '{$mb_sms}',
                     mb_open = '{$mb_open}',
                     mb_email = '{$mb_email}',
-                    mb_country = '{$mb_country}',
-                    mb_city = '{$mb_city}',
                     mb_homepage = '{$mb_homepage}',
                     mb_tel = '{$mb_tel}',
-                    mb_zip = '{$mb_zip}',
+                    mb_zip1 = '{$mb_zip1}',
+                    mb_zip2 = '{$mb_zip2}',
                     mb_addr1 = '{$mb_addr1}',
                     mb_addr2 = '{$mb_addr2}',
+                    mb_addr3 = '{$mb_addr3}',
+                    mb_addr_jibeon = '{$mb_addr_jibeon}',
                     mb_signature = '{$mb_signature}',
                     mb_profile = '{$mb_profile}',
                     mb_1 = '{$mb_1}',
@@ -457,14 +461,14 @@ if ($w == '') {
 
     if ($old_email != $mb_email && $config['cf_use_email_certify']) {
         set_session('ss_mb_id', '');
-        alert('Updated your information successfully.', G5_URL);
+        alert('회원 정보가 수정 되었습니다.\n\nE-mail 주소가 변경되었으므로 다시 인증하셔야 합니다.', G5_URL);
     } else {
         echo '
         <!doctype html>
         <html lang="ko">
         <head>
         <meta charset="utf-8">
-        <title>Edit Information</title>
+        <title>회원정보수정</title>
         <body>
         <form name="fregisterupdate" method="post" action="'.G5_HTTP_BBS_URL.'/register_form.php">
         <input type="hidden" name="w" value="u">
@@ -473,7 +477,7 @@ if ($w == '') {
         <input type="hidden" name="is_update" value="1">
         </form>
         <script>
-        alert("Updated your information successfully.");
+        alert("회원 정보가 수정 되었습니다.");
         document.fregisterupdate.submit();
         </script>
         </body>

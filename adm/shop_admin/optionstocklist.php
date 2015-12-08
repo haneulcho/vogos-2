@@ -18,7 +18,7 @@ if ($sel_ca_id != "") {
     $sql_search .= " and b.ca_id like '$sel_ca_id%' ";
 }
 
-if ($sel_field == "")  $sel_field = "b.it_name_kr";
+if ($sel_field == "")  $sel_field = "b.it_name";
 if ($sort1 == "") $sort1 = "a.io_stock_qty";
 if ($sort2 == "") $sort2 = "asc";
 
@@ -41,7 +41,7 @@ $sql  = " select a.it_id,
                  a.io_stock_qty,
                  a.io_noti_qty,
                  a.io_use,
-                 b.it_name_kr,
+                 b.it_name,
                  b.it_price_ddm,
                  b.it_place_ddm,
                  b.it_name_ddm,
@@ -85,7 +85,7 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
 
 <label for="sel_field" class="sound_only">검색대상</label>
 <select name="sel_field" id="sel_field">
-    <option value="it_name_kr" <?php echo get_selected($sel_field, 'b.it_name_kr'); ?>>상품명</option>
+    <option value="it_name" <?php echo get_selected($sel_field, 'b.it_name'); ?>>상품명</option>
     <option value="a.it_id" <?php echo get_selected($sel_field, 'a.it_id'); ?>>상품코드</option>
     <option value="b.it_place_ddm" <?php echo get_selected($sel_field, 'b.it_place_ddm'); ?>>사입처</option>
     <option value="b.it_name_ddm" <?php echo get_selected($sel_field, 'b.it_name_ddm'); ?>>사입상품명</option>
@@ -115,7 +115,7 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
     <caption><?php echo $g5['title']; ?> 목록</caption>
     <thead>
     <tr>
-        <th scope="col"><a href="<?php echo title_sort("b.it_name_kr") . "&amp;$qstr1"; ?>">상품명</a></th>
+        <th scope="col"><a href="<?php echo title_sort("b.it_name") . "&amp;$qstr1"; ?>">상품명</a></th>
         <th scope="col">옵션항목</th>
         <th scope="col">옵션타입</th>
         <th scope="col"><a href="<?php echo title_sort("a.io_stock_qty") . "&amp;$qstr1"; ?>">창고재고</a></th>
@@ -181,7 +181,7 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
             <input type="hidden" name="it_id[<?php echo $i; ?>]" value="<?php echo $row['it_id']; ?>">
             <input type="hidden" name="io_id[<?php echo $i; ?>]" value="<?php echo $row['io_id']; ?>">
             <input type="hidden" name="io_type[<?php echo $i; ?>]" value="<?php echo $row['io_type']; ?>">
-            <a href="<?php echo $href; ?>"><?php echo get_it_image($row['it_id'], 50, 50); ?> <?php echo cut_str(stripslashes($row['it_name_kr']), 60, "&#133"); ?> - <?php echo $row['it_place_ddm'].' / '.$row['it_name_ddm'].' / '.$row['it_price_ddm']; ?></a>
+            <a href="<?php echo $href; ?>"><?php echo get_it_image($row['it_id'], 50, 50); ?> <?php echo cut_str(stripslashes($row['it_name']), 60, "&#133"); ?> - <?php echo $row['it_place_ddm'].' / '.$row['it_name_ddm'].' / '.$row['it_price_ddm']; ?></a>
         </td>
         <td class="td_itopt"><?php echo $option; ?></td>
         <td class="td_mng"><?php echo $type; ?></td>

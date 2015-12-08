@@ -16,7 +16,7 @@ $sql = " select * from {$g5['g5_shop_cart_table']} where od_id = '$cart_id' and 
 $result = sql_query($sql);
 
 // 판매가격
-$sql2 = " select ct_price_kr, it_name_kr, ct_send_cost from {$g5['g5_shop_cart_table']} where od_id = '$cart_id' and it_id = '$it_id' order by ct_id asc limit 1 ";
+$sql2 = " select ct_price, it_name, ct_send_cost from {$g5['g5_shop_cart_table']} where od_id = '$cart_id' and it_id = '$it_id' order by ct_id asc limit 1 ";
 $row2 = sql_fetch($sql2);
 
 if(!mysql_num_rows($result))
@@ -27,7 +27,7 @@ if(!mysql_num_rows($result))
 <form name="foption" method="post" action="<?php echo G5_SHOP_URL; ?>/cartupdate.php" onsubmit="return formcheck(this);">
 <input type="hidden" name="act" value="optionmod">
 <input type="hidden" name="it_id[]" value="<?php echo $it['it_id']; ?>">
-<input type="hidden" id="it_price_kr" value="<?php echo $row2['ct_price_kr']; ?>">
+<input type="hidden" id="it_price" value="<?php echo $row2['ct_price']; ?>">
 <input type="hidden" name="ct_send_cost" value="<?php echo $row2['ct_send_cost']; ?>">
 <input type="hidden" name="sw_direct">
 <?php
@@ -83,8 +83,10 @@ if($option_2) {
             else
                 $it_stock_qty = get_option_stock_qty($row['it_id'], $row['io_id'], $row['io_type']);
 
-            if($row['io_price'] > 0)
-                $io_price = '(+ $'.number_format($row['io_price'], 2);
+            if($row['io_price'] < 0)
+                $io_price = '('.number_format($row['io_price']).'원)';
+            else
+                $io_price = '(+'.number_format($row['io_price']).'원)';
 
             $cls = 'opt';
             if($row['io_type'])
@@ -132,19 +134,19 @@ function formcheck(f)
         val = $(this).val();
 
         if(val.length < 1) {
-            alert("Please check a quantity.");
+            alert("수량을 입력해 주십시오.");
             result = false;
             return false;
         }
 
         if(val.replace(/[0-9]/g, "").length > 0) {
-            alert("Invalid number. Please input valid number.");
+            alert("수량은 숫자로 입력해 주십시오.");
             result = false;
             return false;
         }
 
         if(parseInt(val.replace(/[^0-9]/g, "")) < 1) {
-            alert("Please specify a quantity larger than 0 in a product.");
+            alert("수량은 1이상 입력해 주십시오.");
             result = false;
             return false;
         }
@@ -159,12 +161,12 @@ function formcheck(f)
     }
 
     if(min_qty > 0 && sum_qty < min_qty) {
-        alert("Please specify a quantity larger than "+number_format(String(min_qty))+" in a product.");
+        alert("선택옵션 개수 총합 "+number_format(String(min_qty))+"개 이상 주문해 주십시오.");
         return false;
     }
 
     if(max_qty > 0 && sum_qty > max_qty) {
-        alert("Please specify a quantity less than "+number_format(String(max_qty))+" in a product.");
+        alert("선택옵션 개수 총합 "+number_format(String(max_qty))+"개 이하로 주문해 주십시오.");
         return false;
     }
 

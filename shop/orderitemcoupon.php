@@ -16,7 +16,7 @@ if($sw_direct)
 else
     $cart_id = get_session('ss_cart_id');
 
-$sql = " select SUM( IF(io_type = '1', io_price * ct_qty, (ct_price_kr + io_price) * ct_qty)) as sum_price
+$sql = " select SUM( IF(io_type = '1', io_price * ct_qty, (ct_price + io_price) * ct_qty)) as sum_price
             from {$g5['g5_shop_cart_table']}
             where od_id = '$cart_id'
               and it_id = '$it_id' ";

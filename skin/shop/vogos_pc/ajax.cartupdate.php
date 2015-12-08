@@ -17,19 +17,19 @@ else
 // 브라우저에서 쿠키를 허용하지 않은 경우라고 볼 수 있음.
 if (!$tmp_cart_id)
 {
-    die(json_encode(array('error' => 'You might not be able to take advantage of certain functions of our site.\n\nYou may need to enable cookies.\n\nPlease enable cookies on your device. (Internet option)')));
+    die(json_encode(array('error' => '더 이상 작업을 진행할 수 없습니다.\n\n브라우저의 쿠키 허용을 사용하지 않음으로 설정한것 같습니다.\n\n브라우저의 인터넷 옵션에서 쿠키 허용을 사용으로 설정해 주십시오.\n\n그래도 진행이 되지 않는다면 쇼핑몰 운영자에게 문의 바랍니다.')));
 }
 
 
 // 레벨(권한)이 상품구입 권한보다 작다면 상품을 구입할 수 없음.
 if ($member['mb_level'] < $default['de_level_sell'])
 {
-    die(json_encode(array('error' => 'Sorry! You are not authorized.')));
+    die(json_encode(array('error' => '상품을 구입할 수 있는 권한이 없습니다.')));
 }
 
 $count = count($_POST['it_id']);
 if ($count < 1)
-    die(json_encode(array('error' => 'Please add items to your cart.')));
+    die(json_encode(array('error' => '장바구니에 담을 상품을 선택하여 주십시오.')));
 
 $ct_count = 0;
 for($i=0; $i<$count; $i++) {
@@ -40,7 +40,7 @@ for($i=0; $i<$count; $i++) {
     $sql = " select * from {$g5['g5_shop_item_table']} where it_id = '$it_id' ";
     $it = sql_fetch($sql);
     if(!$it['it_id'])
-        die(json_encode(array('error' => 'There is no information for this product. ')));
+        die(json_encode(array('error' => '상품정보가 존재하지 않습니다.')));
 
     // 옵션정보를 얻어서 배열에 저장
     $opt_list = array();
@@ -59,11 +59,11 @@ for($i=0; $i<$count; $i++) {
     }
 
     if($lst_count > 0 && !trim($_POST['io_id'][$it_id][$i]) && $_POST['io_type'][$it_id][$i] == 0)
-        die(json_encode(array('error' => 'Please select item options.')));
+        die(json_encode(array('error' => '상품의 선택옵션을 선택해 주십시오.')));
 
     for($k=0; $k<$opt_count; $k++) {
         if ($_POST['ct_qty'][$it_id][$k] < 1)
-            die(json_encode(array('error' => 'Please enter quantity at least one.')));
+            die(json_encode(array('error' => '수량은 1 이상 입력해 주십시오.')));
     }
 
     // 바로구매에 있던 장바구니 자료를 지운다.
@@ -79,10 +79,10 @@ for($i=0; $i<$count; $i++) {
         }
 
         if($it['it_buy_min_qty'] > 0 && $sum_qty < $it['it_buy_min_qty'])
-            die(json_encode(array('error' => 'The quantity requested is not available. Please enter a lower quantity.')));
+            die(json_encode(array('error' => $it['it_name'].'의 선택옵션 개수 총합 '.number_format($it['it_buy_min_qty']).'개 이상 주문해 주십시오.')));
 
         if($it['it_buy_max_qty'] > 0 && $sum_qty > $it['it_buy_max_qty'])
-            die(json_encode(array('error' => 'The quantity requested is not available. Please enter a lower quantity.')));
+            die(json_encode(array('error' => $it['it_name'].'의 선택옵션 개수 총합 '.number_format($it['it_buy_max_qty']).'개 이하로 주문해 주십시오.')));
 
         // 기존에 장바구니에 담긴 상품이 있는 경우에 최대 구매수량 체크
         if($it['it_buy_max_qty'] > 0) {
@@ -95,7 +95,7 @@ for($i=0; $i<$count; $i++) {
             $row4 = sql_fetch($sql4);
 
             if(($sum_qty + $row4['ct_sum']) > $it['it_buy_max_qty'])
-                die(json_encode(array('error' => 'The quantity requested is not available. Please enter a lower quantity.')));
+                die(json_encode(array('error' => $it['it_name'].'의 선택옵션 개수 총합 '.number_format($it['it_buy_max_qty']).'개 이하로 주문해 주십시오.', './cart.php')));
         }
     }
 
@@ -107,7 +107,7 @@ for($i=0; $i<$count; $i++) {
     // 장바구니에 Insert
     $comma = '';
     $sql = " INSERT INTO {$g5['g5_shop_cart_table']}
-                    ( od_id, mb_id, it_id, it_name_kr, it_sc_type, it_sc_method, it_sc_price, it_sc_minimum, it_sc_qty, ct_status, ct_price_kr, ct_price_en, ct_point, ct_point_use, ct_stock_use, ct_option, ct_qty, ct_notax, io_id, io_type, io_price, ct_time, ct_ip, ct_send_cost, ct_direct, ct_select, ct_select_time )
+                    ( od_id, mb_id, it_id, it_name, it_sc_type, it_sc_method, it_sc_price, it_sc_minimum, it_sc_qty, ct_status, ct_price, ct_price_en, ct_point, ct_point_use, ct_stock_use, ct_option, ct_qty, ct_notax, io_id, io_type, io_price, ct_time, ct_ip, ct_send_cost, ct_direct, ct_select, ct_select_time )
                 VALUES ";
 
     for($k=0; $k<$opt_count; $k++) {
@@ -129,10 +129,10 @@ for($i=0; $i<$count; $i++) {
         // 구매가격이 음수인지 체크
         if($io_type) {
             if((int)$io_price < 0)
-                die(json_encode(array('error' => 'Please enter valid number.')));
+                die(json_encode(array('error' => '구매금액이 음수인 상품은 구매할 수 없습니다.')));
         } else {
-            if((int)$it['it_price_kr'] + (int)$io_price < 0)
-                die(json_encode(array('error' => 'Please enter valid number.')));
+            if((int)$it['it_price'] + (int)$io_price < 0)
+                die(json_encode(array('error' => '구매금액이 음수인 상품은 구매할 수 없습니다.')));
         }
 
         // 동일옵션의 상품이 있으면 수량 더함
@@ -153,7 +153,7 @@ for($i=0; $i<$count; $i++) {
 
             if ($tmp_ct_qty + $ct_qty > $tmp_it_stock_qty)
             {
-                die(json_encode(array('error' => 'The quantity requested is not available. Please enter a lower quantity.\n\nIn stock : ' . number_format($tmp_it_stock_qty))));
+                die(json_encode(array('error' => $io_value." 의 재고수량이 부족합니다.\n\n현재 재고수량 : " . number_format($tmp_it_stock_qty) . " 개")));
             }
 
             $sql3 = " update {$g5['g5_shop_cart_table']}
@@ -182,7 +182,7 @@ for($i=0; $i<$count; $i++) {
         else if($it['it_sc_type'] > 1 && $it['it_sc_method'] == 1)
             $ct_send_cost = 1; // 착불
 
-        $sql .= $comma."( '$tmp_cart_id', '{$member['mb_id']}', '{$it['it_id']}', '".addslashes($it['it_name_kr'])."', '{$it['it_sc_type']}', '{$it['it_sc_method']}', '{$it['it_sc_price']}', '{$it['it_sc_minimum']}', '{$it['it_sc_qty']}', '쇼핑', '{$it['it_price_kr']}', '$point', '0', '0', '$io_value', '$ct_qty', '{$it['it_notax']}', '$io_id', '$io_type', '$io_price', '".G5_TIME_YMDHIS."', '$REMOTE_ADDR', '$ct_send_cost', '$sw_direct', '$ct_select', '$ct_select_time' )";
+        $sql .= $comma."( '$tmp_cart_id', '{$member['mb_id']}', '{$it['it_id']}', '".addslashes($it['it_name'])."', '{$it['it_sc_type']}', '{$it['it_sc_method']}', '{$it['it_sc_price']}', '{$it['it_sc_minimum']}', '{$it['it_sc_qty']}', '쇼핑', '{$it['it_price']}', '$point', '0', '0', '$io_value', '$ct_qty', '{$it['it_notax']}', '$io_id', '$io_type', '$io_price', '".G5_TIME_YMDHIS."', '$REMOTE_ADDR', '$ct_send_cost', '$sw_direct', '$ct_select', '$ct_select_time' )";
         $comma = ' , ';
         $ct_count++;
     }

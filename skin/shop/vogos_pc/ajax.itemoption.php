@@ -30,8 +30,8 @@ ob_start();
 ?>
 <form name="fcart" method="post" action="<?php echo $action_url; ?>">
 <input type="hidden" name="it_id[]" value="<?php echo $it['it_id']; ?>">
-<input type="hidden" name="it_name_kr[]" value="<?php echo stripslashes($it['it_name_kr']); ?>">
-<input type="hidden" name="it_price_kr[]" value="<?php echo get_price($it); ?>">
+<input type="hidden" name="it_name[]" value="<?php echo stripslashes($it['it_name']); ?>">
+<input type="hidden" name="it_price[]" value="<?php echo get_price($it); ?>">
 <input type="hidden" name="it_stock[]" value="<?php echo get_it_stock_qty($it['it_id']); ?>">
 <input type="hidden" name="io_type[<?php echo $it['it_id']; ?>][]" value="0">
 <input type="hidden" name="io_id[<?php echo $it['it_id']; ?>][]" value="">

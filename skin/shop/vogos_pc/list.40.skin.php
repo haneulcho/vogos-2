@@ -42,7 +42,7 @@ for ($i=1; $row=sql_fetch_array($result); $i++) {
     }
 
     if ($this->view_it_img) {
-        echo get_it_image($row['it_id'], $this->img_width, $this->img_height, '', '', stripslashes($row['it_name_kr']))."\n";
+        echo get_it_image($row['it_id'], $this->img_width, $this->img_height, '', '', stripslashes($row['it_name']))."\n";
     }
 
     if ($this->href) {
@@ -61,27 +61,27 @@ for ($i=1; $row=sql_fetch_array($result); $i++) {
         echo "<div class=\"sct_txt\"><a href=\"{$this->href}{$row['it_id']}\" class=\"sct_a\">\n";
     }
 
-    if ($this->view_it_name_kr) {
-        echo stripslashes($row['it_name_kr'])."\n";
+    if ($this->view_it_name) {
+        echo stripslashes($row['it_name'])."\n";
     }
 
     if ($this->href) {
         echo "</a></div>\n";
     }
 
-    if ($this->view_it_basic_kr && $row['it_basic_kr']) {
-        echo "<div class=\"sct_basic\">".stripslashes($row['it_basic_kr'])."</div>\n";
+    if ($this->view_it_basic && $row['it_basic']) {
+        echo "<div class=\"sct_basic\">".stripslashes($row['it_basic'])."</div>\n";
     }
 
-    if ($this->view_it_cust_price_kr || $this->view_it_price_kr) {
+    if ($this->view_it_cust_price || $this->view_it_price) {
 
         echo "<div class=\"sct_cost\">\n";
 
-        if ($this->view_it_cust_price_kr && $row['it_cust_price_kr']) {
-            echo "<strike>".display_price($row['it_cust_price_kr'])."</strike>\n";
+        if ($this->view_it_cust_price && $row['it_cust_price']) {
+            echo "<strike>".display_price($row['it_cust_price'])."</strike>\n";
         }
 
-        if ($this->view_it_price_kr) {
+        if ($this->view_it_price) {
             echo display_price(get_price($row), $row['it_tel_inq'])."\n";
         }
 
@@ -91,7 +91,7 @@ for ($i=1; $row=sql_fetch_array($result); $i++) {
 
     if ($this->view_sns) {
         $sns_url  = G5_SHOP_URL.'/item.php?it_id='.$row['it_id'];
-        $sns_title = get_text($row['it_name_kr']).' | '.get_text($config['cf_title']);
+        $sns_title = get_text($row['it_name']).' | '.get_text($config['cf_title']);
         echo "<div class=\"sct_sns\">";
         echo get_sns_share_link('facebook', $sns_url, $sns_title, G5_SHOP_SKIN_URL.'/img/sns_fb_s.png');
         echo get_sns_share_link('twitter', $sns_url, $sns_title, G5_SHOP_SKIN_URL.'/img/sns_twt_s.png');

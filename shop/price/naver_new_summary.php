@@ -30,7 +30,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     $stock_qty = get_it_stock_qty($row['it_id']);
 
     echo "{$lt}begin{$gt}\n";
-    echo "{$lt}mapid{$gt}{$row['it_id_kr']}\n";
+    echo "{$lt}mapid{$gt}{$row['it_id']}\n";
     if ($stock_qty <= 0)
     {
         // 품절 상품 양식
@@ -40,7 +40,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     {
         // 업데이트 상품 양식 & 품절 복구 상품 양식
         echo "{$lt}pname{$gt}{$row['it_name']}\n";
-        echo "{$lt}price{$gt}{$row['it_price_kr']}\n";
+        echo "{$lt}price{$gt}{$row['it_price']}\n";
         echo "{$lt}class{$gt}U\n";
     }
     echo "{$lt}utime{$gt}{$row['it_time']}\n";

@@ -23,7 +23,7 @@ add_javascript('<script src="'.G5_SHOP_SKIN_URL.'/js/jquery.magnific-popup.min.j
             ?>
         </div>
         <div class="sit_title">
-            <h2><?php echo stripslashes($it['it_name_kr']); ?>
+            <h2><?php echo stripslashes($it['it_name']); ?>
             <?php
                 if ($is_admin) {
                     echo '<span class="sit_admin"><a href="'.G5_ADMIN_URL.'/shop_admin/itemform.php?w=u&amp;it_id='.$it_id.'" class="btn_admin" target="_blank">상품 관리</a></span>';
@@ -79,7 +79,7 @@ $video_frame = "<iframe src=\"".$video_src."\" width=\"330\" height=\"590\" fram
                 $thumbnails[] = $thumb;
                 $big_img_count++;
 
-                echo '<a href="'.G5_DATA_URL.'/item/'.$it['it_img'.$i].'" target="_blank" title="'.$it['it_name_kr'].'">'.$img.'</a>';
+                echo '<a href="'.G5_DATA_URL.'/item/'.$it['it_img'.$i].'" target="_blank" title="'.$it['it_name'].'">'.$img.'</a>';
             }
         }
 
@@ -112,12 +112,12 @@ $video_frame = "<iframe src=\"".$video_src."\" width=\"330\" height=\"590\" fram
     <!-- 상품 요약정보 및 구매 시작 { -->
     <section id="sit_ov">
         <div class="sit_it_basic">
-            <p><?php echo $it['it_basic_kr']; ?></p>
+            <p><?php echo $it['it_basic']; ?></p>
             <?php
                 if(!empty($it['it_img11'])) {
                     $color_img = get_it_thumbnail($it['it_img11'], 70, 95);
                     echo '<div class="color_img">';
-                    echo '<a href="'.G5_DATA_URL.'/item/'.$it['it_img11'].'" target="_blank" title="'.$it['it_name_kr'].'">'.$color_img.'</a>';
+                    echo '<a href="'.G5_DATA_URL.'/item/'.$it['it_img11'].'" target="_blank" title="'.$it['it_name'].'">'.$color_img.'</a>';
                     echo '</div>';
                 }
             ?>
@@ -188,10 +188,10 @@ $video_frame = "<iframe src=\"".$video_src."\" width=\"330\" height=\"590\" fram
                 <li class="sit_opt_list">
                     <input type="hidden" name="io_type[<?php echo $it_id; ?>][]" value="0">
                     <input type="hidden" name="io_id[<?php echo $it_id; ?>][]" value="">
-                    <input type="hidden" name="io_value[<?php echo $it_id; ?>][]" value="<?php echo $it['it_name_kr']; ?>">
+                    <input type="hidden" name="io_value[<?php echo $it_id; ?>][]" value="<?php echo $it['it_name']; ?>">
                     <input type="hidden" class="io_price" value="0">
                     <input type="hidden" class="io_stock" value="<?php echo $it['it_stock_qty']; ?>">
-                    <span class="sit_opt_subj"><?php echo $it['it_name_kr']; ?></span>
+                    <span class="sit_opt_subj"><?php echo $it['it_name']; ?></span>
                     <span class="sit_opt_prc">(+0)</span>
                     <div>
                         <label for="ct_qty_<?php echo $i; ?>" class="sound_only">수량</label>
@@ -217,7 +217,7 @@ $video_frame = "<iframe src=\"".$video_src."\" width=\"330\" height=\"590\" fram
             </p>
             <?php } ?>
 
-            <h3 id="sit_title"><?php echo stripslashes($it['it_name_kr']); ?> <span class="sound_only">Item Information &amp; Form</span></h3>
+            <h3 id="sit_title"><?php echo stripslashes($it['it_name']); ?> <span class="sound_only">Item Information &amp; Form</span></h3>
 
             <?php if (!$it['it_use']) { // 판매가능이 아닐 경우 ?>
             This Product is currently unavailable.
@@ -228,7 +228,7 @@ $video_frame = "<iframe src=\"".$video_src."\" width=\"330\" height=\"590\" fram
             </div>
             <div class="sit_ov_total">
                 <span class="price_total">SUBTOTAL</span>
-                <input type="hidden" id="it_price_kr" value="<?php echo get_price($it); ?>">
+                <input type="hidden" id="it_price" value="<?php echo get_price($it); ?>">
                 <div id="sit_tot_price" class="price_total_num">
                     <?php echo display_price(get_price($it)); ?>
                 </div>
@@ -456,13 +456,13 @@ function fitem_submit(f)
     }
 
     // 판매가격이 0 보다 작다면
-    if (document.getElementById("it_price_kr").value < 0) {
-        alert("An error occured. Please contact to us.");
+    if (document.getElementById("it_price").value < 0) {
+        alert("전화로 문의해 주시면 감사하겠습니다.");
         return false;
     }
 
     if($(".sit_opt_list").size() < 1) {
-        alert("Please select an option.");
+        alert("상품의 선택옵션을 선택해 주십시오.");
         return false;
     }
 
@@ -476,19 +476,19 @@ function fitem_submit(f)
         val = $(this).val();
 
         if(val.length < 1) {
-            alert("Please enter item quantity you selected.");
+            alert("수량을 입력해 주십시오.");
             result = false;
             return false;
         }
 
         if(val.replace(/[0-9]/g, "").length > 0) {
-            alert("Please check a quantity.\nYou can use only number.");
+            alert("수량은 숫자로 입력해 주십시오.");
             result = false;
             return false;
         }
 
         if(parseInt(val.replace(/[^0-9]/g, "")) < 1) {
-            alert("Please enter quantity at least one.");
+            alert("수량은 1이상 입력해 주십시오.");
             result = false;
             return false;
         }
@@ -503,12 +503,12 @@ function fitem_submit(f)
     }
 
     if(min_qty > 0 && sum_qty < min_qty) {
-        alert("The quantity requested is not available. Please enter a lower quantity.");
+        alert("선택옵션 개수 총합 "+number_format(String(min_qty))+"개 이상 주문해 주십시오.");
         return false;
     }
 
     if(max_qty > 0 && sum_qty > max_qty) {
-        alert("The quantity requested is not available. Please enter a lower quantity.");
+        alert("선택옵션 개수 총합 "+number_format(String(max_qty))+"개 이하로 주문해 주십시오.");
         return false;
     }
 

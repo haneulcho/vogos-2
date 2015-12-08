@@ -45,7 +45,7 @@ $qstr = "sort1=$sort1&amp;sort2=$sort2&amp;sel_field=$sel_field&amp;search=$sear
 
 // 상품목록
 $sql = " select it_id,
-                it_name_kr,
+                it_name,
                 cp_price,
                 ct_notax,
                 ct_send_cost,
@@ -55,6 +55,19 @@ $sql = " select it_id,
           group by it_id
           order by ct_id ";
 $result = sql_query($sql);
+
+// 주소 참고항목 필드추가
+if(!isset($od['od_addr3'])) {
+    sql_query(" ALTER TABLE `{$g5['g5_shop_order_table']}`
+                    ADD `od_addr3` varchar(255) NOT NULL DEFAULT '' AFTER `od_addr2`,
+                    ADD `od_b_addr3` varchar(255) NOT NULL DEFAULT '' AFTER `od_b_addr2` ", true);
+}
+
+// 배송목록에 참고항목 필드추가
+if(!sql_query(" select ad_addr3 from {$g5['g5_shop_order_address_table']} limit 1", false)) {
+    sql_query(" ALTER TABLE `{$g5['g5_shop_order_address_table']}`
+                    ADD `ad_addr3` varchar(255) NOT NULL DEFAULT '' AFTER `ad_addr2` ", true);
+}
 
 // 결제 PG 필드 추가
 if(!sql_query(" select od_pg from {$g5['g5_shop_order_table']} limit 1 ", false)) {
@@ -129,7 +142,7 @@ add_javascript(G5_POSTCODE_JS, 0);    //다음 주소 js
             $image = get_it_image($row['it_id'], 50, 50);
 
             // 상품의 옵션정보
-            $sql = " select ct_id, it_id, ct_price_kr, ct_point, ct_qty, ct_option, ct_status, cp_price, ct_stock_use, ct_point_use, ct_send_cost, io_type, io_price
+            $sql = " select ct_id, it_id, ct_price, ct_point, ct_qty, ct_option, ct_status, cp_price, ct_stock_use, ct_point_use, ct_send_cost, io_type, io_price
                         from {$g5['g5_shop_cart_table']}
                         where od_id = '{$od['od_id']}'
                           and it_id = '{$row['it_id']}'
@@ -138,7 +151,7 @@ add_javascript(G5_POSTCODE_JS, 0);    //다음 주소 js
             $rowspan = mysql_num_rows($res);
 
             // 합계금액 계산
-            $sql = " select SUM(IF(io_type = 1, (io_price * ct_qty), ((ct_price_kr + io_price) * ct_qty))) as price,
+            $sql = " select SUM(IF(io_type = 1, (io_price * ct_qty), ((ct_price + io_price) * ct_qty))) as price,
                             SUM(ct_qty) as qty
                         from {$g5['g5_shop_cart_table']}
                         where it_id = '{$row['it_id']}'
@@ -171,20 +184,20 @@ add_javascript(G5_POSTCODE_JS, 0);    //다음 주소 js
                 if($opt['io_type'])
                     $opt_price = $opt['io_price'];
                 else
-                    $opt_price = $opt['ct_price_kr'] + $opt['io_price'];
+                    $opt_price = $opt['ct_price'] + $opt['io_price'];
 
                 // 소계
-                $ct_price_kr['stotal'] = $opt_price * $opt['ct_qty'];
+                $ct_price['stotal'] = $opt_price * $opt['ct_qty'];
                 $ct_point['stotal'] = $opt['ct_point'] * $opt['ct_qty'];
             ?>
             <tr>
                 <?php if($k == 0) { ?>
                 <td rowspan="<?php echo $rowspan; ?>">
-                    <a href="./itemform.php?w=u&amp;it_id=<?php echo $row['it_id']; ?>"><?php echo $image; ?> <?php echo stripslashes($row['it_name_kr']); ?></a>
+                    <a href="./itemform.php?w=u&amp;it_id=<?php echo $row['it_id']; ?>"><?php echo $image; ?> <?php echo stripslashes($row['it_name']); ?></a>
                     <?php if($od['od_tax_flag'] && $row['ct_notax']) echo '[비과세상품]'; ?>
                 </td>
                 <td rowspan="<?php echo $rowspan; ?>" class="td_chk">
-                    <label for="sit_sel_<?php echo $i; ?>" class="sound_only"><?php echo $row['it_name_kr']; ?> 옵션 전체선택</label>
+                    <label for="sit_sel_<?php echo $i; ?>" class="sound_only"><?php echo $row['it_name']; ?> 옵션 전체선택</label>
                     <input type="checkbox" id="sit_sel_<?php echo $i; ?>" name="it_sel[]">
                 </td>
                 <?php } ?>
@@ -200,7 +213,7 @@ add_javascript(G5_POSTCODE_JS, 0);    //다음 주소 js
                     <input type="text" name="ct_qty[<?php echo $chk_cnt; ?>]" id="ct_qty_<?php echo $chk_cnt; ?>" value="<?php echo $opt['ct_qty']; ?>" required class="frm_input required" size="5">
                 </td>
                 <td class="td_num"><?php echo number_format($opt_price); ?></td>
-                <td class="td_num"><?php echo number_format($ct_price_kr['stotal']); ?></td>
+                <td class="td_num"><?php echo number_format($ct_price['stotal']); ?></td>
                 <td class="td_num"><?php echo number_format($opt['cp_price']); ?></td>
                 <td class="td_num"><?php echo number_format($ct_point['stotal']); ?></td>
                 <td class="td_sendcost_by"><?php echo $ct_send_cost; ?></td>
@@ -796,25 +809,23 @@ add_javascript(G5_POSTCODE_JS, 0);    //다음 주소 js
                     <th scope="row"><label for="od_hp"><span class="sound_only">주문하신 분 </span>핸드폰</label></th>
                     <td><input type="text" name="od_hp" value="<?php echo $od['od_hp']; ?>" id="od_hp" class="frm_input"></td>
                 </tr>
+
                 <tr>
-                    <th scope="row"><label for="od_country"><span class="sound_only">주문하신 분 </span>국가</label></th>
-                    <td><input type="text" name="od_country" value="<?php echo $od['od_country']; ?>" id="od_country" class="frm_input"></td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="od_city"><span class="sound_only">주문하신 분 </span>도시</label></th>
-                    <td><input type="text" name="od_city" value="<?php echo $od['od_city']; ?>" id="od_city" class="frm_input"></td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="od_addr1"><span class="sound_only">주문하신 분 </span>주소1 (Address Line 1)</label></th>
-                    <td><input type="text" name="od_addr1" value="<?php echo $od['od_addr1']; ?>" id="od_addr1" class="frm_input"></td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="od_addr2"><span class="sound_only">주문하신 분 </span>주소2 (Address Line 2)</label></th>
-                    <td><input type="text" name="od_addr2" value="<?php echo $od['od_addr2']; ?>" id="od_addr2" class="frm_input"></td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="od_zip"><span class="sound_only">주문하신 분 </span>우편번호 (Postal Code)</label></th>
-                    <td><input type="text" name="od_zip" value="<?php echo $od['od_zip']; ?>" id="od_zip" class="frm_input"></td>
+                    <th scope="row"><span class="sound_only">주문하시는 분 </span>주소</th>
+                    <td>
+                        <label for="od_zip" class="sound_only">우편번호</label>
+                        <input type="text" name="od_zip" value="<?php echo $od['od_zip1'].$od['od_zip2']; ?>" id="od_zip" required class="frm_input required" size="5">
+                        <button type="button" class="btn_frmline" onclick="win_zip('frmorderform3', 'od_zip', 'od_addr1', 'od_addr2', 'od_addr3', 'od_addr_jibeon');">주소 검색</button><br>
+                        <span id="od_win_zip" style="display:block"></span>
+                        <input type="text" name="od_addr1" value="<?php echo $od['od_addr1']; ?>" id="od_addr1" required class="frm_input required" size="35">
+                        <label for="od_addr1">기본주소</label><br>
+                        <input type="text" name="od_addr2" value="<?php echo $od['od_addr2']; ?>" id="od_addr2" class="frm_input" size="35">
+                        <label for="od_addr2">상세주소</label>
+                        <br>
+                        <input type="text" name="od_addr3" value="<?php echo $od['od_addr3']; ?>" id="od_addr3" class="frm_input" size="35">
+                        <label for="od_addr3">참고항목</label>
+                        <input type="hidden" name="od_addr_jibeon" value="<?php echo $od['od_addr_jibeon']; ?>"><br>
+                    </td>
                 </tr>
                 <tr>
                     <th scope="row"><label for="od_email"><span class="sound_only">주문하신 분 </span>E-mail</label></th>
@@ -861,20 +872,19 @@ add_javascript(G5_POSTCODE_JS, 0);    //다음 주소 js
                     <td><input type="text" name="od_b_country" value="<?php echo $od['od_b_country']; ?>" id="od_b_country" class="frm_input required"></td>
                 </tr>
                 <tr>
-                    <th scope="row"><label for="od_b_city"><span class="sound_only">받으시는 분 </span>도시</label></th>
-                    <td><input type="text" name="od_b_city" value="<?php echo $od['od_b_city']; ?>" id="od_b_city" class="frm_input required"></td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="od_b_addr1"><span class="sound_only">받으시는 분 </span>주소1 (Address Line 1)</label></th>
-                    <td><input type="text" name="od_b_addr1" value="<?php echo $od['od_b_addr1']; ?>" id="od_b_addr1" class="frm_input"></td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="od_b_addr2"><span class="sound_only">받으시는 분 </span>주소2 (Address Line 2)</label></th>
-                    <td><input type="text" name="od_b_addr2" value="<?php echo $od['od_b_addr2']; ?>" id="od_b_addr2" class="frm_input"></td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="od_b_zip"><span class="sound_only">받으시는 분 </span>우편번호 (Postal Code)</label></th>
-                    <td><input type="text" name="od_b_zip" value="<?php echo $od['od_b_zip']; ?>" id="od_b_zip" class="frm_input"></td>
+                    <th scope="row"><span class="sound_only">받으시는 분 </span>주소</th>
+                    <td>
+                        <label for="od_b_zip" class="sound_only">우편번호</label>
+                        <input type="text" name="od_b_zip" value="<?php echo $od['od_b_zip1'].$od['od_b_zip2']; ?>" id="od_b_zip" required class="frm_input required" size="5">
+                        <button type="button" class="btn_frmline" onclick="win_zip('frmorderform3', 'od_b_zip', 'od_b_addr1', 'od_b_addr2', 'od_b_addr3', 'od_b_addr_jibeon');">주소 검색</button><br>
+                        <input type="text" name="od_b_addr1" value="<?php echo $od['od_b_addr1']; ?>" id="od_b_addr1" required class="frm_input required" size="35">
+                        <label for="od_b_addr1">기본주소</label>
+                        <input type="text" name="od_b_addr2" value="<?php echo $od['od_b_addr2']; ?>" id="od_b_addr2" class="frm_input" size="35">
+                        <label for="od_b_addr2">상세주소</label>
+                        <input type="text" name="od_b_addr3" value="<?php echo $od['od_b_addr3']; ?>" id="od_b_addr3" class="frm_input" size="35">
+                        <label for="od_b_addr3">참고항목</label>
+                        <input type="hidden" name="od_b_addr_jibeon" value="<?php echo $od['od_b_addr_jibeon']; ?>"><br>
+                    </td>
                 </tr>
 
                 <?php if ($default['de_hope_date_use']) { ?>

@@ -24,7 +24,7 @@ if ($od_send_mail)
     $result = sql_query($sql);
     for ($j=0; $ct=mysql_fetch_array($result); $j++) {
         $cart_list[$j]['it_id']      = $ct['it_id'];
-        $cart_list[$j]['it_name_kr'] = $ct['it_name_kr'];
+        $cart_list[$j]['it_name'] = $ct['it_name'];
         $cart_list[$j]['it_opt']     = $ct['ct_option'];
 
         $ct_status = $ct['ct_status'];

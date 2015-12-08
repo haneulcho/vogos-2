@@ -14,7 +14,7 @@ if ($sort1 == "") $sort1 = "it_id_cnt";
 if ($sort2 == "") $sort2 = "desc";
 
 $sql  = " select a.it_id,
-                 b.it_name_kr,
+                 b.it_name,
                  COUNT(a.it_id) as it_id_cnt
             from {$g5['g5_shop_wish_table']} a, {$g5['g5_shop_item_table']} b ";
 $sql .= " where a.it_id = b.it_id ";
@@ -28,7 +28,7 @@ if ($sel_ca_id)
 {
     $sql .= " and b.ca_id like '$sel_ca_id%' ";
 }
-$sql .= " group by a.it_id, b.it_name_kr
+$sql .= " group by a.it_id, b.it_name
           order by $sort1 $sort2 ";
 $result = sql_query($sql);
 $total_count = mysql_num_rows($result);
@@ -106,7 +106,7 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
     <tr class="<?php echo $bg; ?>">
         <td class="td_num"><?php echo $num; ?></td>
         <td>
-            <a href="<?php echo $href; ?>"><?php echo get_it_image($row['it_id'], 50, 50); ?> <?php echo cut_str($row['it_name_kr'],30); ?></a>
+            <a href="<?php echo $href; ?>"><?php echo get_it_image($row['it_id'], 50, 50); ?> <?php echo cut_str($row['it_name'],30); ?></a>
         </td>
         <td class="td_num"><?php echo $row['it_id_cnt']; ?></td>
     </tr>

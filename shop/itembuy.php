@@ -9,7 +9,7 @@ $sql = " select * from {$g5['g5_shop_item_table']} where it_id = '$it_id' ";
 $it = sql_fetch($sql);
 
 if(!$it['it_id'])
-    alert('There is no information for this product.', G5_SHOP_URL);
+    alert('상품정보가 존재하지 않습니다.', G5_SHOP_URL);
 
 // 본인인증, 성인인증체크
 if(!$is_admin) {
@@ -19,18 +19,18 @@ if(!$is_admin) {
 }
 
 if(is_soldout($it['it_id']))
-    alert('Out of Stock.\\nPlease select other items.', G5_SHOP_URL);
+    alert('상품의 재고가 부족하여 구매할 수 없습니다.', G5_SHOP_URL);
 
 // 상품옵션체크
 $sql = " select count(*) as cnt from {$g5['g5_shop_item_option_table']} where it_id = '$it_id' and io_type = '0' and io_use = '1' ";
 $cnt = sql_fetch($sql);
 
 if(($io_id && !$cnt['cnt']) || (!$io_id && $cnt['cnt']))
-    alert('Some options are changed.\\nPlease try again.', G5_SHOP_URL.'/item.php?it_id='.$it_id);
+    alert('상품의 옵션정보가 변경됐습니다.\\n상품페이지에서 다시 주문해 주십시오.', G5_SHOP_URL.'/item.php?it_id='.$it_id);
 
 // 최소구매수량이 있으면 상세페이지에서 다시 주문토록 안내
 if($it['it_buy_min_qty'] > 1)
-    alert(get_text($it['it_name_kr']).' The quantity requested is not available.\\nPlease enter a higher quantity.', G5_SHOP_URL.'/item.php?it_id='.$it_id);
+    alert(get_text($it['it_name']).' 상품은 최소 '.number_format($it['it_buy_min_qty']).' 이상 구매하셔야 합니다.\\n상품페이지에서 다시 주문해 주십시오.', G5_SHOP_URL.'/item.php?it_id='.$it_id);
 
 // 옵션정보
 if($io_id && $it['it_option_subject']) {
@@ -41,7 +41,7 @@ if($io_id && $it['it_option_subject']) {
     $arr_opt = explode(chr(30), $io_id);
 
     if(count($subj) != count($arr_opt))
-        alert('We could not process your request.\\nPlease try again.', G5_SHOP_URL.'/item.php?it_id='.$it_id);
+        alert('상품의 옵션정보가 올바르지 않습니다.\\n상품페이지에서 다시 주문해 주십시오.', G5_SHOP_URL.'/item.php?it_id='.$it_id);
 
     $io_value = '';
     $sep = '';
@@ -50,10 +50,10 @@ if($io_id && $it['it_option_subject']) {
         $sep = ' / ';
     }
 } else {
-    $io_value = $it['it_name_kr'];
+    $io_value = $it['it_name'];
 }
 
-$tot_prc = $it['it_price_kr'] + $opt['io_price'];
+$tot_prc = $it['it_price'] + $opt['io_price'];
 
 // 배송비결제
 $ct_send_cost = 0;

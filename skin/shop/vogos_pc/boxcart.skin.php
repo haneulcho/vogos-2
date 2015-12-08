@@ -11,16 +11,16 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_SKIN_URL.'/style.css">', 
 
     <ul>
     <?php
-    $hsql  = " select it_id, it_name_kr from {$g5['g5_shop_cart_table']} ";
+    $hsql  = " select it_id, it_name from {$g5['g5_shop_cart_table']} ";
     $hsql .= " where od_id = '".get_session('ss_cart_id')."' group by it_id ";
     $hresult = sql_query($hsql);
     for ($i=0; $row=sql_fetch_array($hresult); $i++)
     {
         echo '<li>';
-        $it_name_kr = get_text($row['it_name_kr']);
+        $it_name = get_text($row['it_name']);
         // 이미지로 할 경우
         //$it_name = get_it_image($row['it_id'], 50, 50, true);
-        echo '<a href="'.G5_SHOP_URL.'/cart.php">'.$it_name_kr.'</a>';
+        echo '<a href="'.G5_SHOP_URL.'/cart.php">'.$it_name.'</a>';
         echo '</li>';
     }
 

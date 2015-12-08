@@ -14,8 +14,7 @@ if(!$od['od_id'])
 
 // 상품목록
 $sql = " select it_id,
-                it_name_kr,
-                it_name_en,
+                it_name,
                 cp_price,
                 ct_notax,
                 ct_send_cost,
@@ -53,7 +52,7 @@ $result = sql_query($sql);
             $image = get_it_image($row['it_id'], 50, 50);
 
             // 상품의 옵션정보
-            $sql = " select ct_id, it_id, ct_price_kr, ct_price_en, ct_qty, ct_option, ct_status, cp_price, ct_send_cost, io_type, io_price
+            $sql = " select ct_id, it_id, ct_price, ct_qty, ct_option, ct_status, cp_price, ct_send_cost, io_type, io_price
                         from {$g5['g5_shop_cart_table']}
                         where od_id = '$od_id'
                           and it_id = '{$row['it_id']}'
@@ -89,16 +88,16 @@ $result = sql_query($sql);
                 if($opt['io_type'])
                     $opt_price = $opt['io_price'];
                 else
-                    $opt_price = $opt['ct_price_kr'] + $opt['io_price'];
+                    $opt_price = $opt['ct_price'] + $opt['io_price'];
 
                 // 소계
-                $ct_price_kr['stotal'] = $opt_price * $opt['ct_qty'];
+                $ct_price['stotal'] = $opt_price * $opt['ct_qty'];
                 $ct_point['stotal'] = $opt['ct_point'] * $opt['ct_qty'];
             ?>
             <tr>
                 <?php if($k == 0) { ?>
                 <td class="td_itname" rowspan="<?php echo $rowspan; ?>">
-                    <a href="./itemform.php?w=u&amp;it_id=<?php echo $row['it_id']; ?>"><?php echo $image; ?> <?php echo stripslashes($row['it_name_kr']); ?></a>
+                    <a href="./itemform.php?w=u&amp;it_id=<?php echo $row['it_id']; ?>"><?php echo $image; ?> <?php echo stripslashes($row['it_name']); ?></a>
                     <?php if($od['od_tax_flag'] && $row['ct_notax']) echo '[비과세상품]'; ?>
                 </td>
                 <?php } ?>
@@ -108,7 +107,7 @@ $result = sql_query($sql);
                 <td class="td_mngsmall"><?php echo $opt['ct_status']; ?></td>
                 <td class="td_cntsmall"><?php echo $opt['ct_qty']; ?></td>
                 <td class="td_num"><?php echo number_format($opt_price); ?></td>
-                <td class="td_num"><?php echo number_format($ct_price_kr['stotal']); ?></td>
+                <td class="td_num"><?php echo number_format($ct_price['stotal']); ?></td>
                 <td class="td_num"><?php echo number_format($opt['cp_price']); ?></td>
                 <td class="td_num"><?php echo number_format($ct_point['stotal']); ?></td>
                 <td class="td_sendcost_by"><?php echo $ct_send_cost; ?></td>

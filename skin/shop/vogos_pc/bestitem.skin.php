@@ -39,8 +39,8 @@ if ($ca_id)
     $list->set_mobile(true);
     $list->set_view('it_img', true);
     $list->set_view('it_id', false);
-    $list->set_view('it_name_kr', true);
-    $list->set_view('it_price_kr', true);
+    $list->set_view('it_name', true);
+    $list->set_view('it_price', true);
     echo $list->run();
 ?>
     </div>

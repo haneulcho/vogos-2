@@ -11,10 +11,11 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
     <h1><?php echo $g5['title'] ?></h1>
 
     <p>
+        <strong>비밀번호를 한번 더 입력해주세요.</strong>
         <?php if ($url == 'member_leave.php') { ?>
-        <strong>Your account will be deactivated.</strong>
+        <strong>비밀번호를 입력하시면 회원탈퇴가 완료됩니다.</strong>
         <?php }else{ ?>
-        </strong>Please confirm your password.</strong>
+        </strong>회원님의 정보를 안전하게 보호하기 위해 비밀번호를 한번 더 확인합니다.</strong>
         <?php }  ?>
     </p>
 
@@ -26,15 +27,15 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
         ID
         <span id="mb_confirm_id"><?php echo $member['mb_id'] ?></span>
 
-        <label for="confirm_mb_password">Password<strong class="sound_only"> required</strong></label>
+        <label for="confirm_mb_password">Password<strong class="sound_only"> 필수</strong></label>
         <input type="password" name="mb_password" id="confirm_mb_password" required class="required frm_input" size="15" maxLength="20">
-        <input type="submit" value="Confirm" id="btn_submit" class="btn_submit">
+        <input type="submit" value="확인" id="btn_submit" class="btn_submit">
     </fieldset>
 
     </form>
 
     <div class="btn_confirm">
-        <a href="<?php echo G5_URL ?>">Back to Main page</a>
+        <a href="<?php echo G5_URL ?>">메인으로 돌아가기</a>
     </div>
 
 </div>

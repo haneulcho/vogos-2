@@ -3,7 +3,7 @@ include_once('./_common.php');
 include_once('./_head.php');
 
 if ($is_guest)
-    alert('Member Only, Please Sign In', G5_BBS_URL.'/login.php');
+    alert('로그인 한 회원만 접근하실 수 있습니다.', G5_BBS_URL.'/login.php');
 
 /*
 if ($url)
@@ -12,7 +12,7 @@ else
     $urlencode = urlencode($_SERVER[REQUEST_URI]);
 */
 
-$g5['title'] = 'Confirm Password';
+$g5['title'] = '회원 비밀번호 확인';
 $url = clean_xss_tags($_GET['url']);
 
 // url 체크

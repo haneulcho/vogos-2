@@ -27,7 +27,7 @@ if ($_POST['act_button'] == "선택SMS전송") {
         // 실제 번호를 넘김
         $k = $_POST['chk'][$i];
 
-        $sql = " select a.ss_id, a.ss_hp, a.ss_send, b.it_id, b.it_name_kr
+        $sql = " select a.ss_id, a.ss_hp, a.ss_send, b.it_id, b.it_name
                     from {$g5['g5_shop_item_stocksms_table']} a left join {$g5['g5_shop_item_table']} b on ( a.it_id = b.it_id )
                     where a.ss_id = '{$_POST['ss_id'][$k]}' ";
         $row = sql_fetch($sql);
@@ -37,7 +37,7 @@ if ($_POST['act_button'] == "선택SMS전송") {
 
         // SMS
         if($config['cf_sms_use'] == 'icode') {
-            $sms_contents = iconv_euckr(get_text($row['it_name_kr']).' 상품이 재입고 되었습니다. '.$default['de_admin_company_name']);
+            $sms_contents = iconv_euckr(get_text($row['it_name']).' 상품이 재입고 되었습니다. '.$default['de_admin_company_name']);
             $receive_number = preg_replace("/[^0-9]/", "", $row['ss_hp']);	// 수신자번호
             $send_number = preg_replace("/[^0-9]/", "", $default['de_admin_company_tel']); // 발신자번호
 

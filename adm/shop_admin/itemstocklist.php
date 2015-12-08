@@ -18,7 +18,7 @@ if ($sel_ca_id != "") {
     $sql_search .= " and ca_id like '$sel_ca_id%' ";
 }
 
-if ($sel_field == "")  $sel_field = "it_name_kr";
+if ($sel_field == "")  $sel_field = "it_name";
 if ($sort1 == "") $sort1 = "it_stock_qty";
 if ($sort2 == "") $sort2 = "asc";
 if ($sort3 == "") $sort3 = "desc";
@@ -41,8 +41,7 @@ $sql  = " select it_id,
                  it_place_ddm,
                  it_name_ddm,
                  it_price_ddm,
-                 it_name_kr,
-                 it_name_en,
+                 it_name,
                  it_use,
                  it_stock_qty,
                  it_stock_sms,
@@ -88,7 +87,7 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
 
 <label for="sel_field" class="sound_only">검색대상</label>
 <select name="sel_field" id="sel_field">
-    <option value="it_name_kr" <?php echo get_selected($sel_field, 'it_name_kr'); ?>>상품명</option>
+    <option value="it_name" <?php echo get_selected($sel_field, 'it_name'); ?>>상품명</option>
     <option value="it_id" <?php echo get_selected($sel_field, 'it_id'); ?>>상품코드</option>
     <option value="it_place_ddm" <?php echo get_selected($sel_field, 'it_place_ddm'); ?>>사입처</option>
     <option value="it_name_ddm" <?php echo get_selected($sel_field, 'it_name_ddm'); ?>>사입상품명</option>
@@ -124,7 +123,7 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
     <tr>
         <th scope="col"><a href="<?php echo title_sort("it_id") . "&amp;$qstr1"; ?>">상품코드</a></th>
         <th scope="col" style="width:130px"><a href="<?php echo title_sort("it_update_time") . "&amp;$qstr2"; ?>">등록, 수정일</a></th>
-        <th scope="col"><a href="<?php echo title_sort("it_name_kr") . "&amp;$qstr1"; ?>">상품명</a></th>
+        <th scope="col"><a href="<?php echo title_sort("it_name") . "&amp;$qstr1"; ?>">상품명</a></th>
         <th scope="col"><a href="<?php echo title_sort("it_place_ddm") . "&amp;$qstr1"; ?>">사입처 / 사입상품명 / 사입단가</a></th>
         <th scope="col"><a href="<?php echo title_sort("it_stock_qty") . "&amp;$qstr1"; ?>">창고재고</a></th>
         <th scope="col">주문대기</th>
@@ -179,7 +178,7 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
         <td class="td_numbig">
             <span style="font-size:11px"><?php echo $row['it_update_time']; ?></span>
         </td>
-        <td><a href="<?php echo $href; ?>"><?php echo get_it_image($row['it_id'], 50, 50); ?> <span style="color:#ff0000"><?php echo cut_str(stripslashes($row['it_name_kr']), 60, "&#133"); ?></span></a></td>
+        <td><a href="<?php echo $href; ?>"><?php echo get_it_image($row['it_id'], 50, 50); ?> <span style="color:#ff0000"><?php echo cut_str(stripslashes($row['it_name']), 60, "&#133"); ?></span></a></td>
         <td>
             <?php echo $row['it_place_ddm'].' / '.$row['it_name_ddm'].' / '.$row['it_price_ddm']; ?>
         </td>

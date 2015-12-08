@@ -34,7 +34,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     }
 
     if ($this->view_it_img) {
-        echo get_it_image2($row['it_id'], 10, $sct_img_width, $sct_img_height, '', '', stripslashes($row['it_name_kr']))."\n";
+        echo get_it_image2($row['it_id'], 10, $sct_img_width, $sct_img_height, '', '', stripslashes($row['it_name']))."\n";
     }
 
     if ($this->href) {
@@ -50,23 +50,23 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
         }
     }
 
-    if ($this->view_it_name_kr) {
-        echo stripslashes($row['it_name_kr'])."\n";
+    if ($this->view_it_name) {
+        echo stripslashes($row['it_name'])."\n";
     }
 
     if ($this->href) {
         echo "</a></div>\n";
     }
 
-    if ($this->view_it_cust_price_kr || $this->view_it_price_kr) {
+    if ($this->view_it_cust_price || $this->view_it_price) {
 
         echo "<div class=\"sct_cost\">\n";
 
-        if ($this->view_it_cust_price_kr && $row['it_cust_price_kr']) {
-            echo "<strike>".display_price($row['it_cust_price_kr'])."</strike>\n";
+        if ($this->view_it_cust_price && $row['it_cust_price']) {
+            echo "<strike>".display_price($row['it_cust_price'])."</strike>\n";
         }
 
-        if ($this->view_it_price_kr) {
+        if ($this->view_it_price) {
             echo display_price(get_price($row), $row['it_tel_inq'])."\n";
         }
 

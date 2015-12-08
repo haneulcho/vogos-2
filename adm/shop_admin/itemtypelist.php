@@ -37,7 +37,7 @@ if ($sca != "") {
     $sql_search .= " $where (ca_id like '$sca%' or ca_id2 like '$sca%' or ca_id3 like '$sca%') ";
 }
 
-if ($sfl == "")  $sfl = "it_name_kr";
+if ($sfl == "")  $sfl = "it_name";
 
 if (!$sst)  {
     $sst  = "it_id";
@@ -63,8 +63,7 @@ $sql  = " select it_id,
                  it_name_ddm,
                  it_price_ddm,
                  it_place_ddm,
-                 it_name_kr,
-                 it_name_en,
+                 it_name,
                  it_type1,
                  it_type2,
                  it_type3,
@@ -106,7 +105,7 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
 
 <label for="sfl" class="sound_only">검색대상</label>
 <select name="sfl" id="sfl">
-    <option value="it_name_kr" <?php echo get_selected($sfl, 'it_name_kr'); ?>>상품명</option>
+    <option value="it_name" <?php echo get_selected($sfl, 'it_name'); ?>>상품명</option>
     <option value="it_id" <?php echo get_selected($sfl, 'it_id'); ?>>상품코드</option>
     <option value="it_place_ddm" <?php echo get_selected($sfl, 'it_place_ddm'); ?>>사입처</option>
     <option value="it_name_ddm" <?php echo get_selected($sfl, 'it_name_ddm'); ?>>사입상품명</option>
@@ -133,7 +132,7 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
     <tr>
         <th scope="col"><?php echo subject_sort_link("it_id", $qstr, 1); ?>상품코드</a></th>
         <th scope="col" style="width:130px"><?php echo subject_sort_link("it_update_time", $qstr, 'desc', 1); ?>등록, 수정일</a></th>
-        <th scope="col"><?php echo subject_sort_link("it_name_kr"); ?>상품명</a></th>
+        <th scope="col"><?php echo subject_sort_link("it_name"); ?>상품명</a></th>
         <th scope="col"><?php echo subject_sort_link("it_type1", $qstr, 1); ?>Editor's<br>Pick</a></th>
         <th scope="col"><?php echo subject_sort_link("it_type2", $qstr, 1); ?>인덱스<br>Runway</a></th>
         <th scope="col"><?php echo subject_sort_link("it_type3", $qstr, 1); ?>NEW<br>ARRIVALS</a></th>
@@ -156,7 +155,7 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
         <td class="td_code">
             <span style="font-size:11px"><?php echo $row['it_update_time']; ?></span>
         </td>
-        <td><a href="<?php echo $href; ?>"><?php echo get_it_image($row['it_id'], 50, 50); ?><span style="color:#ff0000"> <?php echo cut_str(stripslashes($row['it_name_kr']), 60, "&#133"); ?></span> - <?php echo $row['it_place_ddm'].' / '.$row['it_name_ddm'].' / '.$row['it_price_ddm']; ?></a></td>
+        <td><a href="<?php echo $href; ?>"><?php echo get_it_image($row['it_id'], 50, 50); ?><span style="color:#ff0000"> <?php echo cut_str(stripslashes($row['it_name']), 60, "&#133"); ?></span> - <?php echo $row['it_place_ddm'].' / '.$row['it_name_ddm'].' / '.$row['it_price_ddm']; ?></a></td>
         <td class="td_chk">
             <label for="type1_<?php echo $i; ?>" class="sound_only">히트상품</label>
             <input type="checkbox" name="it_type1[<?php echo $i; ?>]" value="1" id="type1_<?php echo $i; ?>" <?php echo ($row['it_type1'] ? 'checked' : ''); ?>>
@@ -178,7 +177,7 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
             <input type="checkbox" name="it_type5[<?php echo $i; ?>]" value="1" id="type5_<?php echo $i; ?>" <?php echo ($row['it_type5'] ? 'checked' : ''); ?>>
         </td>
         <td class="td_mngsmall">
-            <a href="./itemform.php?w=u&amp;it_id=<?php echo $row['it_id']; ?>&amp;ca_id=<?php echo $row['ca_id']; ?>&amp;<?php echo $qstr; ?>"><span class="sound_only"><?php echo cut_str(stripslashes($row['it_name_kr']), 60, "&#133"); ?> </span>수정</a>
+            <a href="./itemform.php?w=u&amp;it_id=<?php echo $row['it_id']; ?>&amp;ca_id=<?php echo $row['ca_id']; ?>&amp;<?php echo $qstr; ?>"><span class="sound_only"><?php echo cut_str(stripslashes($row['it_name']), 60, "&#133"); ?> </span>수정</a>
          </td>
     </tr>
     <?php

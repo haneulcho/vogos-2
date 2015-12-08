@@ -35,7 +35,7 @@ mailer($config['cf_admin_email_name'], $config['cf_admin_email'], $od_email, $su
 unset($list);
 $sql = " select b.it_sell_email,
                 a.it_id,
-                a.it_name_kr
+                a.it_name
            from {$g5['g5_shop_cart_table']} a left join {$g5['g5_shop_item_table']} b on ( a.it_id = b.it_id )
           where a.od_id = '$od_id'
             and a.ct_select = '1'
@@ -45,7 +45,7 @@ $result = sql_query($sql);
 for ($i=0; $row=sql_fetch_array($result); $i++)
 {
     // 합계금액 계산
-    $sql = " select SUM(IF(io_type = 1, (io_price * ct_qty), ((ct_price_kr + io_price) * ct_qty))) as price,
+    $sql = " select SUM(IF(io_type = 1, (io_price * ct_qty), ((ct_price + io_price) * ct_qty))) as price,
                     SUM(ct_point * ct_qty) as point,
                     SUM(ct_qty) as qty
                 from {$g5['g5_shop_cart_table']}
@@ -78,9 +78,9 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
 
     $list[$i]['it_id']   = $row['it_id'];
     $list[$i]['it_simg'] = get_it_image($row['it_id'], 70, 70);
-    $list[$i]['it_name_kr'] = $row['it_name_kr'];
+    $list[$i]['it_name'] = $row['it_name'];
     $list[$i]['it_opt']  = $options;
-    $list[$i]['ct_price_kr'] = $sum['price'];
+    $list[$i]['ct_price'] = $sum['price'];
 
     $subject = $config['cf_title'].' - 주문 알림 메일 (주문자 '.$od_name.'님)';
     ob_start();

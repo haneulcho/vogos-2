@@ -423,43 +423,23 @@ if(!sql_query(" select it_skin from {$g5['g5_shop_item_table']} limit 1", false)
             </td>
         </tr>
         <tr>
-            <th scope="row"><label for="it_name_kr">상품명_KR</label></th>
+            <th scope="row"><label for="it_name">상품명</label></th>
             <td colspan="2">
                 <?php echo help("HTML 입력이 불가합니다."); ?>
-                <input type="text" name="it_name_kr" value="<?php echo get_text(cut_str($it['it_name_kr'], 250, "")); ?>" id="it_name_kr" required class="frm_input required" size="95">
+                <input type="text" name="it_name" value="<?php echo get_text(cut_str($it['it_name'], 250, "")); ?>" id="it_name" required class="frm_input required" size="95">
             </td>
         </tr>
         <tr>
-            <th scope="row"><label for="it_name_en">상품명_EN</label></th>
-            <td colspan="2">
-                <?php echo help("HTML 입력이 불가합니다."); ?>
-                <input type="text" name="it_name_en" value="<?php echo get_text(cut_str($it['it_name_en'], 250, "")); ?>" id="it_name_en" required class="frm_input required" size="95">
-            </td>
-        </tr>
-        <tr>
-            <th scope="row"><label for="it_basic_kr">기본설명_KR</label></th>
+            <th scope="row"><label for="it_basic">기본설명</label></th>
             <td>
                 <?php echo help("상품명 하단에 상품에 대한 추가적인 설명이 필요한 경우에 입력합니다. HTML 입력도 가능합니다."); ?>
-                <input type="text" name="it_basic_kr" value="<?php echo get_text($it['it_basic_kr']); ?>" id="it_basic_kr" class="frm_input" size="95">
+                <input type="text" name="it_basic" value="<?php echo get_text($it['it_basic']); ?>" id="it_basic" class="frm_input" size="95">
             </td>
             <td class="td_grpset">
-                <input type="checkbox" name="chk_ca_it_basic_kr" value="1" id="chk_ca_it_basic_kr">
-                <label for="chk_ca_it_basic_kr">분류적용</label>
-                <input type="checkbox" name="chk_all_it_basic_kr" value="1" id="chk_all_it_basic_kr">
-                <label for="chk_all_it_basic_kr">전체적용</label>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row"><label for="it_basic_en">기본설명_EN</label></th>
-            <td>
-                <?php echo help("상품명 하단에 상품에 대한 추가적인 설명이 필요한 경우에 입력합니다. HTML 입력도 가능합니다."); ?>
-                <input type="text" name="it_basic_en" value="<?php echo get_text($it['it_basic_en']); ?>" id="it_basic_en" class="frm_input" size="95">
-            </td>
-            <td class="td_grpset">
-                <input type="checkbox" name="chk_ca_it_basic_en" value="1" id="chk_ca_it_basic_en">
-                <label for="chk_ca_it_basic_en">분류적용</label>
-                <input type="checkbox" name="chk_all_it_basic_en" value="1" id="chk_all_it_basic_en">
-                <label for="chk_all_it_basic_en">전체적용</label>
+                <input type="checkbox" name="chk_ca_it_basic" value="1" id="chk_ca_it_basic">
+                <label for="chk_ca_it_basic">분류적용</label>
+                <input type="checkbox" name="chk_all_it_basic" value="1" id="chk_all_it_basic">
+                <label for="chk_all_it_basic">전체적용</label>
             </td>
         </tr>
         <tr>
@@ -649,53 +629,28 @@ if(!sql_query(" select it_skin from {$g5['g5_shop_item_table']} limit 1", false)
         </colgroup>
         <tbody>
         <tr>
-            <th scope="row"><label for="it_price_kr">판매가격_KR</label></th>
+            <th scope="row"><label for="it_price">판매가격</label></th>
             <td>
-                <input type="text" name="it_price_kr" value="<?php echo $it['it_price_kr']; ?>" id="it_price_kr" class="frm_input" size="8"> 원
+                <input type="text" name="it_price" value="<?php echo $it['it_price']; ?>" id="it_price" class="frm_input" size="8"> 원
             </td>
             <td class="td_grpset">
-                <input type="checkbox" name="chk_ca_it_price_kr" value="1" id="chk_ca_it_price_kr">
-                <label for="chk_ca_it_price_kr">분류적용</label>
-                <input type="checkbox" name="chk_all_it_price_kr" value="1" id="chk_all_it_price_kr">
-                <label for="chk_all_it_price_kr">전체적용</label>
+                <input type="checkbox" name="chk_ca_it_price" value="1" id="chk_ca_it_price">
+                <label for="chk_ca_it_price">분류적용</label>
+                <input type="checkbox" name="chk_all_it_price" value="1" id="chk_all_it_price">
+                <label for="chk_all_it_price">전체적용</label>
             </td>
         </tr>
         <tr>
-            <th scope="row"><label for="it_price_en">판매가격_EN</label></th>
-            <td>
-                $ <input type="text" name="it_price_en" value="<?php echo $it['it_price_en']; ?>" id="it_price_en" class="frm_input" size="8">
-            </td>
-            <td class="td_grpset">
-                <input type="checkbox" name="chk_ca_it_price_en" value="1" id="chk_ca_it_price_en">
-                <label for="chk_ca_it_price_en">분류적용</label>
-                <input type="checkbox" name="chk_all_it_price_en" value="1" id="chk_all_it_price_en">
-                <label for="chk_all_it_price_en">전체적용</label>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row"><label for="it_cust_price_kr">시중가격(할인시 시중가격 적기)_KR</label></th>
+            <th scope="row"><label for="it_cust_price">시중가격(할인시 시중가격 적기)</label></th>
             <td>
                 <?php echo help("입력하지 않으면 상품상세페이지에 출력하지 않습니다."); ?>
-                <input type="text" name="it_cust_price_kr" value="<?php echo $it['it_cust_price_kr']; ?>" id="it_cust_price_kr" class="frm_input" size="8"> 원
+                <input type="text" name="it_cust_price" value="<?php echo $it['it_cust_price']; ?>" id="it_cust_price" class="frm_input" size="8"> 원
             </td>
             <td class="td_grpset">
-                <input type="checkbox" name="chk_ca_it_cust_price_kr" value="1" id="chk_ca_it_cust_price_kr">
-                <label for="chk_ca_it_cust_price_kr">분류적용</label>
-                <input type="checkbox" name="chk_all_it_cust_price_kr" value="1" id="chk_all_it_cust_price_kr">
-                <label for="chk_all_it_cust_price_kr">전체적용</label>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row"><label for="it_cust_price_en">시중가격(할인시 시중가격 적기)_EN</label></th>
-            <td>
-                <?php echo help("입력하지 않으면 상품상세페이지에 출력하지 않습니다."); ?>
-                $ <input type="text" name="it_cust_price_en" value="<?php echo $it['it_cust_price_en']; ?>" id="it_cust_price_en" class="frm_input" size="8">
-            </td>
-            <td class="td_grpset">
-                <input type="checkbox" name="chk_ca_it_cust_price_en" value="1" id="chk_ca_it_cust_price_en">
-                <label for="chk_ca_it_cust_price_en">분류적용</label>
-                <input type="checkbox" name="chk_all_it_cust_price_en" value="1" id="chk_all_it_cust_price_en">
-                <label for="chk_all_it_cust_price_en">전체적용</label>
+                <input type="checkbox" name="chk_ca_it_cust_price" value="1" id="chk_ca_it_cust_price">
+                <label for="chk_ca_it_cust_price">분류적용</label>
+                <input type="checkbox" name="chk_all_it_cust_price" value="1" id="chk_all_it_cust_price">
+                <label for="chk_all_it_cust_price">전체적용</label>
             </td>
         </tr>
         <tr>
@@ -1511,17 +1466,17 @@ if(!sql_query(" select it_skin from {$g5['g5_shop_item_table']} limit 1", false)
             $(function() {
                 $("#btn_search_item").click(function() {
                     var ca_id = $("#sch_relation").val();
-                    var it_name_kr = $.trim($("#sch_name").val());
+                    var it_name = $.trim($("#sch_name").val());
                     var $relation = $("#relation");
 
-                    if(ca_id == "" && it_name_kr == "") {
+                    if(ca_id == "" && it_name == "") {
                         $relation.html("<p>상품의 분류를 선택하시거나 상품명을 입력하신 후 검색하여 주십시오.</p>");
                         return false;
                     }
 
                     $("#relation").load(
                         "./itemformrelation.php",
-                        { it_id: "<?php echo $it_id; ?>", ca_id: ca_id, it_name_kr: it_name_kr }
+                        { it_id: "<?php echo $it_id; ?>", ca_id: ca_id, it_name: it_name }
                     );
                 });
 
@@ -1576,7 +1531,7 @@ if(!sql_query(" select it_skin from {$g5['g5_shop_item_table']} limit 1", false)
             <div id="reg_relation" class="srel_sel">
                 <?php
                 $str = array();
-                $sql = " select b.ca_id, b.it_id, b.it_name_kr, b.it_price_kr
+                $sql = " select b.ca_id, b.it_id, b.it_name, b.it_price
                            from {$g5['g5_shop_item_relation_table']} a
                            left join {$g5['g5_shop_item_table']} b on (a.it_id2=b.it_id)
                           where a.it_id = '$it_id'
@@ -1584,14 +1539,14 @@ if(!sql_query(" select it_skin from {$g5['g5_shop_item_table']} limit 1", false)
                 $result = sql_query($sql);
                 for($g=0; $row=sql_fetch_array($result); $g++)
                 {
-                    $it_name_kr = get_it_image($row['it_id'], 50, 50).' '.$row['it_name_kr'];
+                    $it_name = get_it_image($row['it_id'], 50, 50).' '.$row['it_name'];
 
                     if($g==0)
                         echo '<ul>';
                 ?>
                     <li>
                         <input type="hidden" name="re_it_id[]" value="<?php echo $row['it_id']; ?>">
-                        <div class="list_item"><?php echo $it_name_kr; ?></div>
+                        <div class="list_item"><?php echo $it_name; ?></div>
                         <div class="list_item_btn"><button type="button" class="del_item btn_frmline">삭제</button></div>
                     </li>
                 <?php

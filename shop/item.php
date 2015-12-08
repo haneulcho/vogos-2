@@ -89,8 +89,8 @@ if($ca_dir_check) {
 
 define('G5_SHOP_CSS_URL', str_replace(G5_PATH, G5_URL, $skin_dir));
 
-$g5['title'] = $it['it_name_kr'].' &gt; '.$it['ca_name'];
-$og_title = get_text($it['it_name_kr']).' | VOGOS';
+$g5['title'] = $it['it_name'].' &gt; '.$it['ca_name'];
+$og_title = get_text($it['it_name']).' | VOGOS';
 $og_url = G5_SHOP_URL.'/item.php?it_id='.$it['it_id'];
 $og_img = get_it_imageurl($it['it_id']);
 $og_description = 'Everywhere is a Runway, Everyday VOGOS';
@@ -102,9 +102,9 @@ else
     include_once('./_head.php');
 
 // 로그분석기 시작
-$http_PC=$it['it_name_kr'];    //상품명
+$http_PC=$it['it_name'];    //상품명
 $http_PT=$it['ca_name'];    //카테고리
-$http_PS=$it['it_price_kr'];    //상품가격
+$http_PS=$it['it_price'];    //상품가격
 // 로그분석기 끝
 
 // 분류 위치
@@ -134,10 +134,10 @@ else
     $action_url = './cartupdate.php';
 
 // 이전 상품보기
-$sql = " select it_id, it_name_kr from {$g5['g5_shop_item_table']} where it_id > '$it_id' and SUBSTRING(ca_id,1,4) = '".substr($it['ca_id'],0,4)."' and it_use = '1' order by it_id asc limit 1 ";
+$sql = " select it_id, it_name from {$g5['g5_shop_item_table']} where it_id > '$it_id' and SUBSTRING(ca_id,1,4) = '".substr($it['ca_id'],0,4)."' and it_use = '1' order by it_id asc limit 1 ";
 $row = sql_fetch($sql);
 if ($row['it_id']) {
-    $prev_title = '<img src="'.G5_SHOP_SKIN_URL.'/img/lArrow2.png" alt="이전상품"><span class="sound_only"> '.$row['it_name_kr'].'</span>';
+    $prev_title = '<img src="'.G5_SHOP_SKIN_URL.'/img/lArrow2.png" alt="이전상품"><span class="sound_only"> '.$row['it_name'].'</span>';
     $prev_href = '<a href="./item.php?it_id='.$row['it_id'].'" id="siblings_prev">';
     $prev_href2 = '</a>'.PHP_EOL;
 } else {
@@ -147,10 +147,10 @@ if ($row['it_id']) {
 }
 
 // 다음 상품보기
-$sql = " select it_id, it_name_kr from {$g5['g5_shop_item_table']} where it_id < '$it_id' and SUBSTRING(ca_id,1,4) = '".substr($it['ca_id'],0,4)."' and it_use = '1' order by it_id desc limit 1 ";
+$sql = " select it_id, it_name from {$g5['g5_shop_item_table']} where it_id < '$it_id' and SUBSTRING(ca_id,1,4) = '".substr($it['ca_id'],0,4)."' and it_use = '1' order by it_id desc limit 1 ";
 $row = sql_fetch($sql);
 if ($row['it_id']) {
-    $next_title = '<img src="'.G5_SHOP_SKIN_URL.'/img/rArrow2.png" alt="다음상품"><span class="sound_only"> '.$row['it_name_kr'].'</span>';
+    $next_title = '<img src="'.G5_SHOP_SKIN_URL.'/img/rArrow2.png" alt="다음상품"><span class="sound_only"> '.$row['it_name'].'</span>';
     $next_href = '<a href="./item.php?it_id='.$row['it_id'].'" id="siblings_next">';
     $next_href2 = '</a>'.PHP_EOL;
 } else {
@@ -180,7 +180,7 @@ if($default['de_rel_list_use']) {
 }
 
 // 소셜 관련
-$sns_title = get_text($it['it_name_kr']).' | '.get_text($config['cf_title']);
+$sns_title = get_text($it['it_name']).' | '.get_text($config['cf_title']);
 $sns_url  = G5_SHOP_URL.'/item.php?it_id='.$it['it_id'];
 $sns_share_links .= get_sns_share_link('facebook', $sns_url, $sns_title, G5_SHOP_SKIN_URL.'/img/sns_fb_s.png', $thumb_url).' ';
 $sns_share_links .= get_sns_share_link('twitter', $sns_url, $sns_title, G5_SHOP_SKIN_URL.'/img/sns_twt_s.png', $thumb_url).' ';

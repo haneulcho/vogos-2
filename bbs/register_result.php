@@ -8,7 +8,7 @@ if (isset($_SESSION['ss_mb_reg']))
 if (!$mb['mb_id'])
     goto_url(G5_URL);
 
-$g5['title'] = 'Sign Up complete!';
+$g5['title'] = '회원가입이 완료되었습니다.';
 include_once('./_head.php');
 // 로그분석기 시작
 $http_SO="REGO";	//가입완료페이지

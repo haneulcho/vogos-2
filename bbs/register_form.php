@@ -23,11 +23,11 @@ if ($w == "") {
     referer_check();
 
     if (!isset($_POST['agree']) || !$_POST['agree']) {
-        alert('Please agree to our Term and Conditions to complete sign up process.', G5_BBS_URL.'/register.php');
+        alert('회원가입약관의 내용에 동의하셔야 회원가입 하실 수 있습니다.', G5_BBS_URL.'/register.php');
     }
 
     if (!isset($_POST['agree2']) || !$_POST['agree2']) {
-        alert('Please agree to our Privacy Policy to enable sign in.', G5_BBS_URL.'/register.php');
+        alert('개인정보처리방침안내의 내용에 동의하셔야 회원가입 하실 수 있습니다.', G5_BBS_URL.'/register.php');
     }
 
     $member['mb_birth'] = '';
@@ -42,11 +42,8 @@ if ($w == "") {
     if (isset($_POST['mb_name'])) {
         $member['mb_name']  = $_POST['mb_name'];
     }
-    if (isset($_POST['mb_country'])) {
-        $member['mb_country']  = $_POST['mb_country'];
-    }
 
-    $g5['title'] = 'Sign Up';
+    $g5['title'] = '회원 가입';
 
 } else if ($w == 'u') {
 
@@ -54,10 +51,10 @@ if ($w == "") {
         alert('관리자의 회원정보는 관리자 화면에서 수정해 주십시오.', G5_URL);
 
     if (!$is_member)
-        alert('Please sign in first!', G5_URL);
+        alert('로그인 후 이용하여 주십시오.', G5_URL);
 
     if ($member['mb_id'] != $_POST['mb_id'])
-        alert('An Error Occured, Please check your ID.');
+        alert('로그인된 회원과 넘어온 정보가 서로 다릅니다.');
 
     /*
     if (!($member[mb_password] == sql_password($_POST[mb_password]) && $_POST[mb_password]))
@@ -75,10 +72,10 @@ if ($w == "") {
             $tmp_password = get_encrypt_string($_POST['mb_password']);
 
         if ($member['mb_password'] != $tmp_password)
-            alert('Your password is incorrect.');
+            alert('비밀번호가 틀립니다.');
     }
 
-    $g5['title'] = 'Edit my info.';
+    $g5['title'] = '회원 정보 수정';
 
     set_session("ss_reg_mb_name", $member['mb_name']);
     set_session("ss_reg_mb_hp", $member['mb_hp']);
@@ -90,11 +87,11 @@ if ($w == "") {
     $member['mb_birth']       = get_text($member['mb_birth']);
     $member['mb_tel']         = get_text($member['mb_tel']);
     $member['mb_hp']          = get_text($member['mb_hp']);
-    $member['mb_country']     = get_text($member['mb_country']);
-    $member['mb_city']        = get_text($member['mb_city']);
-    $member['mb_zip']         = get_text($member['mb_zip']);
+    $member['mb_zip1']        = get_text($member['mb_zip1']);
+    $member['mb_zip2']        = get_text($member['mb_zip2']);
     $member['mb_addr1']       = get_text($member['mb_addr1']);
     $member['mb_addr2']       = get_text($member['mb_addr2']);
+    $member['mb_addr3']       = get_text($member['mb_addr3']);
     $member['mb_signature']   = get_text($member['mb_signature']);
     $member['mb_recommend']   = get_text($member['mb_recommend']);
     $member['mb_profile']     = get_text($member['mb_profile']);

@@ -24,7 +24,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_SKIN_URL.'/style.css">', 
         ?>
         <span>
             <a href="javascript:window.close();">
-                <img src="<?php echo $imageurl; ?>" width="<?php echo $size[0]; ?>" height="<?php echo $size[1]; ?>" alt="<?php echo $row['it_name_kr']; ?>" id="largeimage_<?php echo $i; ?>">
+                <img src="<?php echo $imageurl; ?>" width="<?php echo $size[0]; ?>" height="<?php echo $size[1]; ?>" alt="<?php echo $row['it_name']; ?>" id="largeimage_<?php echo $i; ?>">
             </a>
         </span>
         <?php

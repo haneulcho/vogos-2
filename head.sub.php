@@ -35,7 +35,7 @@ header("Pragma: no-cache"); // HTTP/1.0
 */
 ?>
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="utf-8">
 <?php

@@ -18,7 +18,7 @@ include_once(G5_PATH.'/head.sub.php');
         <table>
         <caption><?php echo $g5['title']; ?> 입력</caption>
         <thead>
-        <tr>
+        <tr>_
             <th scope="col">상품명</th>
             <th scope="col">사용</th>
             <th scope="col">삭제</th>
@@ -26,7 +26,7 @@ include_once(G5_PATH.'/head.sub.php');
         </thead>
         <tbody>
         <?php
-        $sql = " select b.it_id, b.it_name_kr, b.it_use from {$g5['g5_shop_event_item_table']} a
+        $sql = " select b.it_id, b.it_name, b.it_use from {$g5['g5_shop_event_item_table']} a
                    left join {$g5['g5_shop_item_table']} b on (a.it_id=b.it_id)
                   where a.ev_id = '$ev_id'
                   order by b.it_id desc ";
@@ -39,7 +39,7 @@ include_once(G5_PATH.'/head.sub.php');
             <td>
                 <a href="<?php echo $href; ?>" target="_blank">
                     <?php echo get_it_image($row['it_id'], 40, 40); ?>
-                    <?php echo cut_str(stripslashes($row['it_name_kr']), 60, "&#133"); ?>
+                    <?php echo cut_str(stripslashes($row['it_name']), 60, "&#133"); ?>
                 </a>
             </td>
             <td class="td_boolean"><?php echo ($row['it_use']?"사용":"미사용"); ?></td>

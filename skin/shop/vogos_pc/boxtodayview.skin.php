@@ -30,20 +30,20 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_SKIN_URL.'/style.css">', 
             $tv_it_idx = $tv_idx - ($i - 1);
             $tv_it_id = get_session("ss_tv[$tv_it_idx]");
 
-            $rowx = sql_fetch(" select it_id, it_name_kr from {$g5['g5_shop_item_table']} where it_id = '$tv_it_id' ");
+            $rowx = sql_fetch(" select it_id, it_name from {$g5['g5_shop_item_table']} where it_id = '$tv_it_id' ");
             if(!$rowx['it_id'])
                 continue;
 
             if ($tv_tot_count % $tv_div['img_length'] == 0) $k++;
 
-            $it_name_kr = get_text($rowx['it_name_kr']);
-            $img = get_it_image($tv_it_id, $tv_div['img_width'], $tv_div['img_height'], $tv_it_id, '', $it_name_kr);
+            $it_name = get_text($rowx['it_name']);
+            $img = get_it_image($tv_it_id, $tv_div['img_width'], $tv_div['img_height'], $tv_it_id, '', $it_name);
 
             if ($tv_tot_count == 0) echo '<ul id="stv_ul">'.PHP_EOL;
             echo '<li class="stv_item c'.$k.'">'.PHP_EOL;
             echo $img;
             echo '<br>';
-            echo cut_str($it_name_kr, 10, '').PHP_EOL;
+            echo cut_str($it_name, 10, '').PHP_EOL;
             echo '</li>'.PHP_EOL;
 
             $tv_tot_count++;

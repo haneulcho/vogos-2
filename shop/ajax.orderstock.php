@@ -55,7 +55,7 @@ for($i=0; $row=sql_fetch_array($result); $i++) {
 
     if ($ct_qty > $it_stock_qty)
     {
-        $item_option = $row['it_name_kr'];
+        $item_option = $row['it_name'];
         if($row['io_id'])
             $item_option .= '('.$row['ct_option'].')';
 

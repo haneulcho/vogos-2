@@ -103,10 +103,10 @@ $colspan = 9;
     for ($i=0; $row=sql_fetch_array($result); $i++) {
         switch($row['cp_method']) {
             case '0':
-                $sql3 = " select it_name_kr from {$g5['g5_shop_item_table']} where it_id = '{$row['cp_target']}' ";
+                $sql3 = " select it_name from {$g5['g5_shop_item_table']} where it_id = '{$row['cp_target']}' ";
                 $row3 = sql_fetch($sql3);
                 $cp_method = '개별상품할인';
-                $cp_target = get_text($row3['it_name_kr']);
+                $cp_target = get_text($row3['it_name']);
                 break;
             case '1':
                 $sql3 = " select ca_name from {$g5['g5_shop_category_table']} where ca_id = '{$row['cp_target']}' ";

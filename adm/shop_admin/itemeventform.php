@@ -19,7 +19,7 @@ if ($w == "u")
         alert("등록된 자료가 없습니다.");
 
     // 등록된 이벤트 상품
-    $sql = " select b.it_id, b.it_name_kr
+    $sql = " select b.it_id, b.it_name
                 from {$g5['g5_shop_event_item_table']} a left join {$g5['g5_shop_item_table']} b on ( a.it_id = b.it_id )
                 where a.ev_id = '$ev_id' ";
     $res_item = sql_query($sql);
@@ -221,14 +221,14 @@ include_once (G5_ADMIN_PATH.'/admin.head.php');
                 <div id="reg_item_list" class="srel_sel">
                     <?php
                     for($i=0; $row=sql_fetch_array($res_item); $i++) {
-                        $it_name_kr = get_it_image($row['it_id'], 50, 50).' '.$row['it_name_kr'];
+                        $it_name = get_it_image($row['it_id'], 50, 50).' '.$row['it_name'];
 
                         if($i==0)
                             echo '<ul>';
                     ?>
                         <li>
                             <input type="hidden" name="it_id[]" value="<?php echo $row['it_id']; ?>">
-                            <div class="list_item"><?php echo $it_name_kr; ?></div>
+                            <div class="list_item"><?php echo $it_name; ?></div>
                             <div class="list_item_btn"><button type="button" class="del_item btn_frmline">삭제</button></div>
                         </li>
                     <?php
@@ -320,16 +320,16 @@ include_once (G5_ADMIN_PATH.'/admin.head.php');
 $(function() {
     $("#btn_search_item").click(function() {
         var ca_id = $("#sch_ca_id").val();
-        var it_name_kr = $.trim($("#sch_name").val());
+        var it_name = $.trim($("#sch_name").val());
 
-        if(ca_id == "" && it_name_kr == "") {
+        if(ca_id == "" && it_name == "") {
             $("#sch_item_list").html("<p>상품의 분류를 선택하시거나 상품명을 입력하신 후 검색하여 주십시오.</p>");
             return false;
         }
 
         $("#sch_item_list").load(
             "./itemeventsearch.php",
-            { w: "<?php echo $w; ?>", ev_id: "<?php echo $ev_id; ?>", ca_id: ca_id, it_name_kr: it_name_kr }
+            { w: "<?php echo $w; ?>", ev_id: "<?php echo $ev_id; ?>", ca_id: ca_id, it_name: it_name }
         );
     });
 

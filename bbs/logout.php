@@ -13,7 +13,7 @@ set_cookie('ck_auto', '', 0);
 if ($url) {
     $p = parse_url($url);
     if ($p['scheme'] || $p['host']) {
-        alert('Login Error, Please try again!');
+        alert('url에 도메인을 지정할 수 없습니다.');
     }
 
     if($url == 'shop')

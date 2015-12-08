@@ -16,7 +16,7 @@ $sql_common = " from `{$g5['g5_shop_item_use_table']}` a join `{$g5['g5_shop_ite
 $sql_search = " where a.is_confirm = '1' ";
 
 if(!$sfl)
-    $sfl = 'b.it_name_kr';
+    $sfl = 'b.it_name';
 
 if ($stx) {
     $sql_search .= " and ( ";

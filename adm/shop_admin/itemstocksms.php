@@ -116,24 +116,24 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
     for ($i=0; $row=mysql_fetch_array($result); $i++)
     {
         // 상품정보
-        $sql = " select it_name_kr from {$g5['g5_shop_item_table']} where it_id = '{$row['it_id']}' ";
+        $sql = " select it_name from {$g5['g5_shop_item_table']} where it_id = '{$row['it_id']}' ";
         $it = sql_fetch($sql);
 
-        if($it['it_name_kr'])
-            $it_name_kr = get_text($it['it_name_kr']);
+        if($it['it_name'])
+            $it_name = get_text($it['it_name']);
         else
-            $it_name_kr = '상품정보 없음';
+            $it_name = '상품정보 없음';
 
         $bg = 'bg'.($i%2);
 
     ?>
     <tr class="<?php echo $bg; ?>">
         <td class="td_chk">
-            <label for="chk_<?php echo $i; ?>" class="sound_only"><?php echo $it_name_kr; ?> 알림요청</label>
+            <label for="chk_<?php echo $i; ?>" class="sound_only"><?php echo $it_name; ?> 알림요청</label>
             <input type="checkbox" name="chk[]" value="<?php echo $i ?>" id="chk_<?php echo $i; ?>">
             <input type="hidden" name="ss_id[<?php echo $i; ?>]" value="<?php echo $row['ss_id']; ?>">
         </td>
-        <td><?php echo $it_name_kr; ?></td>
+        <td><?php echo $it_name; ?></td>
         <td class="td_telbig"><?php echo $row['ss_hp']; ?></td>
         <td class="td_stat"><?php echo ($row['ss_send'] ? '전송완료' : '전송전'); ?></td>
         <td class="td_datetime"><?php echo (is_null_time($row['ss_send_time']) ? '' : $row['ss_send_time']); ?></td>

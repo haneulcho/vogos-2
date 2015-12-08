@@ -81,14 +81,10 @@ class item_list
     // 기본으로 보여지는 필드들
     protected $view_it_id              = false;       // 상품코드
     protected $view_it_img             = true;        // 상품이미지
-    protected $view_it_name_kr         = true;        // 상품명
-    protected $view_it_name_en         = false;        // 상품명
-    protected $view_it_basic_kr        = true;        // 기본설명
-    protected $view_it_basic_en        = false;        // 기본설명
-    protected $view_it_price_kr        = true;        // 판매가격
-    protected $view_it_price_en        = true;        // 판매가격
-    protected $view_it_cust_price_kr   = false;       // 소비자가
-    protected $view_it_cust_price_en   = false;       // 소비자가
+    protected $view_it_name            = true;        // 상품명
+    protected $view_it_basic           = true;        // 기본설명
+    protected $view_it_price           = true;        // 판매가격
+    protected $view_it_cust_price      = false;       // 소비자가
     protected $view_it_icon            = false;       // 아이콘
     protected $view_sns                = false;       // SNS
 
@@ -731,7 +727,7 @@ function display_price($price, $tel_inq=false)
     if ($tel_inq)
         $price = '전화문의';
     else
-        $price = '$'.number_format($price, 2);
+        $price = number_format($price, 0).'원';
 
     return $price;
 }
@@ -746,8 +742,8 @@ function get_price($it)
     if ($it['it_tel_inq']) return '전화문의';
 
     $price = $it['it_price'];
-    $price = (float)$price;
-    $price = number_format($price, 2, '.', '');
+    $price = (int)$price;
+    $price = number_format($price, 0).'원';
 
     return $price;
 }
@@ -1129,10 +1125,10 @@ function get_item_options($it_id, $subject)
                 if($row['io_price'] == 0) {
                     $price = '&nbsp;&nbsp;';
                 } else {
-                    $price = '&nbsp;&nbsp;+ '.number_format($row['io_price'], 2);
+                    $price = '&nbsp;&nbsp;+ '.number_format($row['io_price']).'원';
                 }
             } else {
-                $price = '&nbsp;&nbsp; '.number_format($row['io_price'], 2);
+                $price = '&nbsp;&nbsp; '.number_format($row['io_price']).'원';
             }
 
             if($row['io_stock_qty'] < 1)
@@ -1183,10 +1179,10 @@ function get_item_supply($it_id, $subject)
                 if($row['io_price'] == 0) {
                     $price = '&nbsp;&nbsp;';
                 } else {
-                    $price = '&nbsp;&nbsp;+ '.number_format($row['io_price'], 2);
+                    $price = '&nbsp;&nbsp;+ '.number_format($row['io_price']).'원';
                 }
             } else {
-                $price = '&nbsp;&nbsp; '.number_format($row['io_price'], 2);
+                $price = '&nbsp;&nbsp; '.number_format($row['io_price']).'원';
             }
             $io_stock_qty = get_option_stock_qty($it_id, $row['io_id'], $row['io_type']);
 
@@ -1371,10 +1367,10 @@ function get_goods($cart_id)
     global $g5;
 
     // 상품명만들기
-    $row = sql_fetch(" select a.it_id, b.it_name_kr from {$g5['g5_shop_cart_table']} a, {$g5['g5_shop_item_table']} b where a.it_id = b.it_id and a.od_id = '$cart_id' order by ct_id limit 1 ");
+    $row = sql_fetch(" select a.it_id, b.it_name from {$g5['g5_shop_cart_table']} a, {$g5['g5_shop_item_table']} b where a.it_id = b.it_id and a.od_id = '$cart_id' order by ct_id limit 1 ");
     // 상품명에 "(쌍따옴표)가 들어가면 오류 발생함
     $goods['it_id'] = $row['it_id'];
-    $goods['full_name']= $goods['name'] = addslashes($row['it_name_kr']);
+    $goods['full_name']= $goods['name'] = addslashes($row['it_name']);
     // 특수문자제거
     $goods['full_name'] = preg_replace ("/[ #\&\+\-%@=\/\\\:;,\.'\"\^`~\_|\!\?\*$#<>()\[\]\{\}]/i", "",  $goods['full_name']);
 
@@ -1550,7 +1546,7 @@ function relation_item($it_id, $width, $height, $rows=3)
     if(!$it_id)
         return $str;
 
-    $sql = " select b.it_id, b.it_name_kr, b.it_price, b.it_tel_inq from {$g5['g5_shop_item_relation_table']} a left join {$g5['g5_shop_item_table']} b on ( a.it_id2 = b.it_id ) where a.it_id = '$it_id' order by ir_no asc limit 0, $rows ";
+    $sql = " select b.it_id, b.it_name, b.it_price, b.it_tel_inq from {$g5['g5_shop_item_relation_table']} a left join {$g5['g5_shop_item_table']} b on ( a.it_id2 = b.it_id ) where a.it_id = '$it_id' order by ir_no asc limit 0, $rows ";
     $result = sql_query($sql);
 
     for($i=0; $row=sql_fetch_array($result); $i++) {
@@ -1559,7 +1555,7 @@ function relation_item($it_id, $width, $height, $rows=3)
             $str .= '<ul class="sct_rel_ul">';
         }
 
-        $it_name_kr = get_text($row['it_name_kr']); // 상품명
+        $it_name = get_text($row['it_name']); // 상품명
         $it_price = get_price($row); // 상품가격
         if(!$row['it_tel_inq'])
             $it_price = display_price($it_price);
@@ -1718,10 +1714,10 @@ function get_order_info($od_id)
     $info = array();
 
     // 장바구니 주문금액정보
-    $sql = " select SUM(IF(io_type = 1, (io_price * ct_qty), ((ct_price_kr + io_price) * ct_qty))) as price,
+    $sql = " select SUM(IF(io_type = 1, (io_price * ct_qty), ((ct_price + io_price) * ct_qty))) as price,
                     SUM(cp_price) as coupon,
-                    SUM( IF( ct_notax = 0, ( IF(io_type = 1, (io_price * ct_qty), ( (ct_price_kr + io_price) * ct_qty) ) - cp_price ), 0 ) ) as tax_mny,
-                    SUM( IF( ct_notax = 1, ( IF(io_type = 1, (io_price * ct_qty), ( (ct_price_kr + io_price) * ct_qty) ) - cp_price ), 0 ) ) as free_mny
+                    SUM( IF( ct_notax = 0, ( IF(io_type = 1, (io_price * ct_qty), ( (ct_price + io_price) * ct_qty) ) - cp_price ), 0 ) ) as tax_mny,
+                    SUM( IF( ct_notax = 1, ( IF(io_type = 1, (io_price * ct_qty), ( (ct_price + io_price) * ct_qty) ) - cp_price ), 0 ) ) as free_mny
                 from {$g5['g5_shop_cart_table']}
                 where od_id = '$od_id'
                   and ct_status IN ( '주문', '입금', '준비', '배송', '완료' ) ";
@@ -1817,7 +1813,7 @@ function get_order_info($od_id)
     $od_free_mny = $free_mny;
 
     // 장바구니 취소금액 정보
-    $sql = " select SUM(IF(io_type = 1, (io_price * ct_qty), ((ct_price_kr + io_price) * ct_qty))) as price
+    $sql = " select SUM(IF(io_type = 1, (io_price * ct_qty), ((ct_price + io_price) * ct_qty))) as price
                 from {$g5['g5_shop_cart_table']}
                 where od_id = '$od_id'
                   and ct_status IN ( '취소', '반품', '품절' ) ";
@@ -1899,7 +1895,7 @@ function get_sendcost($cart_id, $selected=1)
     $result = sql_query($sql);
     for($i=0; $sc=sql_fetch_array($result); $i++) {
         // 합계
-        $sql = " select SUM(IF(io_type = 1, (io_price * ct_qty), ((ct_price_kr + io_price) * ct_qty))) as price,
+        $sql = " select SUM(IF(io_type = 1, (io_price * ct_qty), ((ct_price + io_price) * ct_qty))) as price,
                         SUM(ct_qty) as qty
                     from {$g5['g5_shop_cart_table']}
                     where it_id = '{$sc['it_id']}'
@@ -1923,11 +1919,12 @@ function get_sendcost($cart_id, $selected=1)
         $send_cost_limit = explode(";", $default['de_send_cost_limit']);
         $send_cost_list  = explode(";", $default['de_send_cost_list']);
         $send_cost = 0;
-        $send_cost_min = '79.99';
-        if($total_price < (float)$send_cost_min) {
-            $send_cost = 16.99;
-        } else {
-            $send_cost = 0;
+        for ($k=0; $k<count($send_cost_limit); $k++) {
+            // 총판매금액이 배송비 상한가 보다 작다면
+            if ($total_price < preg_replace('/[^0-9]/', '', $send_cost_limit[$k])) {
+                $send_cost = (float)$send_cost_list[$k];
+                break;
+            }
         }
     }
 
@@ -1963,7 +1960,7 @@ function get_item_sendcost($it_id, $price, $qty, $cart_id)
                 $ct['it_sc_qty'] = 1;
 
             $q = ceil((int)$qty / (int)$ct['it_sc_qty']);
-            $sendcost = (float)$ct['it_sc_price'] * $q;
+            $sendcost = (int)$ct['it_sc_price'] * $q;
         }
     } else if($ct['it_sc_type'] == 1) { // 무료배송
         $sendcost = 0;

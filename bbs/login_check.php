@@ -7,7 +7,7 @@ $mb_id       = trim($_POST['mb_id']);
 $mb_password = trim($_POST['mb_password']);
 
 if (!$mb_id || !$mb_password)
-    alert('Please Enter Your ID and Password');
+    alert('회원아이디나 비밀번호가 공백이면 안됩니다.');
 
 $mb = get_member($mb_id);
 
@@ -15,19 +15,19 @@ $mb = get_member($mb_id);
 // 회원아이디를 입력해 보고 맞으면 또 비밀번호를 입력해보는 경우를 방지하기 위해서입니다.
 // 불법사용자의 경우 회원아이디가 틀린지, 비밀번호가 틀린지를 알기까지는 많은 시간이 소요되기 때문입니다.
 if (!$mb['mb_id'] || !check_password($mb_password, $mb['mb_password'])) {
-    alert('The ID or password is incorrect.');
+    alert('가입된 회원아이디가 아니거나 비밀번호가 틀립니다.\\n비밀번호는 대소문자를 구분합니다.');
 }
 
 // 차단된 아이디인가?
 if ($mb['mb_intercept_date'] && $mb['mb_intercept_date'] <= date("Ymd", G5_SERVER_TIME)) {
     $date = preg_replace("/([0-9]{4})([0-9]{2})([0-9]{2})/", "\\1년 \\2월 \\3일", $mb['mb_intercept_date']);
-    alert('This account is on hold. Please contact Customer Service.');
+    alert('회원님의 아이디는 접근이 금지되어 있습니다.\n처리일 : '.$date);
 }
 
 // 탈퇴한 아이디인가?
 if ($mb['mb_leave_date'] && $mb['mb_leave_date'] <= date("Ymd", G5_SERVER_TIME)) {
     $date = preg_replace("/([0-9]{4})([0-9]{2})([0-9]{2})/", "\\1년 \\2월 \\3일", $mb['mb_leave_date']);
-    alert('Invalid ID');
+    alert('탈퇴한 아이디이므로 접근하실 수 없습니다.\n탈퇴일 : '.$date);
 }
 
 if ($config['cf_use_email_certify'] && !preg_match("/[1-9]/", $mb['mb_email_certify'])) {

@@ -440,12 +440,8 @@ $it_info_value = addslashes(serialize($value_array));
 if($it_point_type == 1 && $it_point > 99)
     alert("포인트 비율을 0과 99 사이의 값으로 입력해 주십시오.");
 
-$it_name_kr = strip_tags(trim($_POST['it_name_kr']));
-$it_name_en = strip_tags(trim($_POST['it_name_en']));
-if ($it_name_kr == "") {
-    alert("상품명을 입력해 주십시오.");
-}
-if ($it_name_en == "") {
+$it_name = strip_tags(trim($_POST['it_name']));
+if ($it_name == "") {
     alert("상품명을 입력해 주십시오.");
 }
 
@@ -457,8 +453,7 @@ $sql_common = " ca_id               = '$ca_id',
                 it_place_ddm        = '$it_place_ddm',
                 it_name_ddm         = '$it_name_ddm',
                 it_price_ddm        = '$it_price_ddm',
-                it_name_kr          = '$it_name_kr',
-                it_name_en          = '$it_name_en',
+                it_name             = '$it_name',
                 it_maker            = '$it_maker',
                 it_origin           = '$it_origin',
                 it_brand            = '$it_brand',
@@ -470,15 +465,12 @@ $sql_common = " ca_id               = '$ca_id',
                 it_type3            = '$it_type3',
                 it_type4            = '$it_type4',
                 it_type5            = '$it_type5',
-                it_basic_kr         = '$it_basic_kr',
-                it_basic_en         = '$it_basic_en',
+                it_basic            = '$it_basic',
                 it_explan           = '$it_explan',
                 it_explan2          = '".strip_tags(trim($_POST['it_explan']))."',
                 it_mobile_explan    = '$it_mobile_explan',
-                it_cust_price_kr    = '$it_cust_price_kr',
-                it_cust_price_en    = '$it_cust_price_en',
-                it_price_kr         = '$it_price_kr',
-                it_price_en         = '$it_price_en',
+                it_cust_price       = '$it_cust_price',
+                it_price            = '$it_price',
                 it_point            = '$it_point',
                 it_point_type       = '$it_point_type',
                 it_supply_point     = '$it_supply_point',
@@ -664,8 +656,7 @@ if($supply_count) {
 $ca_fields = '';
 if(is_checked('chk_ca_it_skin'))                $ca_fields .= " , it_skin = '$it_skin' ";
 if(is_checked('chk_ca_it_mobile_skin'))         $ca_fields .= " , it_mobile_skin = '$it_mobile_skin' ";
-if(is_checked('chk_ca_it_basic_kr'))            $ca_fields .= " , it_basic_kr = '$it_basic_kr' ";
-if(is_checked('chk_ca_it_basic_en'))            $ca_fields .= " , it_basic_en = '$it_basic_en' ";
+if(is_checked('chk_ca_it_basic'))               $ca_fields .= " , it_basic = '$it_basic' ";
 if(is_checked('chk_ca_it_order'))               $ca_fields .= " , it_order = '$it_order' ";
 if(is_checked('chk_ca_it_type'))                $ca_fields .= " , it_type1 = '$it_type1', it_type2 = '$it_type2', it_type3 = '$it_type3', it_type4 = '$it_type4', it_type5 = '$it_type5' ";
 if(is_checked('chk_ca_it_maker'))               $ca_fields .= " , it_maker = '$it_maker' ";
@@ -680,10 +671,8 @@ if(is_checked('chk_ca_it_use'))                 $ca_fields .= " , it_use = '$it_
 if(is_checked('chk_ca_it_nocoupon'))            $ca_fields .= " , it_nocoupon = '$it_nocoupon' ";
 if(is_checked('chk_ca_it_soldout'))             $ca_fields .= " , it_soldout = '$it_soldout' ";
 if(is_checked('chk_ca_it_info'))                $ca_fields .= " , it_info_gubun = '$it_info_gubun', it_info_value = '$it_info_value' ";
-if(is_checked('chk_ca_it_price_kr'))            $ca_fields .= " , it_price_kr = '$it_price_kr' ";
-if(is_checked('chk_ca_it_price_en'))            $ca_fields .= " , it_price_en = '$it_price_en' ";
-if(is_checked('chk_ca_it_cust_price_kr'))       $ca_fields .= " , it_cust_price_kr = '$it_cust_price_en' ";
-if(is_checked('chk_ca_it_cust_price_en'))       $ca_fields .= " , it_cust_price_en = '$it_cust_price_en' ";
+if(is_checked('chk_ca_it_price'))               $ca_fields .= " , it_price = '$it_price' ";
+if(is_checked('chk_ca_it_cust_price'))          $ca_fields .= " , it_cust_price = '$it_cust_price' ";
 if(is_checked('chk_ca_it_point'))               $ca_fields .= " , it_point = '$it_point' ";
 if(is_checked('chk_ca_it_point_type'))          $ca_fields .= " , it_point_type = '$it_point_type' ";
 if(is_checked('chk_ca_it_supply_point'))        $ca_fields .= " , it_supply_point = '$it_supply_point' ";
@@ -708,19 +697,18 @@ if(is_checked('chk_ca_9'))                      $ca_fields .= " , it_9_subj = '$
 if(is_checked('chk_ca_10'))                     $ca_fields .= " , it_10_subj = '$it_10_subj', it_10 = '$it_10' ";
 
 if($ca_fields) {
-    sql_query(" update {$g5['g5_shop_item_table']} set it_name_kr = it_name_kr, it_name_en = it_name_en {$ca_fields} where ca_id = '$ca_id' ");
+    sql_query(" update {$g5['g5_shop_item_table']} set it_name = it_name {$ca_fields} where ca_id = '$ca_id' ");
     if($ca_id2)
-        sql_query(" update {$g5['g5_shop_item_table']} set it_name_kr = it_name_kr, it_name_en = it_name_en {$ca_fields} where ca_id2 = '$ca_id2' ");
+        sql_query(" update {$g5['g5_shop_item_table']} set it_name = it_name {$ca_fields} where ca_id2 = '$ca_id2' ");
     if($ca_id3)
-        sql_query(" update {$g5['g5_shop_item_table']} set it_name_kr = it_name_kr, it_name_en = it_name_en {$ca_fields} where ca_id3 = '$ca_id3' ");
+        sql_query(" update {$g5['g5_shop_item_table']} set it_name = it_name {$ca_fields} where ca_id3 = '$ca_id3' ");
 }
 
 // 모든 상품 동일 옵션 적용
 $all_fields = '';
 if(is_checked('chk_all_it_skin'))                $all_fields .= " , it_skin = '$it_skin' ";
 if(is_checked('chk_all_it_mobile_skin'))         $all_fields .= " , it_mobile_skin = '$it_mobile_skin' ";
-if(is_checked('chk_all_it_basic_kr'))            $all_fields .= " , it_basic_kr = '$it_basic_kr' ";
-if(is_checked('chk_all_it_basic_en'))            $all_fields .= " , it_basic_en = '$it_basic_en' ";
+if(is_checked('chk_all_it_basic'))               $all_fields .= " , it_basic = '$it_basic' ";
 if(is_checked('chk_all_it_order'))               $all_fields .= " , it_order = '$it_order' ";
 if(is_checked('chk_all_it_type'))                $all_fields .= " , it_type1 = '$it_type1', it_type2 = '$it_type2', it_type3 = '$it_type3', it_type4 = '$it_type4', it_type5 = '$it_type5' ";
 if(is_checked('chk_all_it_maker'))               $all_fields .= " , it_maker = '$it_maker' ";
@@ -735,10 +723,8 @@ if(is_checked('chk_all_it_use'))                 $all_fields .= " , it_use = '$i
 if(is_checked('chk_all_it_nocoupon'))            $all_fields .= " , it_nocoupon = '$it_nocoupon' ";
 if(is_checked('chk_all_it_soldout'))             $all_fields .= " , it_soldout = '$it_soldout' ";
 if(is_checked('chk_all_it_info'))                $all_fields .= " , it_info_gubun = '$it_info_gubun', it_info_value = '$it_info_value' ";
-if(is_checked('chk_all_it_price_kr'))            $all_fields .= " , it_price_kr = '$it_price_kr' ";
-if(is_checked('chk_all_it_price_en'))            $all_fields .= " , it_price_en = '$it_price_en' ";
-if(is_checked('chk_all_it_cust_price_kr'))       $all_fields .= " , it_cust_price_kr = '$it_cust_price_kr' ";
-if(is_checked('chk_all_it_cust_price_en'))       $all_fields .= " , it_cust_price_en = '$it_cust_price_en' ";
+if(is_checked('chk_all_it_price'))               $all_fields .= " , it_price = '$it_price' ";
+if(is_checked('chk_all_it_cust_price'))          $all_fields .= " , it_cust_price = '$it_cust_price' ";
 if(is_checked('chk_all_it_point'))               $all_fields .= " , it_point = '$it_point' ";
 if(is_checked('chk_all_it_point_type'))          $all_fields .= " , it_point_type = '$it_point_type' ";
 if(is_checked('chk_all_it_supply_point'))        $all_fields .= " , it_supply_point = '$it_supply_point' ";
@@ -763,7 +749,7 @@ if(is_checked('chk_all_9'))                      $all_fields .= " , it_9_subj = 
 if(is_checked('chk_all_10'))                     $all_fields .= " , it_10_subj = '$it_10_subj', it_10 = '$it_10' ";
 
 if($all_fields) {
-    sql_query(" update {$g5['g5_shop_item_table']} set it_name_kr = it_name_kr, it_name_en = it_name_en {$all_fields} ");
+    sql_query(" update {$g5['g5_shop_item_table']} set it_name = it_name {$all_fields} ");
 }
 
 $qstr = "$qstr&amp;sca=$sca&amp;page=$page";

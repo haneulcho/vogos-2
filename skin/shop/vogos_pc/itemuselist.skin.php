@@ -14,7 +14,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_SKIN_URL.'/style.css">', 
     <label for="sfl" class="sound_only">검색항목<strong class="sound_only"> 필수</strong></label>
     <select name="sfl" id="sfl" required>
         <option value="">선택</option>
-        <option value="b.it_name_kr"   <?php echo get_selected($sfl, "b.it_name_kr"); ?>>상품명</option>
+        <option value="b.it_name"   <?php echo get_selected($sfl, "b.it_name"); ?>>상품명</option>
         <option value="a.it_id"     <?php echo get_selected($sfl, "a.it_id"); ?>>상품코드</option>
         <option value="a.is_subject"<?php echo get_selected($sfl, "a.is_subject"); ?>>후기제목</option>
         <option value="a.is_content"<?php echo get_selected($sfl, "a.is_content"); ?>>후기내용</option>
@@ -41,7 +41,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_SKIN_URL.'/style.css">', 
 
         $is_content = get_view_thumbnail(conv_content($row['is_content'], 1), $thumbnail_width);
 
-        $row2 = sql_fetch(" select it_name_kr from {$g5['g5_shop_item_table']} where it_id = '{$row['it_id']}' ");
+        $row2 = sql_fetch(" select it_name from {$g5['g5_shop_item_table']} where it_id = '{$row['it_id']}' ");
         $it_href = G5_SHOP_URL."/item.php?it_id={$row['it_id']}";
 
         if ($i == 0) echo '<ol>';
@@ -51,7 +51,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_SKIN_URL.'/style.css">', 
         <div class="sps_img">
             <a href="<?php echo $it_href; ?>">
                 <?php echo get_itemuselist_thumbnail($row['it_id'], $row['is_content'], 70, 70); ?>
-                <span><?php echo $row2['it_name_kr']; ?></span>
+                <span><?php echo $row2['it_name']; ?></span>
             </a>
         </div>
 
