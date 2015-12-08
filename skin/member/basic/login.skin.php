@@ -15,10 +15,10 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
     <div id="login_frm">
         <div class="login_frm_inputs">
             <label for="login_id" class="sound_only">ID<strong class="sound_only"> required</strong></label>
-            <input type="text" name="mb_id" id="login_id" placeholder="ID(필수)" required class="frm_input required" maxLength="20">
+            <input type="text" name="mb_id" id="login_id" placeholder="ID (필수)" required class="frm_input required" maxLength="20">
             <label for="login_pw" class="sound_only">Password<strong class="sound_only"> required</strong></label>
-            <input type="password" name="mb_password" id="login_pw" placeholder="Password(필)" required class="frm_input required" maxLength="20">
-            <input type="submit" value="Sign In" class="btn_submit">
+            <input type="password" name="mb_password" id="login_pw" placeholder="Password (필수)" required class="frm_input required" maxLength="20">
+            <input type="submit" value="로그인" class="btn_submit">
         </div>
         <div class="login_frm_keep">
             <input type="checkbox" name="auto_login" id="login_auto_login">

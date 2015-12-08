@@ -40,7 +40,7 @@ else if ($w == 'u')
     $mb['mb_hp'] = get_text($mb['mb_hp']);
     $mb['mb_addr1'] = get_text($mb['mb_addr1']);
     $mb['mb_addr2'] = get_text($mb['mb_addr2']);
-    $mb['mb_country'] = get_text($mb['mb_country']);
+    $mb['mb_addr3'] = get_text($mb['mb_addr3']);
     $mb['mb_signature'] = get_text($mb['mb_signature']);
     $mb['mb_recommend'] = get_text($mb['mb_recommend']);
     $mb['mb_profile'] = get_text($mb['mb_profile']);
@@ -158,12 +158,6 @@ add_javascript(G5_POSTCODE_JS, 0);    //다음 주소 js
         </td>
         <th scope="row"><label for="mb_password">비밀번호<?php echo $sound_only ?></label></th>
         <td><input type="password" name="mb_password" id="mb_password" <?php echo $required_mb_password ?> class="frm_input <?php echo $required_mb_password ?>" size="15" maxlength="20"></td>
-    </tr>
-    <tr>
-        <th scope="row"><label for="mb_country">국가<?php echo $sound_only ?></label></th>
-        <td>
-            <input type="text" name="mb_country" value="<?php echo $mb['mb_country'] ?>" id="mb_country" class="frm_input" size="30" minlength="3" maxlength="50">
-        </td>
     </tr>
     <tr>
         <th scope="row"><label for="mb_name">이름 First Name<strong class="sound_only">필수</strong></label></th>

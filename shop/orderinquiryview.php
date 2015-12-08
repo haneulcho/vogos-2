@@ -355,10 +355,6 @@ $_SESSION['ord_num'] = $od_id;
                 </tr>
                 <?php } ?>
                 <tr>
-                    <th scope="row">Country</th>
-                    <td><?php echo get_text($od['od_country']); ?></td>
-                </tr>
-                <tr>
                     <th scope="row">주소</th>
                     <td><?php echo get_text(sprintf("(%s%s)", $od['od_zip1'], $od['od_zip2']).' '.print_address($od['od_addr1'], $od['od_addr2'], $od['od_addr3'], $od['od_addr_jibeon'])); ?></td>
                 </tr>
@@ -401,10 +397,6 @@ $_SESSION['ord_num'] = $od_id;
                     <td><?php echo get_text($od['od_b_hp']); ?></td>
                 </tr>
                 <?php } ?>
-                <tr>
-                    <th scope="row">Country</th>
-                    <td><?php echo get_text($od['od_b_country']); ?></td>
-                </tr>
                 <tr>
                     <th scope="row">주소</th>
                     <td><?php echo get_text(sprintf("(%s%s)", $od['od_b_zip1'], $od['od_b_zip2']).' '.print_address($od['od_b_addr1'], $od['od_b_addr2'], $od['od_b_addr3'], $od['od_b_addr_jibeon'])); ?></td>

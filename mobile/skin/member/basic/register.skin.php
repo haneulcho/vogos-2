@@ -31,7 +31,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
 
     <div class="btn_confirm">
         <p>약관에 동의하셔야 가입하실 수 있습니다.</p>
-        <input type="submit" class="btn_submit" value="Sign Up">
+        <input type="submit" class="btn_submit" value="계속하기">
     </div>
 
     </form>

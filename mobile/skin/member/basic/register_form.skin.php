@@ -145,9 +145,6 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
         $("#reg_mb_id").focus();
         $("#reg_zip_find").css("display", "inline-block");
 
-        var $mb_country = "<?php echo $member['mb_country']; ?>";
-        $('#reg_mb_country').val($mb_country).attr('selected', 'selected');
-
         <?php if($config['cf_cert_use'] && $config['cf_cert_ipin']) { ?>
         // 아이핀인증
         $("#win_ipin_cert").click(function() {

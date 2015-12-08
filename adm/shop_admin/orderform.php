@@ -868,10 +868,6 @@ add_javascript(G5_POSTCODE_JS, 0);    //다음 주소 js
                     <td><input type="text" name="od_b_hp" value="<?php echo $od['od_b_hp']; ?>" id="od_b_hp" class="frm_input required"></td>
                 </tr>
                 <tr>
-                    <th scope="row"><label for="od_b_country"><span class="sound_only">받으시는 분 </span>국가</label></th>
-                    <td><input type="text" name="od_b_country" value="<?php echo $od['od_b_country']; ?>" id="od_b_country" class="frm_input required"></td>
-                </tr>
-                <tr>
                     <th scope="row"><span class="sound_only">받으시는 분 </span>주소</th>
                     <td>
                         <label for="od_b_zip" class="sound_only">우편번호</label>

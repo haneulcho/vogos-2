@@ -442,8 +442,6 @@ CREATE TABLE IF NOT EXISTS `g5_member` (
   `mb_nick_date` date NOT NULL default '0000-00-00',
   `mb_email` varchar(255) NOT NULL default '',
   `mb_homepage` varchar(255) NOT NULL default '',
-  `mb_country` varchar(255) NOT NULL default '',
-  `mb_city` varchar(255) NOT NULL default '',
   `mb_level` tinyint(4) NOT NULL default '0',
   `mb_sex` char(1) NOT NULL default '',
   `mb_birth` varchar(255) NOT NULL default '',

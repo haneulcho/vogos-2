@@ -430,7 +430,6 @@ $sql = " insert {$g5['g5_shop_order_table']}
                 od_email          = '$od_email',
                 od_tel            = '$od_tel',
                 od_hp             = '$od_hp',
-                od_country        = '$od_country',
                 od_zip1           = '$od_zip1',
                 od_zip2           = '$od_zip2',
                 od_addr1          = '$od_addr1',
@@ -441,7 +440,6 @@ $sql = " insert {$g5['g5_shop_order_table']}
                 od_b_name_last    = '$od_b_name_last',
                 od_b_tel          = '$od_b_tel',
                 od_b_hp           = '$od_b_hp',
-                od_b_country      = '$od_b_country',
                 od_b_city         = '$od_b_city',
                 od_b_zip1         = '$od_b_zip1',
                 od_b_zip2         = '$od_b_zip2',
@@ -699,12 +697,11 @@ if($is_member) {
                   and ad_name_last = '$od_b_name_last'
                   and ad_tel = '$od_b_tel'
                   and ad_hp = '$od_b_hp'
-                  and ad_country = '$od_b_country'
                   and ad_zip1 = '$od_b_zip1'
                   and ad_zip2 = '$od_b_zip2'
                   and ad_addr1 = '$od_b_addr1'
-                  and ad_addr1 = '$od_b_addr2'
-                  and ad_addr2 = '$od_b_addr3' ";
+                  and ad_addr2 = '$od_b_addr2'
+                  and ad_addr3 = '$od_b_addr3' ";
     $row = sql_fetch($sql);
 
     // 기본배송지 체크
@@ -731,7 +728,6 @@ if($is_member) {
                         ad_name_last = '$od_b_name_last',
                         ad_tel       = '$od_b_tel',
                         ad_hp        = '$od_b_hp',
-                        ad_country   = '$od_b_country',
                         ad_zip1      = '$od_b_zip1',
                         ad_zip2      = '$od_b_zip2',
                         ad_addr1     = '$od_b_addr1',

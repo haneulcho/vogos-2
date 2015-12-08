@@ -357,8 +357,12 @@ var f = document.forderform;
                 <td><input type="text" name="od_email" value="<?php echo $member['mb_email']; ?>" id="od_email" required class="frm_input required" size="35" maxlength="100"></td>
             </tr>
             <tr>
-                <th scope="row"><label for="od_tel">Phone Number</label></th>
+                <th scope="row"><label for="od_tel">전화번호</label></th>
                 <td><input type="text" name="od_tel" value="<?php echo $member['mb_tel']; ?>" id="od_tel" required class="frm_input required" maxlength="20"></td>
+            </tr>
+            <tr>
+                <th scope="row"><label for="od_hp">휴대전화번호</label></th>
+                <td><input type="text" name="od_hp" value="<?php echo $member['mb_hp']; ?>" id="od_hp" required class="frm_input required" maxlength="15"></td>
             </tr>
             <tr>
                 <th scope="row"><label for="od_zip">우편번호</label></th>
@@ -450,8 +454,12 @@ var f = document.forderform;
                 <td><input type="text" name="od_b_name_last" id="od_b_name_last" required class="frm_input required" maxlength="20"></td>
             </tr>
             <tr>
-                <th scope="row"><label for="od_b_tel">Phone Number<strong class="sound_only"> *필수</strong></label></th>
+                <th scope="row"><label for="od_b_tel">전화번호<strong class="sound_only"> *필수</strong></label></th>
                 <td><input type="text" name="od_b_tel" id="od_b_tel" required class="frm_input required" maxlength="20"></td>
+            </tr>
+            <tr>
+                <th scope="row"><label for="od_b_hp">휴대전화번호<strong class="sound_only"> *필수</strong></label></th>
+                <td><input type="text" name="od_b_hp" id="od_b_hp" required class="frm_input required" maxlength="20"></td>
             </tr>
             <tr>
                 <th scope="row"><label for="od_b_zip">우편번호</label></th>
@@ -1133,7 +1141,6 @@ function forderform_check(f)
     check_field(f.od_tel, "주문하시는 분 전화번호를 입력하십시오.");
     check_field(f.od_addr1, "주소검색을 이용하여 주문하시는 분 주소를 입력하십시오.");
     check_field(f.od_addr2, " 주문하시는 분의 상세주소를 입력하십시오.");
-    check_field(f.od_zip, "");
 
     clear_field(f.od_email);
     if(f.od_email.value=='' || f.od_email.value.search(/(\S+)@(\S+)\.(\S+)/) == -1)
@@ -1150,7 +1157,6 @@ function forderform_check(f)
     check_field(f.od_b_tel, "받으시는 분 전화번호를 입력하십시오.");
     check_field(f.od_b_addr1, "주소검색을 이용하여 받으시는 분 주소를 입력하십시오.");
     check_field(f.od_b_addr2, "받으시는 분의 상세주소를 입력하십시오.");
-    check_field(f.od_b_zip, "");
 
     var od_settle_bank = document.getElementById("od_settle_bank");
     if (od_settle_bank) {
@@ -1432,6 +1438,7 @@ function gumae2baesong(checked) {
 
     if(checked == true) {
         f.od_b_name.value = f.od_name.value;
+        f.od_b_name_last.value = f.od_name_last.value;
         f.od_b_tel.value  = f.od_tel.value;
         f.od_b_hp.value   = f.od_hp.value;
         f.od_b_zip.value  = f.od_zip.value;
@@ -1443,6 +1450,7 @@ function gumae2baesong(checked) {
         calculate_sendcost(String(f.od_b_zip.value));
     } else {
         f.od_b_name.value = "";
+        f.od_b_name_last.value = "";
         f.od_b_tel.value  = "";
         f.od_b_hp.value   = "";
         f.od_b_zip.value  = "";
