@@ -35,23 +35,23 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_MSHOP_SKIN_URL.'/style.css">',
 
         switch($row['od_status']) {
             case '주문':
-                $od_status = '입금확인중';
-                break;
+                    $od_status = '입금대기중';
+                    break;
             case '입금':
-                $od_status = 'Payment Completed';
-                break;
+                    $od_status = '입금완료';
+                    break;
             case '준비':
-                $od_status = 'On hold';
-                break;
+                    $od_status = '배송준비중';
+                    break;
             case '배송':
-                $od_status = 'Out for Delivery';
-                break;
+                    $od_status = '배송중';
+                    break;
             case '완료':
-                $od_status = 'Delivered';
-                break;
+                    $od_status = '배송완료';
+                    break;
             default:
-                $od_status = 'Canceled';
-                break;
+                    $od_status = '주문취소';
+                    break;
         }
     ?>
     <tr>
@@ -70,7 +70,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_MSHOP_SKIN_URL.'/style.css">',
     }
 
     if ($i == 0)
-        echo '<tr><td colspan="7" class="empty_table">Your order list is empty.</td></tr>';
+        echo '<tr><td colspan="7" class="empty_table">주문하신 상품이 없네요.</td></tr>';
     ?>
     </tbody>
     </table>

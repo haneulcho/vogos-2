@@ -110,27 +110,11 @@ for($k=0; $cp=sql_fetch_array($res); $k++) {
                 <?php } ?>
             </tr>
             <tr>
-                <th scope="row">Country</th>
-                <?php if(empty($member['mb_country'])) { ?>
-                <td class="btn_edit_info"><a href="<?php echo G5_BBS_URL; ?>/member_confirm.php?url=register_form.php"><i class="ion-compose"></i> 내 정보 수정</a>을 눌러 부가 정보를 입력하세요.</td>
-                <? } else { ?>
-                <td><?php echo $member['mb_country']; ?></td>
-                <?php } ?>
-            </tr>
-            <tr>
-                <th scope="row">Address Line 1</th>
+                <th scope="row">주소</th>
                 <?php if(empty($member['mb_addr1'])) { ?>
                 <td class="btn_edit_info"><a href="<?php echo G5_BBS_URL; ?>/member_confirm.php?url=register_form.php"><i class="ion-compose"></i> 내 정보 수정</a>을 눌러 부가 정보를 입력하세요.</td>
                 <? } else { ?>
-                <td><?php echo $member['mb_addr1']; ?></td>
-                <?php } ?>
-            </tr>
-            <tr>
-                <th scope="row">Address Line 2</th>
-                <?php if(empty($member['mb_addr2'])) { ?>
-                <td class="btn_edit_info"><a href="<?php echo G5_BBS_URL; ?>/member_confirm.php?url=register_form.php"><i class="ion-compose"></i> 내 정보 수정</a>을 눌러 부가 정보를 입력하세요.</td>
-                <? } else { ?>
-                <td><?php echo $member['mb_addr2']; ?></td>
+                <td><?php echo sprintf("(%s-%s)", $member['mb_zip1'], $member['mb_zip2']).' '.print_address($member['mb_addr1'], $member['mb_addr2'], $member['mb_addr3'], $member['mb_addr_jibeon']); ?></td>
                 <?php } ?>
             </tr>
             </tbody>

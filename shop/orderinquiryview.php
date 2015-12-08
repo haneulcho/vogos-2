@@ -468,7 +468,7 @@ $_SESSION['ord_num'] = $od_id;
         if ($cancel_price == 0) {
             if ($custom_cancel) {
         ?>
-        <button type="button" onclick="document.getElementById('sod_fin_cancelfrm').style.display='block';">주문 취소하</button>
+        <button type="button" onclick="document.getElementById('sod_fin_cancelfrm').style.display='block';">주문 취소하기</button>
 
         <div id="sod_fin_cancelfrm">
             <form method="post" action="./orderinquirycancel.php" onsubmit="return fcancel_check(this);">

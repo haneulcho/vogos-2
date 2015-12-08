@@ -22,7 +22,7 @@ else {
 }
 
 if (get_cart_count($tmp_cart_id) == 0)
-    alert('Your shopping cart is empty.', G5_SHOP_URL.'/cart.php');
+    alert('장바구니가 비어 있습니다.', G5_SHOP_URL.'/cart.php');
 
 $g5['title'] = 'Proceed to Checkout';
 
@@ -318,7 +318,6 @@ var f = document.forderform;
     <input type="hidden" name="item_coupon" value="0">
     <input type="hidden" name="od_coupon" value="0">
     <input type="hidden" name="od_send_coupon" value="0">
-    <input type="hidden" name="od_ref" value="<?php echo $od_id; ?>">
 
     <?php
     require_once('./'.$default['de_pg_service'].'/orderform.2.php');
@@ -395,8 +394,20 @@ var f = document.forderform;
         $addr_list .= '<input type="checkbox" name="ad_sel_addr" value="same" id="ad_sel_addr_same">'.PHP_EOL;
         $addr_list .= '<label for="ad_sel_addr_same">주문자와 받는 분의 배송지가 같을 때 체크하세요.</label>'.PHP_EOL;
 
+/*        // 기본배송지
+        $sql = " select *
+                    from {$g5['g5_shop_order_address_table']}
+                    where mb_id = '{$member['mb_id']}'
+                      and ad_default = '1' ";
+        $row = sql_fetch($sql);
+        if($row['ad_id']) {
+            $val1 = $row['ad_name'].$sep.$row['ad_tel'].$sep.$row['ad_hp'].$sep.$row['ad_zip1'].$sep.$row['ad_zip2'].$sep.$row['ad_addr1'].$sep.$row['ad_addr2'].$sep.$row['ad_addr3'].$sep.$row['ad_jibeon'].$sep.$row['ad_subject'];
+            $addr_list .= '<br><input type="radio" name="ad_sel_addr" value="'.$val1.'" id="ad_sel_addr_def">'.PHP_EOL;
+            $addr_list .= '<label for="ad_sel_addr_def">기본배송지</label>'.PHP_EOL;
+        }
+
         // 최근배송지
-/*        $sql = " select *
+        $sql = " select *
                     from {$g5['g5_shop_order_address_table']}
                     where mb_id = '{$member['mb_id']}'
                       and ad_default = '0'
@@ -404,14 +415,15 @@ var f = document.forderform;
                     limit 1 ";
         $result = sql_query($sql);
         for($i=0; $row=sql_fetch_array($result); $i++) {
-            $val1 = $row['ad_name'].$sep.$row['ad_name_last'].$sep.$row['ad_tel'].$sep.$row['ad_hp'].$sep.$row['ad_zip'].$sep.$row['ad_addr1'].$sep.$row['ad_addr2'].$sep.$row['ad_country'].$sep.$row['ad_subject'];
+            $val1 = $row['ad_name'].$sep.$row['ad_tel'].$sep.$row['ad_hp'].$sep.$row['ad_zip1'].$sep.$row['ad_zip2'].$sep.$row['ad_addr1'].$sep.$row['ad_addr2'].$sep.$row['ad_addr3'].$sep.$row['ad_jibeon'].$sep.$row['ad_subject'];
             $val2 = '<label for="ad_sel_addr_'.($i+1).'">최근배송지('.($row['ad_subject'] ? $row['ad_subject'] : $row['ad_name']).')</label>';
-            $addr_list .= '<input type="radio" name="ad_sel_addr" value="'.$val1.'" id="ad_sel_addr_'.($i+1).'"> '.PHP_EOL.$val2.PHP_EOL;
+            $addr_list .= '<br><input type="radio" name="ad_sel_addr" value="'.$val1.'" id="ad_sel_addr_'.($i+1).'"> '.PHP_EOL.$val2.PHP_EOL;
         }
-*/
-        //$addr_list .= '<label for="od_sel_addr_new">신규배송지</label>'.PHP_EOL;
 
-        //$addr_list .='<a href="'.G5_SHOP_URL.'/orderaddress.php" id="order_address" class="btn_frmline">배송지목록</a>';
+        $addr_list .= '<br><input type="radio" name="ad_sel_addr" value="new" id="od_sel_addr_new">'.PHP_EOL;
+        $addr_list .= '<label for="od_sel_addr_new">신규배송지</label>'.PHP_EOL;
+
+        $addr_list .='<a href="'.G5_SHOP_URL.'/orderaddress.php" id="order_address">배송지목록</a>';*/
     } else {
         // 주문자와 동일
         $addr_list .= '<input type="checkbox" name="ad_sel_addr" value="same" id="ad_sel_addr_same">'.PHP_EOL;
@@ -632,7 +644,6 @@ var f = document.forderform;
         if ($multi_settle == 0)
             echo '<p>결제할 방법이 없습니다.<br>운영자에게 알려주시면 감사하겠습니다.</p>';
         ?>
-    </section>
     <!-- } 결제 정보 입력 끝 -->
 
     <?php
@@ -925,7 +936,8 @@ $(function() {
             f.od_b_addr_jibeon.value = addr[8];
             f.ad_subject.value       = addr[9];
 
-            var zip = addr[8].replace(/[^0-9]/g, "");
+            var zip1 = addr[3].replace(/[^0-9]/g, "");
+            var zip2 = addr[4].replace(/[^0-9]/g, "");
 
             if(zip1 != "" && zip2 != "") {
                 var code = String(zip1) + String(zip2);
@@ -1120,7 +1132,7 @@ function forderform_check(f)
     }
     check_field(f.od_tel, "주문하시는 분 전화번호를 입력하십시오.");
     check_field(f.od_addr1, "주소검색을 이용하여 주문하시는 분 주소를 입력하십시오.");
-    //check_field(f.od_addr2, " 주문하시는 분의 상세주소를 입력하십시오.");
+    check_field(f.od_addr2, " 주문하시는 분의 상세주소를 입력하십시오.");
     check_field(f.od_zip, "");
 
     clear_field(f.od_email);
@@ -1137,7 +1149,7 @@ function forderform_check(f)
     check_field(f.od_b_name, "받으시는 분 이름을 입력하십시오.");
     check_field(f.od_b_tel, "받으시는 분 전화번호를 입력하십시오.");
     check_field(f.od_b_addr1, "주소검색을 이용하여 받으시는 분 주소를 입력하십시오.");
-    //check_field(f.od_b_addr2, "받으시는 분의 상세주소를 입력하십시오.");
+    check_field(f.od_b_addr2, "받으시는 분의 상세주소를 입력하십시오.");
     check_field(f.od_b_zip, "");
 
     var od_settle_bank = document.getElementById("od_settle_bank");

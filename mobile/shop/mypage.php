@@ -33,9 +33,9 @@ for($k=0; $cp=sql_fetch_array($res); $k++) {
     <div id="sod_title" class="mif">
         <header class="fullWidth">
         <?php if(empty($member['mb_name'])) { ?>
-            <h2><?php echo $member['mb_id']; ?>'s VOGOS <span class="cart_item_num"><a href="<?php echo G5_BBS_URL; ?>/member_confirm.php?url=register_form.php"><i class="ion-compose"></i> Edit My Info</a></span></h2>
+            <h2><?php echo $member['mb_id']; ?>'s VOGOS <span class="cart_item_num"><a href="<?php echo G5_BBS_URL; ?>/member_confirm.php?url=register_form.php"><i class="ion-compose"></i> 내 정보 수정</a></span></h2>
         <?php } else { ?>
-            <h2><?php echo $member['mb_name']; ?>'s VOGOS <span class="cart_item_num"><a href="<?php echo G5_BBS_URL; ?>/member_confirm.php?url=register_form.php"><i class="ion-compose"></i> Edit My Info</a></span></h2>
+            <h2><?php echo $member['mb_name']; ?>'s VOGOS <span class="cart_item_num"><a href="<?php echo G5_BBS_URL; ?>/member_confirm.php?url=register_form.php"><i class="ion-compose"></i> 내 정보 수정</a></span></h2>
         <?php } ?>
         </header>
     </div>
@@ -46,7 +46,7 @@ for($k=0; $cp=sql_fetch_array($res); $k++) {
     <section id="smb_my_ov">
         <h2><i class="ion-android-happy"></i> MY INFORMATION
             <div class="smb_my_more">
-                <a href="<?php echo G5_BBS_URL; ?>/member_confirm.php?url=member_leave.php" onclick="return member_leave();"><i class="ion-android-exit"></i> Deactivate ID</a>
+                <a href="<?php echo G5_BBS_URL; ?>/member_confirm.php?url=member_leave.php" onclick="return member_leave();"><i class="ion-android-exit"></i> 탈퇴하기</a>
             </div>
         </h2>
         <div class="sct_iqv_tbl sct_iqv_tbl2">
@@ -59,23 +59,23 @@ for($k=0; $cp=sql_fetch_array($res); $k++) {
             <tr>
                 <th scope="row">ID</th>
                 <?php if(empty($member['mb_id'])) { ?>
-                <td class="btn_edit_info">Click <a href="<?php echo G5_BBS_URL; ?>/member_confirm.php?url=register_form.php"><i class="ion-compose"></i> Edit My Info</a> and provide your additional information</td>
+                <td class="btn_edit_info"><a href="<?php echo G5_BBS_URL; ?>/member_confirm.php?url=register_form.php"><i class="ion-compose"></i> 내 정보 수정</a>을 눌러 부가 정보를 입력하세요.</td>
                 <? } else { ?>
                 <td><?php echo $member['mb_id']; ?></td>
                 <?php } ?>
             </tr>
             <tr>
-                <th scope="row">First Name</th>
+                <th scope="row">First Name (이름)</th>
                 <?php if(empty($member['mb_name'])) { ?>
-                <td class="btn_edit_info">Click <a href="<?php echo G5_BBS_URL; ?>/member_confirm.php?url=register_form.php"><i class="ion-compose"></i> Edit My Info</a> and provide your additional information</td>
+                <td class="btn_edit_info"><a href="<?php echo G5_BBS_URL; ?>/member_confirm.php?url=register_form.php"><i class="ion-compose"></i> 내 정보 수정</a>을 눌러 부가 정보를 입력하세요.</td>
                 <? } else { ?>
                 <td><?php echo $member['mb_name']; ?></td>
                 <?php } ?>
             </tr>
             <tr>
-                <th scope="row">Last Name</th>
+                <th scope="row">Last Name (성)</th>
                 <?php if(empty($member['mb_name_last'])) { ?>
-                <td class="btn_edit_info">Click <a href="<?php echo G5_BBS_URL; ?>/member_confirm.php?url=register_form.php"><i class="ion-compose"></i> Edit My Info</a> and provide your additional information</td>
+                <td class="btn_edit_info"><a href="<?php echo G5_BBS_URL; ?>/member_confirm.php?url=register_form.php"><i class="ion-compose"></i> 내 정보 수정</a>을 눌러 부가 정보를 입력하세요.</td>
                 <? } else { ?>
                 <td><?php echo $member['mb_name_last']; ?></td>
                 <?php } ?>
@@ -83,7 +83,7 @@ for($k=0; $cp=sql_fetch_array($res); $k++) {
             <tr>
                 <th scope="row">E-mail</th>
                 <?php if(empty($member['mb_email'])) { ?>
-                <td class="btn_edit_info">Click <a href="<?php echo G5_BBS_URL; ?>/member_confirm.php?url=register_form.php"><i class="ion-compose"></i> Edit My Info</a> and provide your additional information</td>
+                <td class="btn_edit_info"><a href="<?php echo G5_BBS_URL; ?>/member_confirm.php?url=register_form.php"><i class="ion-compose"></i> 내 정보 수정</a>을 눌러 부가 정보를 입력하세요.</td>
                 <? } else { ?>
                 <td><?php echo $member['mb_email']; ?></td>
                 <?php } ?>
@@ -91,7 +91,7 @@ for($k=0; $cp=sql_fetch_array($res); $k++) {
             <tr>
                 <th scope="row">Telephone</th>
                 <?php if(empty($member['mb_tel'])) { ?>
-                <td class="btn_edit_info">Click <a href="<?php echo G5_BBS_URL; ?>/member_confirm.php?url=register_form.php"><i class="ion-compose"></i> Edit My Info</a> and provide your additional information</td>
+                <td class="btn_edit_info"><a href="<?php echo G5_BBS_URL; ?>/member_confirm.php?url=register_form.php"><i class="ion-compose"></i> 내 정보 수정</a>을 눌러 부가 정보를 입력하세요.</td>
                 <? } else { ?>
                 <td><?php echo $member['mb_tel']; ?></td>
                 <?php } ?>
@@ -99,41 +99,17 @@ for($k=0; $cp=sql_fetch_array($res); $k++) {
             <tr>
                 <th scope="row">Mobile</th>
                 <?php if(empty($member['mb_hp'])) { ?>
-                <td class="btn_edit_info">Click <a href="<?php echo G5_BBS_URL; ?>/member_confirm.php?url=register_form.php"><i class="ion-compose"></i> Edit My Info</a> and provide your additional information</td>
+                <td class="btn_edit_info"><a href="<?php echo G5_BBS_URL; ?>/member_confirm.php?url=register_form.php"><i class="ion-compose"></i> 내 정보 수정</a>을 눌러 부가 정보를 입력하세요.</td>
                 <? } else { ?>
                 <td><?php echo $member['mb_hp']; ?></td>
                 <?php } ?>
             </tr>
             <tr>
-                <th scope="row">Country</th>
-                <?php if(empty($member['mb_country'])) { ?>
-                <td class="btn_edit_info">Click <a href="<?php echo G5_BBS_URL; ?>/member_confirm.php?url=register_form.php"><i class="ion-compose"></i> Edit My Info</a> and provide your additional information</td>
-                <? } else { ?>
-                <td><?php echo $member['mb_country']; ?></td>
-                <?php } ?>
-            </tr>
-            <tr>
-                <th scope="row">Address Line 1</th>
+                <th scope="row">주소</th>
                 <?php if(empty($member['mb_addr1'])) { ?>
-                <td class="btn_edit_info">Click <a href="<?php echo G5_BBS_URL; ?>/member_confirm.php?url=register_form.php"><i class="ion-compose"></i> Edit My Info</a> and provide your additional information</td>
+                <td class="btn_edit_info"><a href="<?php echo G5_BBS_URL; ?>/member_confirm.php?url=register_form.php"><i class="ion-compose"></i> 내 정보 수정</a>을 눌러 부가 정보를 입력하세요.</td>
                 <? } else { ?>
-                <td><?php echo $member['mb_addr1']; ?></td>
-                <?php } ?>
-            </tr>
-            <tr>
-                <th scope="row">Address Line 2</th>
-                <?php if(empty($member['mb_addr2'])) { ?>
-                <td class="btn_edit_info">Click <a href="<?php echo G5_BBS_URL; ?>/member_confirm.php?url=register_form.php"><i class="ion-compose"></i> Edit My Info</a> and provide your additional information</td>
-                <? } else { ?>
-                <td><?php echo $member['mb_addr2']; ?></td>
-                <?php } ?>
-            </tr>
-            <tr>
-                <th scope="row">Postal Code</th>
-                <?php if(empty($member['mb_zip'])) { ?>
-                <td class="btn_edit_info">Click <a href="<?php echo G5_BBS_URL; ?>/member_confirm.php?url=register_form.php"><i class="ion-compose"></i> Edit My Info</a> and provide your additional information</td>
-                <? } else { ?>
-                <td><?php echo $member['mb_zip']; ?></td>
+                <td><?php echo sprintf("(%s-%s)", $member['mb_zip1'], $member['mb_zip2']).' '.print_address($member['mb_addr1'], $member['mb_addr2'], $member['mb_addr3'], $member['mb_addr_jibeon']); ?></td>
                 <?php } ?>
             </tr>
             </tbody>
@@ -144,9 +120,9 @@ for($k=0; $cp=sql_fetch_array($res); $k++) {
 
     <!-- 최근 주문내역 시작 { -->
     <section id="smb_my_od">
-        <h2><i class="ion-android-list"></i> ORDER HISTORY
+        <h2><i class="ion-android-list"></i> 내 주문 내역
             <div class="smb_my_more">
-                <a href="./orderinquiry.php"><i class="ion-android-arrow-dropright-circle"></i>VIEW ORDER HISTORY PAGE</a>
+                <a href="./orderinquiry.php"><i class="ion-android-arrow-dropright-circle"></i>주문 내역 더 보기</a>
             </div>
         </h2>
         <?php
@@ -173,7 +149,7 @@ $(function() {
 
 function member_leave()
 {
-    return confirm('Are you sure you want to deactivate your ID?')
+    return confirm('정말 회원에서 탈퇴 하시겠습니까?')
 }
 </script>
 <!-- } 마이페이지 끝 -->

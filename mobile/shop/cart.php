@@ -137,8 +137,8 @@ $it_send_cost = 0;
                 <button type="button" onclick="remove_item('<?php echo $row['it_id']; ?>');" class="mod_remove"><?php echo '<img src="'.G5_SHOP_SKIN_URL.'/img/cart/btn_remove_option.jpg" alt="Remove Items">' ?></button></div>
             </td>
             <td class="cart_qty"><?php echo number_format($sum['qty']); ?></td>
-            <td class="cart_num">$<?php echo number_format($row['ct_price'], 2); ?></td>
-            <td class="cart_num"><span id="sell_price_<?php echo $i; ?>">$<?php echo number_format($sell_price, 2); ?></span></td>
+            <td class="cart_num">$<?php echo number_format($row['ct_price']); ?></td>
+            <td class="cart_num"><span id="sell_price_<?php echo $i; ?>">$<?php echo number_format($sell_price); ?></span></td>
             <td class="cart_chk">
                 <label for="ct_chk_<?php echo $i; ?>" class="sound_only">Select</label>
                 <input type="checkbox" name="ct_chk[<?php echo $i; ?>]" value="1" id="ct_chk_<?php echo $i; ?>" checked="checked">
@@ -162,7 +162,7 @@ $it_send_cost = 0;
         } // for 끝
 
         if ($i == 0) {
-            echo '<tr><td colspan="8" class="empty_table">Your shopping cart is empty.</td></tr>';
+            echo '<tr><td colspan="8" class="empty_table">장바구니에 담긴 상품이 없습니다.</td></tr>';
         } else {
             // 배송비 계산
             $send_cost = get_sendcost($s_cart_id, 0);
@@ -180,13 +180,13 @@ $it_send_cost = 0;
         <?php if ($send_cost > 0) { // 배송비가 0 보다 크다면 (있다면) ?>
         <tr class="sod_shipping">
             <td class="sod_bsk_dvr">SHIPPING COST</td>
-            <td class="sod_bsk_cnt"><strong>$<?php echo number_format($send_cost, 2); ?></strong></td>
+            <td class="sod_bsk_cnt"><strong>$<?php echo number_format($send_cost); ?></strong></td>
         </tr>
         <?php } ?>
         <?php if ($tot_price > 0) { ?>
         <tr class="sod_subtotal">
             <td class="sod_bsk_dvr">SUBTOTAL</td>
-            <td class="sod_bsk_cnt"><strong>$<?php echo number_format($tot_price, 2); ?></strong></td>
+            <td class="sod_bsk_cnt"><strong>$<?php echo number_format($tot_price); ?></strong></td>
         </tr>
         <?php } ?>
         <?php if ($i > 0) { ?>
@@ -288,7 +288,7 @@ function form_check(act) {
     if (act == "buy")
     {
         if($("input[name^=ct_chk]:checked").size() < 1) {
-            alert("Please select at least one item.");
+            alert("구매하실 상품을 하나이상 선택해 주십시오.");
             return false;
         }
 
@@ -303,7 +303,7 @@ function form_check(act) {
     else if (act == "seldelete")
     {
         if($("input[name^=ct_chk]:checked").size() < 1) {
-            alert("Please select at least one item.");
+            alert("삭제하실 상품을 하나이상 선택해 주십시오.");
             return false;
         }
 

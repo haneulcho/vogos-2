@@ -102,7 +102,7 @@ if (($qsort == "it_sum_qty" || $qsort == "it_price" || $qsort == "it_use_avg" ||
 }
 
 // 총몇개 = 한줄에 몇개 * 몇줄
-$items = $default['de_search_list_mod'] * $default['de_search_list_row'];
+$items = $default['de_mobile_search_list_mod'] * $default['de_mobile_search_list_row'];
 // 페이지가 없으면 첫 페이지 (1 페이지)
 if ($page < 1) $page = 1;
 // 시작 레코드 구함
@@ -126,7 +126,7 @@ $total_page  = ceil($total_count / $items); // 전체 페이지 계산
             echo '<div class="sit_admin"><a href="'.G5_ADMIN_URL.'/shop_admin/configform.php#anc_scf_etc'.'" class="btn_admin">검색 설정</a></div>';
         }
     ?>
-        <h3>Your search for <span class="empha"><?php echo $q; ?></span> returned <?php echo $total_count; ?> results</h3>
+        <h3><span class="empha"><?php echo $q; ?></span>에 대한 검색 결과 총 <?php echo $total_count; ?> 건</h3>
     </div>
     <div id="ssch_frm">
         <form name="frmdetailsearch">
@@ -134,20 +134,20 @@ $total_page  = ceil($total_count / $items); // 전체 페이지 계산
         <input type="hidden" name="qorder" id="qorder" value="<?php echo $qorder ?>">
         <input type="hidden" name="qcaid" id="qcaid" value="<?php echo $qcaid ?>">
         <div>
-            <strong>Scope</strong>
-            <input type="checkbox" name="qname" id="ssch_qname" value="1" <?php echo $qname_check?'checked="checked"':'';?>> <label for="ssch_qname">Product Name</label>
-            <input type="checkbox" name="qexplan" id="ssch_qexplan" value="1" <?php echo $qexplan_check?'checked="checked"':'';?>> <label for="ssch_qexplan">Product Description</label>
-            <input type="checkbox" name="qid" id="ssch_qid" value="1" <?php echo $qid_check?'checked="checked"':'';?>> <label for="ssch_qid">Product No. (ex 15CD-0065)</label>
+            <strong>범위</strong>
+            <input type="checkbox" name="qname" id="ssch_qname" value="1" <?php echo $qname_check?'checked="checked"':'';?>> <label for="ssch_qname">상품 이름</label>
+            <input type="checkbox" name="qexplan" id="ssch_qexplan" value="1" <?php echo $qexplan_check?'checked="checked"':'';?>> <label for="ssch_qexplan">상품 설명</label>
+            <input type="checkbox" name="qid" id="ssch_qid" value="1" <?php echo $qid_check?'checked="checked"':'';?>> <label for="ssch_qid">상품번호 (ex 15CD-0065)</label>
         </div>
         <div>
-            <strong>Price</strong>
+            <strong>가격대</strong>
             <label for="ssch_qfrom" class="sound_only">Min</label>
             <input type="text" name="qfrom" value="<?php echo $qfrom; ?>" id="ssch_qfrom" class="frm_input" size="10"> ~
             <label for="ssch_qto" class="sound_only">Max</label>
             <input type="text" name="qto" value="<?php echo $qto; ?>" id="ssch_qto" class="frm_input" size="10">
         </div>
         <div>
-            <strong>Search:</strong>
+            <strong>검색어:</strong>
             <input type="text" name="q" value="<?php echo $q; ?>" id="ssch_q" class="frm_input" size="40" maxlength="30">
             <input type="submit" value="SEARCH" class="btn_submit">
         </div>
@@ -171,10 +171,10 @@ $total_page  = ceil($total_count / $items); // 전체 페이지 계산
         </ul>
     </div>
     <ul id="ssch_sort">
-        <li><a href="#" class="btn01" onclick="set_sort('it_sum_qty', 'desc'); return false;">most popular</a></li>
-        <li><a href="#" class="btn01" onclick="set_sort('it_price', 'asc'); return false;">price (Low to High)</a></li>
-        <li><a href="#" class="btn01" onclick="set_sort('it_price', 'desc'); return false;">price (High to Low)</a></li>
-        <li><a href="#" class="btn01" onclick="set_sort('it_update_time', 'desc'); return false;">latest</a></li>
+        <li><a href="#" class="btn01" onclick="set_sort('it_sum_qty', 'desc'); return false;">인기많은순</a></li>
+        <li><a href="#" class="btn01" onclick="set_sort('it_price', 'asc'); return false;">가격낮은순</a></li>
+        <li><a href="#" class="btn01" onclick="set_sort('it_price', 'desc'); return false;">가격높은순</a></li>
+        <li><a href="#" class="btn01" onclick="set_sort('it_update_time', 'desc'); return false;">최신순</a></li>
     </ul>
     <!-- } 검색된 분류 끝 -->
 

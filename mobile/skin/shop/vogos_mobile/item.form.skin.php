@@ -489,12 +489,12 @@ function fitem_submit(f)
 
     // 판매가격이 0 보다 작다면
     if (document.getElementById("it_price").value < 0) {
-        alert("An error occured. Please contact to us.");
+        alert("전화로 문의해 주시면 감사하겠습니다.");
         return false;
     }
 
     if($(".sit_opt_list").size() < 1) {
-        alert("Please select an option.");
+        alert("상품의 선택옵션을 선택해 주십시오.");
         return false;
     }
 
@@ -508,19 +508,19 @@ function fitem_submit(f)
         val = $(this).val();
 
         if(val.length < 1) {
-            alert("Please enter item quantity you selected.");
+            alert("수량을 입력해 주십시오.");
             result = false;
             return false;
         }
 
         if(val.replace(/[0-9]/g, "").length > 0) {
-            alert("Please check a quantity.\nYou can use only number.");
+            alert("수량은 숫자로 입력해 주십시오.");
             result = false;
             return false;
         }
 
         if(parseInt(val.replace(/[^0-9]/g, "")) < 1) {
-            alert("Please enter quantity at least one.");
+            alert("수량은 1이상 입력해 주십시오.");
             result = false;
             return false;
         }
@@ -535,12 +535,12 @@ function fitem_submit(f)
     }
 
     if(min_qty > 0 && sum_qty < min_qty) {
-        alert("The quantity requested is not available. Please enter a lower quantity.");
+        alert("선택옵션 개수 총합 "+number_format(String(min_qty))+"개 이상 주문해 주십시오.");
         return false;
     }
 
     if(max_qty > 0 && sum_qty > max_qty) {
-        alert("The quantity requested is not available. Please enter a lower quantity.");
+        alert("선택옵션 개수 총합 "+number_format(String(max_qty))+"개 이하로 주문해 주십시오.");
         return false;
     }
 

@@ -7,7 +7,7 @@ set_session("ss_token", $token);
 
 if (!$is_member) {
     if (get_session('ss_orderview_uid') != $_GET['uid'])
-        alert("An Error Occured.\\n\\nPlease sign in and try again.", G5_SHOP_URL);
+        alert("직접 링크로는 주문서 조회가 불가합니다.\\n\\n주문조회 화면을 통하여 조회하시기 바랍니다.", G5_SHOP_URL);
 }
 
 $sql = "select * from {$g5['g5_shop_order_table']} where od_id = '$od_id' ";
@@ -15,13 +15,13 @@ if($is_member && !$is_admin)
     $sql .= " and mb_id = '{$member['mb_id']}' ";
 $od = sql_fetch($sql);
 if (!$od['od_id'] || (!$is_member && md5($od['od_id'].$od['od_time'].$od['od_ip']) != get_session('ss_orderview_uid'))) {
-    alert("This order is invalid.", G5_SHOP_URL);
+    alert("조회하실 주문서가 없습니다.", G5_SHOP_URL);
 }
 
 // 결제방법
 $settle_case = $od['od_settle_case'];
 
-$g5['title'] = 'Your Order Details';
+$g5['title'] = '주문상세내역';
 include_once(G5_MSHOP_PATH.'/_head.php');
 
 add_stylesheet('<link rel="stylesheet" href="'.G5_MSHOP_SKIN_URL.'/style.css">', 0);
@@ -98,13 +98,13 @@ $_SESSION['ord_num'] = $od_id;
                 switch($row['ct_send_cost'])
                 {
                     case 1:
-                        $ct_send_cost = 'Paid';
+                        $ct_send_cost = '착불';
                         break;
                     case 2:
-                        $ct_send_cost = 'Free shipping';
+                        $ct_send_cost = '무료';
                         break;
                     default:
-                        $ct_send_cost = 'Paid';
+                        $ct_send_cost = '선불';
                         break;
                 }
 
@@ -113,7 +113,7 @@ $_SESSION['ord_num'] = $od_id;
                     $sendcost = get_item_sendcost($row['it_id'], $sum['price'], $sum['qty'], $od_id);
 
                     if($sendcost == 0)
-                        $ct_send_cost = 'Free shipping';
+                        $ct_send_cost = '무';
                 }
 
                 for($k=0; $opt=sql_fetch_array($res); $k++) {
@@ -122,19 +122,19 @@ $_SESSION['ord_num'] = $od_id;
                             $ct_status = '입금확인중';
                             break;
                         case '입금':
-                            $ct_status = 'Payment Completed';
+                            $ct_status = '입금완료';
                             break;
                         case '준비':
-                            $ct_status = 'On hold';
+                            $ct_status = '배송준비중';
                             break;
                         case '배송':
-                            $ct_status = 'Out for Delivery';
+                            $ct_status = '배송중';
                             break;
                         case '완료':
-                            $ct_status = 'Delivered';
+                            $ct_status = '배송완료';
                             break;
                         default:
-                            $ct_status = 'Canceled';
+                            $ct_status = '주문취소';
                             break;
                     }
 
@@ -156,8 +156,8 @@ $_SESSION['ord_num'] = $od_id;
                     <div class="sod_opt"><?php echo $opt['ct_option']; ?></div>
                 </td>
                 <td class="cart_qty"><?php echo number_format($opt['ct_qty']); ?></td>
-                <td class="cart_num">$<?php echo number_format($opt_price, 2); ?></td>
-                <td class="cart_num">$<?php echo number_format($sell_price, 2); ?></td>
+                <td class="cart_num">$<?php echo number_format($opt_price); ?></td>
+                <td class="cart_num">$<?php echo number_format($sell_price); ?></td>
                 <td class="cart_status"><?php echo $ct_status; ?></td>
             </tr>
             <?php
@@ -187,45 +187,45 @@ $_SESSION['ord_num'] = $od_id;
         <table id="sod_bsk_tot" class="subtotal_iqv">
             <tr class="sod_shipping">
                 <td class="sod_bsk_dvr">TOTAL PRICE</td>
-                <td class="sod_bsk_cnt"><strong>$<?php echo number_format($od['od_cart_price'], 2); ?></strong></td>
+                <td class="sod_bsk_cnt"><strong><?php echo number_format($od['od_cart_price']); ?></strong></td>
             </tr>
             <?php if($od['od_cart_coupon'] > 0) { ?>
             <tr class="sod_shipping">
                 <td class="sod_bsk_dvr">USE ITEM COUPON</td>
-                <td class="sod_bsk_cnt"><strong>$<?php echo number_format($od['od_cart_coupon'], 2); ?></strong></td>
+                <td class="sod_bsk_cnt"><strong><?php echo number_format($od['od_cart_coupon']); ?></strong></td>
             </tr>
             <?php } ?>
             <?php if($od['od_coupon'] > 0) { ?>
             <tr class="sod_shipping">
                 <td class="sod_bsk_dvr">USE PRICE COUPON</td>
-                <td class="sod_bsk_cnt"><strong>$<?php echo number_format($od['od_coupon'], 2); ?></strong></td>
+                <td class="sod_bsk_cnt"><strong><?php echo number_format($od['od_coupon']); ?></strong></td>
             </tr>
             <?php } ?>
             <tr class="sod_shipping">
                 <td class="sod_bsk_dvr">SHIPPING COST</td>
-                <td class="sod_bsk_cnt"><strong>$<?php echo number_format($od['od_send_cost'], 2); ?></strong></td>
+                <td class="sod_bsk_cnt"><strong><?php echo number_format($od['od_send_cost']); ?></strong></td>
             </tr>
             <?php if ($od['od_send_cost2'] > 0) { ?>
             <tr class="sod_shipping">
                 <td class="sod_bsk_dvr">SHIPPING COST2</td>
-                <td class="sod_bsk_cnt"><strong>$<?php echo number_format($od['od_send_cost2'], 2); ?></strong></td>
+                <td class="sod_bsk_cnt"><strong><?php echo number_format($od['od_send_cost2']); ?></strong></td>
             </tr>
             <?php } ?>
             <?php if($od['od_send_coupon'] > 0) { ?>
             <tr class="sod_shipping">
                 <td class="sod_bsk_dvr">USE DELIVERY COUPON</td>
-                <td class="sod_bsk_cnt"><strong>$<?php echo number_format($od['od_send_coupon'], 2); ?></strong></td>
+                <td class="sod_bsk_cnt"><strong><?php echo number_format($od['od_send_coupon']); ?></strong></td>
             </tr>
             <?php } ?>
             <?php if($od['od_cancel_price'] > 0) { ?>
             <tr class="sod_shipping">
                 <td class="sod_bsk_dvr">REFUND</td>
-                <td class="sod_bsk_cnt"><strong>$<?php echo number_format($od['od_cancel_price'], 2); ?></strong></td>
+                <td class="sod_bsk_cnt"><strong><?php echo number_format($od['od_cancel_price']); ?></strong></td>
             </tr>
             <?php } ?>
             <tr class="sod_subtotal">
                 <td class="sod_bsk_dvr">SUBTOTAL</td>
-                <td class="sod_bsk_cnt"><strong>$<?php echo number_format($tot_price, 2); ?></strong></td>
+                <td class="sod_bsk_cnt"><strong><?php echo number_format($tot_price); ?></strong></td>
             </tr>
         </table>
     </section>
@@ -241,8 +241,8 @@ $_SESSION['ord_num'] = $od_id;
         $misu_price = $tot_price - $receipt_price - $cancel_price;
 
         if ($misu_price == 0 && ($od['od_cart_price'] > $od['od_cancel_price'])) {
-            //$wanbul = " (완불)";
-            $wanbul = display_price($receipt_price);
+            $wanbul = " (완불)";
+            //$wanbul = display_price($receipt_price);
             $misu = false; // 미수금 없음
         }
         else
@@ -299,7 +299,7 @@ $_SESSION['ord_num'] = $od_id;
                 </tr>
                 <tr>
                     <th scope="row">Payment Method</th>
-                    <td><?php echo $od['od_bank_account']; ?></td>
+                    <td><?php echo $od['od_settle_case']; ?></td>
                 </tr>
                 <?php
                 if($od['od_receipt_price'] > 0)
@@ -374,32 +374,8 @@ $_SESSION['ord_num'] = $od_id;
                 </tr>
                 <?php } ?>
                 <tr>
-                    <th scope="row">Country</th>
-                    <td><?php echo get_text($od['od_country']); ?></td>
-                </tr>
-                <?php
-                if (!empty($od['od_city'])) {
-                ?>
-                <tr>
-                    <th scope="row">City</th>
-                    <td><?php echo get_text($od['od_city']); ?></td>
-                </tr>
-                <?php } ?>
-                <tr>
-                    <th scope="row">Address Line 1</th>
-                    <td><?php echo get_text($od['od_addr1']); ?></td>
-                </tr>
-                <tr>
-                    <th scope="row">Address Line 2</th>
-                    <td><?php echo get_text($od['od_addr2']); ?></td>
-                </tr>
-                <tr>
-                    <th scope="row">E-mail</th>
-                    <td><?php echo get_text($od['od_email']); ?></td>
-                </tr>
-                <tr>
-                    <th scope="row">Postal Code</th>
-                    <td><?php echo get_text($od['od_zip']); ?></td>
+                    <th scope="row">Address</th>
+                    <td><?php echo get_text(sprintf("(%s%s)", $od['od_zip1'], $od['od_zip2']).' '.print_address($od['od_addr1'], $od['od_addr2'], $od['od_addr3'], $od['od_addr_jibeon'])); ?></td>
                 </tr>
                 </tbody>
                 </table>
@@ -437,32 +413,12 @@ $_SESSION['ord_num'] = $od_id;
                 </tr>
                 <?php } ?>
                 <tr>
-                    <th scope="row">Country</th>
-                    <td><?php echo get_text($od['od_b_country']); ?></td>
-                </tr>
-                <?php
-                if (!empty($od['od_b_city'])) {
-                ?>
-                <tr>
-                    <th scope="row">City</th>
-                    <td><?php echo get_text($od['od_b_city']); ?></td>
-                </tr>
-                <?php } ?>
-                <tr>
-                    <th scope="row">Address Line 1</th>
-                    <td><?php echo get_text($od['od_b_addr1']); ?></td>
-                </tr>
-                <tr>
-                    <th scope="row">Address Line 2</th>
-                    <td><?php echo get_text($od['od_b_addr2']); ?></td>
+                    <th scope="row">Address</th>
+                    <td><?php echo get_text(sprintf("(%s%s)", $od['od_b_zip1'], $od['od_b_zip2']).' '.print_address($od['od_b_addr1'], $od['od_b_addr2'], $od['od_b_addr3'], $od['od_b_addr_jibeon'])); ?></td>
                 </tr>
                 <tr>
                     <th scope="row">E-mail</th>
                     <td><?php echo get_text($od['od_b_email']); ?></td>
-                </tr>
-                <tr>
-                    <th scope="row">Postal Code</th>
-                    <td><?php echo get_text($od['od_b_zip']); ?></td>
                 </tr>
                 </tbody>
                 </table>
@@ -482,12 +438,18 @@ $_SESSION['ord_num'] = $od_id;
                 <?php
                 if ($od['od_invoice'] && $od['od_delivery_company'])
                 {
-                    $dhl_link = 'http://www.dhl.com/cgi-bin/tracking.pl?awb='.$od['od_invoice'];
                 ?>
                 <tr>
-                    <td class="empty_table">Items shipped: <?php echo $od['od_invoice_time']; ?><br>
-                    Click your tracking number to view delivery status.
-                    <br><a href="<?php echo $dhl_link; ?>" target="_blank" class="tracking_num" onclick="return popitup('<?php echo $dhl_link; ?>', 'VOGOS SHIPPING INFORMATION - <?php echo $od['od_invoice']; ?>', '550', '400')"><img src="<?php echo G5_SHOP_SKIN_URL; ?>/img/cart/dhl_logo.gif"><i class="ion-paper-airplane"></i> Tracking number: <?php echo $od['od_invoice']; ?></a></td>
+                    <th scope="row">배송회사</th>
+                        <td><?php echo $od['od_delivery_company']; ?> <?php echo get_delivery_inquiry($od['od_delivery_company'], $od['od_invoice'], 'dvr_link'); ?></td>
+                </tr>
+                <tr>
+                    <th scope="row">운송장번호</th>
+                    <td><?php echo $od['od_invoice']; ?></td>
+                </tr>
+                <tr>
+                    <th scope="row">배송일시</th>
+                    <td><?php echo $od['od_invoice_time']; ?></td>
                 </tr>
                 <?php
                 }
@@ -513,14 +475,14 @@ $_SESSION['ord_num'] = $od_id;
         if ($cancel_price == 0) {
             if ($custom_cancel) {
         ?>
-        <button type="button" onclick="document.getElementById('sod_fin_cancelfrm').style.display='block';">Unarchive Order</button>
+        <button type="button" onclick="document.getElementById('sod_fin_cancelfrm').style.display='block';">주문 취소하기</button>
 
         <div id="sod_fin_cancelfrm">
             <form method="post" action="./orderinquirycancel.php" onsubmit="return fcancel_check(this);">
             <input type="hidden" name="od_id"  value="<?php echo $od['od_id']; ?>">
             <input type="hidden" name="token"  value="<?php echo $token; ?>">
 
-            <label for="cancel_memo">Reasons for order cancellation</label>
+            <label for="cancel_memo">취소사유</label>
             <input type="text" name="cancel_memo" id="cancel_memo" required class="frm_input required" size="40" maxlength="100">
             <input type="submit" value="Confirm" class="btn_frmline">
             </form>
@@ -590,12 +552,12 @@ $(function() {
 
 function fcancel_check(f)
 {
-    if(!confirm("Are you sure you want to cancel?"))
+    if(!confirm("주문을 정말 취소하시겠습니까?"))
         return false;
 
     var memo = f.cancel_memo.value;
     if(memo == "") {
-        alert("Could you tell us why?");
+        alert("취소사유를 입력해 주십시오.");
         return false;
     }
 
