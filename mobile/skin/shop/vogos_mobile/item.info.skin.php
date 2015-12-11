@@ -20,7 +20,7 @@ if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 
     <div id="alert_shipping">
         <p>
-            <i class="ion-android-plane"></i>Free express shipping worldwide over $80
+            <i class="ion-android-plane"></i>VOGOS 전상품 70,000원 이상 구매시 무료배송
         </p>
         <div class="go_to_links">
             <a href="<?php echo G5_BBS_URL; ?>/content.php?co_id=shippinginfo"><i class="ion-android-arrow-dropright-circle"></i> View shipping information</a>

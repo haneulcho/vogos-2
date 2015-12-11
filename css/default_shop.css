@@ -165,7 +165,7 @@ background-color:#f3f3f3; color:#a7a7a7;outline:0;font-weight:bold;
 #ft_like .ft_sns a:hover span.ft_sns_yt {background-position:-1px -163px;}
 #ft_like .ft_sns a:hover span.ft_sns_pt {background-position:-1px -42px;}
 
-.ft_bottom {overflow:hidden;width:760px;margin-top:65px;padding-top:16px;border-top:1px solid #3f3f40;}
+.ft_bottom {overflow:hidden;width:760px;margin-top:-63px;padding-top:16px;border-top:1px solid #3f3f40;}
 .ft_bottom p {font-size:11px;font-family:'Lato';font-weight:400;color:#888;line-height:140%;}
 #ft_copy{float:left;width:265px;height:33px;margin-right:40px;margin-bottom:40px;background-position:-5px -46px;}
 #ft_pay {float:left;margin-top:12px;}

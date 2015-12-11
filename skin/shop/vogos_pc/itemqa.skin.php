@@ -9,8 +9,6 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_SKIN_URL.'/style.css">', 
 
 <!-- 상품문의 목록 시작 { -->
 <section id="sit_qa_list">
-    <h3>등록된 상품문의</h3>
-
     <?php
     $thumbnail_width = 500;
     $iq_num     = $total_count - ($page - 1) * $rows;
@@ -99,7 +97,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_SKIN_URL.'/style.css">', 
 
     if ($i > 0) echo '</ol>';
 
-    if (!$i) echo '<p class="sit_empty">상품문의가 없습니다.</p>';
+    if (!$i) echo '<p class="sit_empty">등록된 상품문의가 없습니다.</p>';
     ?>
 </section>
 
@@ -109,8 +107,8 @@ echo itemqa_page($config['cf_write_pages'], $page, $total_page, "./itemqa.php?it
 
 <div id="sit_qa_wbtn">
     <!-- <a href="javascript:itemqawin('it_id=<?php echo $it_id; ?>');">상품문의 쓰기<span class="sound_only"> 새 창</span></a> -->
-    <a href="<?php echo $itemqa_form; ?>" class="btn02 itemqa_form">상품문의 쓰기<span class="sound_only"> 새 창</span></a>
-    <a href="<?php echo $itemqa_list; ?>" id="itemqa_list" class="btn01">더보기</a>
+    <a href="<?php echo $itemqa_form; ?>" class="btn_write itemqa_form"><i class="ion-edit"></i>상품문의 쓰기<span class="sound_only"> 새 창</span></a>
+    <a href="<?php echo $itemqa_list; ?>" id="itemqa_list" class="btn_more"><i class="ion-plus-circled"></i>더보기</a>
 </div>
 
 <script>

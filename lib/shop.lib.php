@@ -742,10 +742,8 @@ function get_price($it)
     if ($it['it_tel_inq']) return '전화문의';
 
     $price = $it['it_price'];
-    $price = (int)$price;
-    $price = number_format($price, 0).'원';
 
-    return $price;
+    return (int)$price;
 }
 
 

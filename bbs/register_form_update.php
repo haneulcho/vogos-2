@@ -32,11 +32,11 @@ if(!$mb_id)
 
 $mb_password    = trim($_POST['mb_password']);
 $mb_password_re = trim($_POST['mb_password_re']);
-$mb_name        = trim($_POST['mb_name']);
-$mb_name_last   = trim($_POST['mb_name_last']);
+$mb_name        = isset($_POST['mb_name'])          ? trim($_POST['mb_name'])        : "";
+$mb_name_last   = isset($_POST['mb_name_last'])     ? trim($_POST['mb_name_last'])   : "";
 // $mb_nick        = trim($_POST['mb_nick']); 보고스 쇼핑몰에서는 닉네임과 이름을 동기화 함
-$mb_nick        = trim($_POST['mb_name']);
-$mb_email       = trim($_POST['mb_email']);
+$mb_nick        = isset($_POST['mb_name'])          ? trim($_POST['mb_name'])        : "";
+$mb_email       = isset($_POST['mb_email'])         ? trim($_POST['mb_email'])         : "";
 $mb_sex         = isset($_POST['mb_sex'])           ? trim($_POST['mb_sex'])         : "";
 $mb_birth       = isset($_POST['mb_birth'])         ? trim($_POST['mb_birth'])       : "";
 $mb_homepage    = isset($_POST['mb_homepage'])      ? trim($_POST['mb_homepage'])    : "";
@@ -75,8 +75,8 @@ if ($w == '' || $w == 'u') {
     if($w == '' && $mb_password != $mb_password_re)
         alert('비밀번호가 일치하지 않습니다.');
 
-    if ($msg = empty_mb_name($mb_id))       alert($msg, "", true, true);
-    if ($msg = empty_mb_nick($mb_nick))     alert($msg, "", true, true);
+    //if ($msg = empty_mb_name($mb_id))       alert($msg, "", true, true);
+    //if ($msg = empty_mb_nick($mb_nick))     alert($msg, "", true, true);
     if ($msg = empty_mb_email($mb_email))   alert($msg, "", true, true);
     if ($msg = reserve_mb_id($mb_id))       alert($msg, "", true, true);
     if ($msg = reserve_mb_nick($mb_nick))   alert($msg, "", true, true);
@@ -139,7 +139,6 @@ $mb_addr_jibeon = preg_match("/^(N|R)$/", $mb_addr_jibeon) ? $mb_addr_jibeon : '
 //===============================================================
 //  본인확인
 //---------------------------------------------------------------
-$mb_hp = hyphen_hp_number($mb_hp);
 if($config['cf_cert_use'] && $_SESSION['ss_cert_type'] && $_SESSION['ss_cert_dupinfo']) {
     // 중복체크
     $sql = " select mb_id from {$g5['member_table']} where mb_id <> '{$member['mb_id']}' and mb_dupinfo = '{$_SESSION['ss_cert_dupinfo']}' ";

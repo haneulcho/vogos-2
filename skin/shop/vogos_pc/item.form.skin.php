@@ -296,6 +296,22 @@ $video_frame = "<iframe src=\"".$video_src."\" width=\"330\" height=\"590\" fram
     <!-- } 상품 요약정보 및 구매 끝 -->
 </div> <!-- sit_ov_wrap END -->
 
+<div id="sit_ov_use" class="fullWidth">
+    <!-- 사용후기 시작 { -->
+    <section id="sit_use">
+        <h3><i class="ion-chatboxes"></i>Reviews</h3>
+        <div id="itemuse"><?php include_once(G5_SHOP_PATH.'/itemuse.php'); ?></div>
+    </section>
+    <!-- } 사용후기 끝 -->
+
+    <!-- 상품문의 시작 { -->
+    <section id="sit_qa">
+        <h3><i class="ion-help-circled"></i>QnA</h3>
+        <div id="itemqa"><?php include_once(G5_SHOP_PATH.'/itemqa.php'); ?></div>
+    </section>
+    <!-- } 상품문의 끝 -->
+</div>
+
 <?php if ($default['de_rel_list_use']) { ?>
 <!-- 관련상품 시작 { -->
     <?php

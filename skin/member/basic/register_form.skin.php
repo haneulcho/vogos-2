@@ -93,7 +93,6 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
                 <input type="text" name="mb_zip" value="<?php echo $member['mb_zip1'].$member['mb_zip2']; ?>" id="reg_mb_zip" <?php echo $config['cf_req_addr']?"required":""; ?> class="frm_input <?php echo $config['cf_req_addr']?"required":""; ?>" size="5" maxlength="6">
             </td>
         </tr>
-
         <tr>
             <th scope="row"><label for="reg_mb_addr1">기본주소</label></th>
             <td>
@@ -259,9 +258,6 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
                 return false;
             }
         }
-
-        <?php echo chk_captcha_js();  ?>
-
         document.getElementById("btn_submit").disabled = "disabled";
 
         return true;

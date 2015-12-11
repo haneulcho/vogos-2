@@ -9,8 +9,6 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_SKIN_URL.'/style.css">', 
 
 <!-- 상품 사용후기 시작 { -->
 <section id="sit_use_list">
-    <h3>등록된 사용후기</h3>
-
     <?php
     $thumbnail_width = 500;
 
@@ -58,7 +56,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_SKIN_URL.'/style.css">', 
 
     if ($i > 0) echo '</ol>';
 
-    if (!$i) echo '<p class="sit_empty">사용후기가 없습니다.</p>';
+    if (!$i) echo '<p class="sit_empty">등록된 사용후기가 없습니다.</p>';
     ?>
 </section>
 
@@ -67,8 +65,8 @@ echo itemuse_page($config['cf_write_pages'], $page, $total_page, "./itemuse.php?
 ?>
 
 <div id="sit_use_wbtn">
-    <a href="<?php echo $itemuse_form; ?>" class="btn02 itemuse_form">사용후기 쓰기<span class="sound_only"> 새 창</span></a>
-    <a href="<?php echo $itemuse_list; ?>" class="btn01 itemuse_list">더보기</a>
+    <a href="<?php echo $itemuse_form; ?>" class="btn_write itemuse_form"><i class="ion-edit"></i>사용후기 쓰기<span class="sound_only"> 새 창</span></a>
+    <a href="<?php echo $itemuse_list; ?>" class="btn_more itemuse_list"><i class="ion-plus-circled"></i>더보기</a>
 </div>
 
 <script>
