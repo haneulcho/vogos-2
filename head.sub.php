@@ -131,7 +131,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-5F5F9R');</script>
 <!-- End Google Tag Manager -->
-<div id="vogosalert" style="position:fixed;top:0;left:0;background-color:#ff0000;color:#fff;font-size:18px;text-align:center;z-index:1000;">***이 곳은 개발용 테스트 서버입니다! test.vogos.com***</div>
+<div id="vogosalert" style="position:fixed;top:0;left:0;background-color:#ff0000;color:#fff;font-size:18px;text-align:center;z-index:1000;">***이 곳은 개발용 테스트 서버입니다! testkr.vogos.com***</div>
 <?php
 if ($is_member) { // 회원이라면 로그인 중이라는 메세지를 출력해준다.
     $sr_admin_msg = '';
