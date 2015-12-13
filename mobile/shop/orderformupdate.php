@@ -310,7 +310,7 @@ else if ($od_settle_case == "계좌이체")
     $od_receipt_point   = $i_temp_point;
     $od_receipt_time    = preg_replace("/([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})/", "\\1-\\2-\\3 \\4:\\5:\\6", $app_time);
     $od_bank_account    = $od_settle_case;
-    $od_deposit_name    = $od_name_last.$od_name;
+    $od_deposit_name    = $od_name;
     $od_bank_account    = $bank_name;
     $pg_price           = $amount;
     $od_misu            = $i_price - $od_receipt_price;
@@ -687,9 +687,9 @@ if($config['cf_sms_use'] && ($default['de_sms_use2'] || $default['de_sms_use3'])
             $recv_number = preg_replace("/[^0-9]/", "", $recv_numbers[$s]);
             $send_number = preg_replace("/[^0-9]/", "", $send_numbers[$s]);
 
-            $sms_content = str_replace("{이름}", $od_name_last.$od_name, $sms_content);
-            $sms_content = str_replace("{보낸분}", $od_name_last.$od_name, $sms_content);
-            $sms_content = str_replace("{받는분}", $od_b_name_last.$od_b_name, $sms_content);
+            $sms_content = str_replace("{이름}", $od_name, $sms_content);
+            $sms_content = str_replace("{보낸분}", $od_name, $sms_content);
+            $sms_content = str_replace("{받는분}", $od_b_name, $sms_content);
             $sms_content = str_replace("{주문번호}", $od_id, $sms_content);
             $sms_content = str_replace("{주문금액}", number_format($tot_ct_price + $od_send_cost + $od_send_cost2), $sms_content);
             $sms_content = str_replace("{회원아이디}", $member['mb_id'], $sms_content);
@@ -705,7 +705,7 @@ if($config['cf_sms_use'] && ($default['de_sms_use2'] || $default['de_sms_use3'])
 
         // 무통장 입금 때 고객에게 계좌정보 보냄
         if($od_settle_case == '무통장' && $default['de_sms_use2'] && $od_misu > 0) {
-            $sms_content = $od_name_last.$od_name."님의 입금계좌입니다.\n금액:".number_format($od_misu)."원\n계좌:".$od_bank_account."\n".$default['de_admin_company_name'];
+            $sms_content = $od_name."님의 입금계좌입니다.\n금액:".number_format($od_misu)."원\n계좌:".$od_bank_account."\n".$default['de_admin_company_name'];
 
             $recv_number = preg_replace("/[^0-9]/", "", $od_hp);
             $send_number = preg_replace("/[^0-9]/", "", $default['de_admin_company_tel']);
