@@ -54,12 +54,13 @@ $i_send_cost2  = (int)$_POST['od_send_cost2'];
 $i_send_coupon  = (int)$_POST['od_send_coupon'];
 $i_temp_point = (int)$_POST['od_temp_point'];
 
+
 // 주문금액이 상이함
 $sql = " select SUM(IF(io_type = 1, (io_price * ct_qty), ((ct_price + io_price) * ct_qty))) as od_price,
               COUNT(distinct it_id) as cart_count
             from {$g5['g5_shop_cart_table']} where od_id = '$tmp_cart_id' and ct_select = '1' ";
 $row = sql_fetch($sql);
-$tot_ct_price = $i_price;
+$tot_ct_price = $row['od_price'];
 $cart_count = $row['cart_count'];
 $tot_od_price = $tot_ct_price;
 
@@ -222,7 +223,6 @@ if ((int)($send_cost - $tot_sc_cp_price) !== (int)($i_send_cost - $i_send_coupon
 $od_b_zip   = preg_replace('/[^0-9]/', '', $od_b_zip);
 $od_b_zip1  = substr($od_b_zip, 0, 3);
 $od_b_zip2  = substr($od_b_zip, 3);
-
 $zipcode = $od_b_zip;
 $sql = " select sc_id, sc_price from {$g5['g5_shop_sendcost_table']} where sc_zip1 <= '$zipcode' and sc_zip2 >= '$zipcode' ";
 $tmp = sql_fetch($sql);
@@ -242,7 +242,7 @@ if ($is_member && $config['cf_use_point'])
         $temp_point = (int)$default['de_settle_max_point'];
 
         if($temp_point > (int)$tot_od_price)
-        $temp_point = (int)$tot_od_price;
+            $temp_point = (int)$tot_od_price;
 
         if($temp_point > (int)$member['mb_point'])
             $temp_point = (int)$member['mb_point'];
@@ -265,7 +265,7 @@ $i_price = $i_price + $i_send_cost + $i_send_cost2 - $i_temp_point - $i_send_cou
 $order_price = $tot_od_price + $send_cost + $send_cost2 - $tot_sc_cp_price - $od_temp_point;
 
 $od_status = '주문';
-if ($od_settle_case == "전액포인트")
+if ($od_settle_case == "무통장")
 {
     $od_receipt_point   = $i_temp_point;
     $od_receipt_price   = 0;
@@ -274,6 +274,68 @@ if ($od_settle_case == "전액포인트")
         $od_status      = '입금';
         $od_receipt_time = G5_TIME_YMDHIS;
     }
+}
+else if ($od_settle_case == "전액포인트")
+{
+    $od_receipt_point   = $i_temp_point;
+    $od_receipt_price   = 0;
+    $od_misu            = $i_price - $od_receipt_price;
+    if($od_misu == 0) {
+        $od_status      = '입금';
+        $od_receipt_time = G5_TIME_YMDHIS;
+    }
+}
+else if ($od_settle_case == "계좌이체")
+{
+    switch($default['de_pg_service']) {
+        case 'lg':
+            include G5_SHOP_PATH.'/lg/xpay_result.php';
+            break;
+        case 'inicis':
+            include G5_SHOP_PATH.'/inicis/inipay_result.php';
+            break;
+        default:
+            include G5_SHOP_PATH.'/kcp/pp_ax_hub.php';
+            $bank_name  = iconv("cp949", "utf-8", $bank_name);
+            break;
+    }
+
+    $od_tno             = $tno;
+    $od_receipt_price   = $amount;
+    $od_receipt_point   = $i_temp_point;
+    $od_receipt_time    = preg_replace("/([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})/", "\\1-\\2-\\3 \\4:\\5:\\6", $app_time);
+    $od_bank_account    = $od_settle_case;
+    $od_deposit_name    = $od_name_last.$od_name;
+    $od_bank_account    = $bank_name;
+    $pg_price           = $amount;
+    $od_misu            = $i_price - $od_receipt_price;
+    if($od_misu == 0)
+        $od_status      = '입금';
+}
+else if ($od_settle_case == "가상계좌")
+{
+    switch($default['de_pg_service']) {
+        case 'lg':
+            include G5_SHOP_PATH.'/lg/xpay_result.php';
+            break;
+        case 'inicis':
+            include G5_SHOP_PATH.'/inicis/inipay_result.php';
+            $od_app_no = $app_no;
+            break;
+        default:
+            include G5_SHOP_PATH.'/kcp/pp_ax_hub.php';
+            $bankname   = iconv("cp949", "utf-8", $bankname);
+            $depositor  = iconv("cp949", "utf-8", $depositor);
+            break;
+    }
+
+    $od_receipt_point   = $i_temp_point;
+    $od_tno             = $tno;
+    $od_receipt_price   = 0;
+    $od_bank_account    = $bankname.' '.$account;
+    $od_deposit_name    = $depositor;
+    $pg_price           = $amount;
+    $od_misu            = $i_price - $od_receipt_price;
 }
 else if ($od_settle_case == "휴대폰")
 {
@@ -299,30 +361,6 @@ else if ($od_settle_case == "휴대폰")
     if($od_misu == 0)
         $od_status      = '입금';
 }
-else if ($od_settle_case == "가상계좌")
-{
-     switch($default['de_pg_service']) {
-        case 'lg':
-            include G5_SHOP_PATH.'/lg/xpay_result.php';
-        case 'inicis':
-            include G5_SHOP_PATH.'/inicis/inipay_result.php';
-            $od_app_no = $app_no;
-            break;
-        default:
-            include G5_SHOP_PATH.'/kcp/pp_ax_hub.php';
-            $bankname   = iconv("cp949", "utf-8", $bankname);
-            $depositor  = iconv("cp949", "utf-8", $depositor);
-            break;
-    }
-
-    $od_receipt_point   = $i_temp_point;
-    $od_tno             = $tno;
-    $od_receipt_price   = 0;
-    $od_bank_account    = $bankname.' '.$account;
-    $od_deposit_name    = $depositor;
-    $pg_price           = $amount;
-    $od_misu            = $i_price - $od_receipt_price;
-}
 else if ($od_settle_case == "신용카드")
 {
     switch($default['de_pg_service']) {
@@ -334,7 +372,7 @@ else if ($od_settle_case == "신용카드")
             break;
         default:
             include G5_SHOP_PATH.'/kcp/pp_ax_hub.php';
-            $bank_name  = iconv("cp949", "utf-8", $bank_name);
+            $card_name  = iconv("cp949", "utf-8", $card_name);
             break;
     }
 
@@ -342,7 +380,8 @@ else if ($od_settle_case == "신용카드")
     $od_app_no          = $app_no;
     $od_receipt_price   = $amount;
     $od_receipt_point   = $i_temp_point;
-    $od_receipt_time    = preg_replace("/([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})/", "\\1-\\2-\\3 \\4:\\5:\\6", $od_receipt_time);
+    $od_receipt_time    = preg_replace("/([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})/", "\\1-\\2-\\3 \\4:\\5:\\6", $app_time);
+    $od_bank_account    = $card_name;
     $pg_price           = $amount;
     $od_misu            = $i_price - $od_receipt_price;
     if($od_misu == 0)
@@ -369,7 +408,7 @@ if($tno) {
                 break;
         }
 
-        die("주문금액과 결제금액이 일치하지 않습니다.");
+        die("Receipt Amount Error");
     }
 }
 
@@ -401,6 +440,7 @@ $od_name          = clean_xss_tags($od_name);
 $od_name_last     = clean_xss_tags($od_name_last);
 $od_tel           = clean_xss_tags($od_tel);
 $od_hp            = clean_xss_tags($od_hp);
+$od_zip           = preg_replace('/[^0-9]/', '', $od_zip);
 $od_zip1          = substr($od_zip, 0, 3);
 $od_zip2          = substr($od_zip, 3);
 $od_addr1         = clean_xss_tags($od_addr1);
@@ -408,11 +448,8 @@ $od_addr2         = clean_xss_tags($od_addr2);
 $od_addr3         = clean_xss_tags($od_addr3);
 $od_addr_jibeon   = preg_match("/^(N|R)$/", $od_addr_jibeon) ? $od_addr_jibeon : '';
 $od_b_name        = clean_xss_tags($od_b_name);
-$od_b_name_last   = clean_xss_tags($od_b_name_last);
 $od_b_tel         = clean_xss_tags($od_b_tel);
 $od_b_hp          = clean_xss_tags($od_b_hp);
-$od_b_zip1        = substr($od_b_zip1, 0, 3);
-$od_b_zip2        = substr($od_b_zip2, 3);
 $od_b_addr1       = clean_xss_tags($od_b_addr1);
 $od_b_addr2       = clean_xss_tags($od_b_addr2);
 $od_b_addr3       = clean_xss_tags($od_b_addr3);
@@ -437,10 +474,8 @@ $sql = " insert {$g5['g5_shop_order_table']}
                 od_addr3          = '$od_addr3',
                 od_addr_jibeon    = '$od_addr_jibeon',
                 od_b_name         = '$od_b_name',
-                od_b_name_last    = '$od_b_name_last',
                 od_b_tel          = '$od_b_tel',
                 od_b_hp           = '$od_b_hp',
-                od_b_city         = '$od_b_city',
                 od_b_zip1         = '$od_b_zip1',
                 od_b_zip2         = '$od_b_zip2',
                 od_b_addr1        = '$od_b_addr1',
@@ -645,9 +680,9 @@ if($config['cf_sms_use'] && ($default['de_sms_use2'] || $default['de_sms_use3'])
             $recv_number = preg_replace("/[^0-9]/", "", $recv_numbers[$s]);
             $send_number = preg_replace("/[^0-9]/", "", $send_numbers[$s]);
 
-            $sms_content = str_replace("{이름}", $od_name, $sms_content);
-            $sms_content = str_replace("{보낸분}", $od_name, $sms_content);
-            $sms_content = str_replace("{받는분}", $od_b_name, $sms_content);
+            $sms_content = str_replace("{이름}", $od_name_last.$od_name, $sms_content);
+            $sms_content = str_replace("{보낸분}", $od_name_last.$od_name, $sms_content);
+            $sms_content = str_replace("{받는분}", $od_b_name_last.$od_b_name, $sms_content);
             $sms_content = str_replace("{주문번호}", $od_id, $sms_content);
             $sms_content = str_replace("{주문금액}", number_format($tot_ct_price + $od_send_cost + $od_send_cost2), $sms_content);
             $sms_content = str_replace("{회원아이디}", $member['mb_id'], $sms_content);
@@ -694,7 +729,6 @@ if($is_member) {
     $sql = " select * from {$g5['g5_shop_order_address_table']}
                 where mb_id = '{$member['mb_id']}'
                   and ad_name = '$od_b_name'
-                  and ad_name_last = '$od_b_name_last'
                   and ad_tel = '$od_b_tel'
                   and ad_hp = '$od_b_hp'
                   and ad_zip1 = '$od_b_zip1'
@@ -721,25 +755,24 @@ if($is_member) {
                       and ad_id = '{$row['ad_id']}' ";
     } else {
         $sql = " insert into {$g5['g5_shop_order_address_table']}
-                    set mb_id        = '{$member['mb_id']}',
-                        ad_subject   = '$ad_subject',
-                        ad_default   = '$ad_default',
-                        ad_name      = '$od_b_name',
-                        ad_name_last = '$od_b_name_last',
-                        ad_tel       = '$od_b_tel',
-                        ad_hp        = '$od_b_hp',
-                        ad_zip1      = '$od_b_zip1',
-                        ad_zip2      = '$od_b_zip2',
-                        ad_addr1     = '$od_b_addr1',
-                        ad_addr2     = '$od_b_addr2',
-                        ad_addr3     = '$od_b_addr3',
-                        ad_jibeon    = '$od_b_addr_jibeon' ";
+                    set mb_id       = '{$member['mb_id']}',
+                        ad_subject  = '$ad_subject',
+                        ad_default  = '$ad_default',
+                        ad_name     = '$od_b_name',
+                        ad_tel      = '$od_b_tel',
+                        ad_hp       = '$od_b_hp',
+                        ad_zip1     = '$od_b_zip1',
+                        ad_zip2     = '$od_b_zip2',
+                        ad_addr1    = '$od_b_addr1',
+                        ad_addr2    = '$od_b_addr2',
+                        ad_addr3    = '$od_b_addr3',
+                        ad_jibeon   = '$od_b_addr_jibeon' ";
     }
 
     sql_query($sql);
 }
 
-    goto_url(G5_SHOP_URL.'/orderinquiryview.php?od_id='.$od_id.'&amp;uid='.$uid);
+goto_url(G5_SHOP_URL.'/orderinquiryview.php?od_id='.$od_id.'&amp;uid='.$uid);
 ?>
 
 <html>

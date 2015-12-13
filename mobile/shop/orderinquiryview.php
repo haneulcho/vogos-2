@@ -187,7 +187,7 @@ $_SESSION['ord_num'] = $od_id;
         <table id="sod_bsk_tot" class="subtotal_iqv">
             <tr class="sod_shipping">
                 <td class="sod_bsk_dvr">TOTAL PRICE</td>
-                <td class="sod_bsk_cnt"><strong><?php echo number_format($od['od_cart_price']); ?></strong></td>
+                <td class="sod_bsk_cnt"><strong><?php echo number_format($od['od_cart_price']); ?> 원</strong></td>
             </tr>
             <?php if($od['od_cart_coupon'] > 0) { ?>
             <tr class="sod_shipping">
@@ -198,34 +198,34 @@ $_SESSION['ord_num'] = $od_id;
             <?php if($od['od_coupon'] > 0) { ?>
             <tr class="sod_shipping">
                 <td class="sod_bsk_dvr">USE PRICE COUPON</td>
-                <td class="sod_bsk_cnt"><strong><?php echo number_format($od['od_coupon']); ?></strong></td>
+                <td class="sod_bsk_cnt"><strong><?php echo number_format($od['od_coupon']); ?> 원</strong></td>
             </tr>
             <?php } ?>
             <tr class="sod_shipping">
                 <td class="sod_bsk_dvr">SHIPPING COST</td>
-                <td class="sod_bsk_cnt"><strong><?php echo number_format($od['od_send_cost']); ?></strong></td>
+                <td class="sod_bsk_cnt"><strong><?php echo number_format($od['od_send_cost']); ?> 원</strong></td>
             </tr>
             <?php if ($od['od_send_cost2'] > 0) { ?>
             <tr class="sod_shipping">
                 <td class="sod_bsk_dvr">SHIPPING COST2</td>
-                <td class="sod_bsk_cnt"><strong><?php echo number_format($od['od_send_cost2']); ?></strong></td>
+                <td class="sod_bsk_cnt"><strong><?php echo number_format($od['od_send_cost2']); ?> 원</strong></td>
             </tr>
             <?php } ?>
             <?php if($od['od_send_coupon'] > 0) { ?>
             <tr class="sod_shipping">
                 <td class="sod_bsk_dvr">USE DELIVERY COUPON</td>
-                <td class="sod_bsk_cnt"><strong><?php echo number_format($od['od_send_coupon']); ?></strong></td>
+                <td class="sod_bsk_cnt"><strong><?php echo number_format($od['od_send_coupon']); ?> 원</strong></td>
             </tr>
             <?php } ?>
             <?php if($od['od_cancel_price'] > 0) { ?>
             <tr class="sod_shipping">
                 <td class="sod_bsk_dvr">REFUND</td>
-                <td class="sod_bsk_cnt"><strong><?php echo number_format($od['od_cancel_price']); ?></strong></td>
+                <td class="sod_bsk_cnt"><strong><?php echo number_format($od['od_cancel_price']); ?> 원</strong></td>
             </tr>
             <?php } ?>
             <tr class="sod_subtotal">
                 <td class="sod_bsk_dvr">SUBTOTAL</td>
-                <td class="sod_bsk_cnt"><strong><?php echo number_format($tot_price); ?></strong></td>
+                <td class="sod_bsk_cnt"><strong><?php echo number_format($tot_price); ?> 원</strong></td>
             </tr>
         </table>
     </section>

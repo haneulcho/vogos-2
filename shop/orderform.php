@@ -24,7 +24,7 @@ else {
 if (get_cart_count($tmp_cart_id) == 0)
     alert('장바구니가 비어 있습니다.', G5_SHOP_URL.'/cart.php');
 
-$g5['title'] = 'Proceed to Checkout';
+$g5['title'] = '주문서 작성';
 
 // 전자결제를 사용할 때만 실행
 if($default['de_iche_use'] || $default['de_vbank_use'] || $default['de_hp_use'] || $default['de_card_use']) {
@@ -52,13 +52,12 @@ set_session('ss_order_id', $od_id);
 $s_cart_id = $tmp_cart_id;
 $order_action_url = G5_HTTPS_SHOP_URL.'/orderformupdate.php';
 
-    require_once('./settle_'.$default['de_pg_service'].'.inc.php');
-    // 결제대행사별 코드 include (스크립트 등)
-    require_once('./'.$default['de_pg_service'].'/orderform.1.php');
+require_once('./settle_'.$default['de_pg_service'].'.inc.php');
+
+// 결제대행사별 코드 include (스크립트 등)
+require_once('./'.$default['de_pg_service'].'/orderform.1.php');
 ?>
-<script>
-var f = document.forderform;
-</script>
+
 <form name="forderform" id="forderform" method="post" action="<?php echo $order_action_url; ?>" onsubmit="return forderform_check(this);" autocomplete="off">
 <div id="sod_frm">
 
@@ -240,9 +239,6 @@ var f = document.forderform;
                 <input type="hidden" name="it_price[<?php echo $i; ?>]" value="<?php echo $sell_price; ?>">
                 <input type="hidden" name="cp_id[<?php echo $i; ?>]" value="">
                 <input type="hidden" name="cp_price[<?php echo $i; ?>]" value="0">
-                <input type="hidden" name="item_<?php echo $i; ?>_product" value="<?php echo get_text($row['it_name']); ?>">
-                <input type="hidden" name="item_<?php echo $i; ?>_quantity" value="<?php echo $sum['qty']; ?>">
-                <input type="hidden" name="item_<?php echo $i; ?>_unitPrice" value="<?php echo number_format($sell_price); ?>">
                 <input type="hidden" name="cp_id[<?php echo $i; ?>]" value="">
                 <input type="hidden" name="cp_price[<?php echo $i; ?>]" value="0">
                 <?php if($default['de_tax_flag_use']) { ?>
@@ -251,8 +247,8 @@ var f = document.forderform;
                 <?php echo $it_name; ?>
             </td>
             <td class="cart_qty"><?php echo number_format($sum['qty']); ?></td>
-            <td class="cart_num"><?php echo number_format($row['ct_price']); ?></td>
-            <td class="cart_num"><span class="total_price"><?php echo number_format($sell_price); ?></span></td>
+            <td class="cart_num"><?php echo number_format($row['ct_price']); ?> 원</td>
+            <td class="cart_num"><span class="total_price"><?php echo number_format($sell_price); ?> 원</span></td>
             <!-- <td class="td_dvr"><?php //echo $ct_send_cost; ?></td> -->
         </tr>
 
@@ -311,15 +307,16 @@ var f = document.forderform;
     </table>
     <!-- } 주문상품 합계 끝 -->
 
-    <input type="hidden" name="od_price" value="<?php echo number_format($tot_sell_price); ?>">
-    <input type="hidden" name="org_od_price" value="<?php echo number_format($tot_sell_price); ?>">
-    <input type="hidden" name="od_send_cost" value="<?php echo number_format($send_cost); ?>">
+    <input type="hidden" name="od_price" value="<?php echo $tot_sell_price; ?>">
+    <input type="hidden" name="org_od_price" value="<?php echo $tot_sell_price; ?>">
+    <input type="hidden" name="od_send_cost" value="<?php echo $send_cost; ?>">
     <input type="hidden" name="od_send_cost2" value="0">
     <input type="hidden" name="item_coupon" value="0">
     <input type="hidden" name="od_coupon" value="0">
     <input type="hidden" name="od_send_coupon" value="0">
 
     <?php
+    // 결제대행사별 코드 include (결제대행사 정보 필드)
     require_once('./'.$default['de_pg_service'].'/orderform.2.php');
     ?>
 
@@ -466,15 +463,15 @@ var f = document.forderform;
                 <td><input type="text" name="od_b_zip" id="od_b_zip" required class="frm_input required" size="5" maxlength="6"></td>
             </tr>
             <tr>
-                <th scope="row"><label for="od_addr1">기본주소</label></th>
+                <th scope="row"><label for="od_b_addr1">기본주소</label></th>
                 <td><button type="button" class="btn_frmline" onclick="win_zip('forderform', 'od_b_zip', 'od_b_addr1', 'od_b_addr2', 'od_b_addr3', 'od_b_addr_jibeon');">주소 검색</button><br><input type="text" name="od_b_addr1" id="od_b_addr1" required class="frm_input frm_address required" size="60"></td>
             </tr>
             <tr>
-                <th scope="row"><label for="od_addr2">상세주소</label></th>
+                <th scope="row"><label for="od_b_addr2">상세주소</label></th>
                 <td><input type="text" name="od_b_addr2" id="od_b_addr2" class="frm_input frm_address" size="60"></td>
             </tr>
             <tr>
-                <th scope="row"><label for="od_addr3">참고항목</label></th>
+                <th scope="row"><label for="od_b_addr3">참고항목</label></th>
                 <td><input type="text" name="od_b_addr3" id="od_b_addr3" readonly="readonly" class="frm_input frm_address" size="60"><input type="hidden" name="od_b_addr_jibeon" value=""></td>
             </tr>
             <tr><td colspan="2" style="height:12px"></td></tr>
@@ -526,12 +523,6 @@ var f = document.forderform;
     }
     ?>
 
-       <?php
-
-        $multi_settle == 0;
-        $checked = '';
-        $temp_point = 0;
-        ?>
     <!-- } 결제 정보 입력 끝 -->
 
         <?php
@@ -996,8 +987,8 @@ function calculate_total_price()
 
     tot_sell_price = sell_price - tot_cp_price + send_cost;
 
-    $("#ct_tot_coupon").text("$"+number_format(String(tot_cp_price))+" 원");
-    $("#ct_tot_price").text("$"+number_format(String(tot_sell_price))+" 원");
+    $("#ct_tot_coupon").text(number_format(String(tot_cp_price))+" 원");
+    $("#ct_tot_price").text(number_format(String(tot_sell_price))+" 원");
 
     $("input[name=good_mny]").val(tot_sell_price);
     $("input[name=od_price]").val(sell_price - tot_cp_price);
@@ -1413,10 +1404,10 @@ function forderform_check(f)
     }
     <?php } ?>
     <?php if($default['de_pg_service'] == 'inicis') { ?>
-    f.buyername.value   = f.od_name.value;
+    f.buyername.value   = f.od_name.value + f.od_name_last.value;
     f.buyeremail.value  = f.od_email.value;
     f.buyertel.value    = f.od_hp.value ? f.od_hp.value : f.od_tel.value;
-    f.recvname.value    = f.od_b_name.value;
+    f.recvname.value    = f.od_b_name.value + f.od_b_name_last.value;
     f.recvtel.value     = f.od_b_hp.value ? f.od_b_hp.value : f.od_b_tel.value;
     f.recvpostnum.value = f.od_b_zip.value;
     f.recvaddr.value    = f.od_b_addr1.value + " " +f.od_b_addr2.value;

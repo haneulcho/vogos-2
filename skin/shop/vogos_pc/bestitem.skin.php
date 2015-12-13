@@ -31,7 +31,7 @@ if ($ca_id)
                 from {$g5['g5_shop_item_table']}
                 where ( ca_id like '$ca_id%' or ca_id2 like '$ca_id%' or ca_id3 like '$ca_id%' )
                   and it_use = '1'
-                order by it_order, it_hit desc
+                order by it_hit desc
                 limit 0, $limit ";
 
     $list = new item_list($best_skin, $list_mod, $list_row, $ca['ca_mobile_img_width'], $ca['ca_mobile_img_height']);
