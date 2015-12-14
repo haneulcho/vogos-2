@@ -46,6 +46,25 @@ include_once(G5_PATH.'/head.sub.php');
 
 </div>
 
+<div class="new_win">
+    <h1><?php echo $g5['title']; ?></h1>
+
+    <form name="fitemexcel3" method="post" action="./itemkrformupdate3.php" enctype="MULTIPART/FORM-DATA" autocomplete="off">
+
+    <div id="excelfile_upload">
+        <label for="excelfile3">영문 가격수정 파일선택</label>
+        <input type="file" name="excelfile3" id="excelfile3">
+    </div>
+
+    <div class="btn_confirm01 btn_confirm">
+        <input type="submit" value="영문 가격수정 엑셀파일 등록" class="btn_submit">
+        <button type="button" onclick="window.close();">닫기</button>
+    </div>
+
+    </form>
+
+</div>
+
 <?php
 include_once(G5_PATH.'/tail.sub.php');
 ?>
