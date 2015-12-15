@@ -21,6 +21,12 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_SKIN_URL.'/style.css">', 
             <col>
         </colgroup>
         <tbody>
+        <?php if ($is_admin) { ?>
+        <tr>
+            <th scope="row"><label for="is_name">이름<strong class="sound_only"> 필수</strong></label></th>
+            <td><input type="text" name="is_name" value="<?php echo get_text($use['is_name']); ?>" id="is_name" required class="required frm_input" minlength="2" maxlength="10"></td>
+        </tr>
+        <?php } ?>
         <tr>
             <th scope="row"><label for="is_subject">제목<strong class="sound_only"> 필수</strong></label></th>
             <td><input type="text" name="is_subject" value="<?php echo get_text($use['is_subject']); ?>" id="is_subject" required class="required frm_input" minlength="2" maxlength="250"></td>

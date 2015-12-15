@@ -17,7 +17,11 @@ $is_score    = (int)$_POST['is_score'] > 5 ? 0 : (int)$_POST['is_score'];
 check_itemuse_write($it_id, $member['mb_id']);
 
 if ($w == "" || $w == "u") {
-    $is_name     = addslashes($member['mb_name']);
+    if ($is_admin) {
+        $is_name     = trim($_POST['is_name']);
+    } else {
+        $is_name     = addslashes($member['mb_name_last']).addslashes($member['mb_name']);
+    }
     $is_password = $member['mb_password'];
 
     if (!$is_subject) alert("제목을 입력하여 주십시오.");
@@ -72,7 +76,8 @@ else if ($w == "u")
     $sql = " update {$g5['g5_shop_item_use_table']}
                 set is_subject = '$is_subject',
                     is_content = '$is_content',
-                    is_score = '$is_score'
+                    is_score = '$is_score',
+                    is_name = '$is_name'
               where is_id = '$is_id' ";
     sql_query($sql);
 
