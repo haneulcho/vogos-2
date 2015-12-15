@@ -172,11 +172,12 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
         <td class="td_num">
         <?php
             $ddm_place2 = $row['ddm_place2'];
+            $it_extract_name = $ddm_place2."(".$row['ddm_name'].")";
             $detail_link = G5_ADMIN_URL.'/shop_admin/ddmaddressview.php?it_place_ddm='.$ddm_place2;
             //$sql_match  = "select it_name, it_price, it_2, it_place_ddm, it_name_ddm, it_price_ddm from {$g5['g5_shop_ddmaddress_table']} where it_place_ddm like '$ddm_place2%'";
             //$result_match = sql_query($sql);
             //for ($j=0; $row=mysql_fetch_array($result_match); $j++) {
-            $sql2 = " select count(*) as cnt1 from {$g5['g5_shop_item_table']} where it_place_ddm like '$ddm_place2%'";
+            $sql2 = " select count(*) as cnt1 from {$g5['g5_shop_item_table']} where it_place_ddm = '$it_extract_name'";
             $row2 = sql_fetch($sql2);
             if($row2['cnt1'] > 0) {
                 $total_count = '<a href="'.$detail_link.'" target="_blank" onclick="return popitup(\''.$detail_link.'\', \'VOGOS 사입처에 받아온 샘플\', \'700\', \'500\')"><span style="color:#ff0000;font-weight:bold;">'.$row2['cnt1'].'개</span> <i class="ion-ios-search-strong" style="margin:0 2px 0 8px;font-style:normal"></i>자세히</a>';
