@@ -25,7 +25,10 @@ $admin = get_admin("super");
         <b>VOGOS KOREA</b><br>
         Tel: +82 (0)70-7771-5527<br>
         B2 Floor, 31, Teheran-ro 33-gil Gangnam-gu, Seoul, Korea<br>
+    </p>
+    <p class="ft_part">
         Business License: 123-88-00091<br>
+        Online Sales License: 2015-서울강남-02347호<br>
     </p>
     <p>Copyright &copy; 2015 VOGOS.com All Rights Reserved.</p>
 </div>
