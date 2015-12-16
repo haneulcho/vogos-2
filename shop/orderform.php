@@ -549,11 +549,6 @@ require_once('./'.$default['de_pg_service'].'/orderform.1.php');
             $checked = '';
         }
 
-        // 전액 포인트 결제
-        $multi_settle++;
-            echo '<input type="radio" id="od_settle_vpoint" name="od_settle_case" value="전액포인트" '.$checked.'> <label for="od_settle_vpoint">전액 포인트 결제</label>'.PHP_EOL;
-            $checked = '';
-
         // 가상계좌 사용
         if ($default['de_vbank_use']) {
             $multi_settle++;
@@ -1219,24 +1214,6 @@ function forderform_check(f)
                 return false;
             }
 
-            if (temp_point != od_price && document.getElementById("od_settle_vpoint").checked) {
-                alert("결제 금액과 포인트가 일치하지 않습니다. 다른 결제방식을 선택하세요.");
-                document.getElementById("od_settle_card").focus();
-                return false;
-            }
-
-            if (temp_point == od_price) {
-                if(temp_point < 50000 && document.getElementById("od_settle_vpoint").checked) {
-                    alert("전액 포인트 50000원 미만 결제시 배송료 2,500원이 부과됩니다. 다른 결제방식 선택 후 "+od_price+"포인트를 입력하세요.");
-                    document.getElementById("od_settle_card").focus();
-                    return false;
-                } else if (document.getElementById("od_settle_vbank").checked || document.getElementById("od_settle_card").checked || document.getElementById("od_settle_hp").checked) {
-                    alert("배송비 포함 최종 결제금액이 0원입니다.\n전액 포인트 결제를 선택하세요.");
-                    document.getElementById("od_settle_vpoint").focus();
-                    return false;
-                }
-            }
-
             if (temp_point > max_point) {
                 alert(max_point + "점 이상 결제할 수 없습니다.");
                 f.od_temp_point.select();
@@ -1347,9 +1324,6 @@ function forderform_check(f)
         case "신용카드":
             f.gopaymethod.value = "onlycard";
             break;
-        case "전액포인트":
-            f.gopaymethod.value = "전액포인트";
-            break;
         default:
             f.gopaymethod.value = "무통장";
             break;
@@ -1412,7 +1386,7 @@ function forderform_check(f)
     f.recvpostnum.value = f.od_b_zip.value;
     f.recvaddr.value    = f.od_b_addr1.value + " " +f.od_b_addr2.value;
 
-    if(f.gopaymethod.value != "무통장" && f.gopaymethod.value != "전액포인트") {
+    if(f.gopaymethod.value != "무통장") {
         if(!set_encrypt_data(f))
             return false;
 

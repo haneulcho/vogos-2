@@ -156,8 +156,8 @@ $_SESSION['ord_num'] = $od_id;
                     <div class="sod_opt"><?php echo $opt['ct_option']; ?></div>
                 </td>
                 <td class="cart_qty"><?php echo number_format($opt['ct_qty']); ?></td>
-                <td class="cart_num">$<?php echo number_format($opt_price); ?></td>
-                <td class="cart_num">$<?php echo number_format($sell_price); ?></td>
+                <td class="cart_num"><?php echo number_format($opt_price); ?> 원</td>
+                <td class="cart_num"><?php echo number_format($sell_price); ?> 원</td>
                 <td class="cart_status"><?php echo $ct_status; ?></td>
             </tr>
             <?php

@@ -12,7 +12,7 @@ if (!defined("_ORDERINQUIRY_")) exit; // 개별 페이지 접근 불가
     <thead>
     <tr>
         <th class="th_iqr_no" scope="col">ORDER NUMBER</th>
-        <th class="th_iqr_no" scope="col">DHL TRACKING NUMBER</th>
+        <th class="th_iqr_no" scope="col">TRACKING NUMBER</th>
         <th class="th_iqr_date" scope="col">ORDER DATE</th>
         <th class="th_iqr_num" scope="col">TOTAL PRICE</th>
         <th class="th_iqr_num" scope="col">SHIPPING COST</th>
