@@ -50,17 +50,10 @@ include_once(G5_SHOP_PATH.'/shop.head.php');
 
     <?php if($default['de_type1_list_use']) { ?>
     <!-- Black Friday 시작 { -->
-    <section class="sct_wrap f8f8f8" style="background:url('<?php echo G5_SHOP_SKIN_URL ?>/img/black_friday_bg.jpg');margin-top:35px;padding:0;">
-    <div class="fullWidth">
-        <img id="ev_bf" src="<?php echo G5_SHOP_SKIN_URL ?>/img/surprise12_kr.jpg" border="0" width="1110" height="700" orgWidth="1110" orgHeight="700" usemap="#ev_bf" alt="" />
-        <map name="ev_bf">
-        <area alt="Amazing metallics, cool cut-outs and sexy necklines mean you'll be going all out across the eras this season!" title="SHOP DRESSES" href="<?php echo G5_SHOP_URL; ?>/list.php?ca_id=30" shape="rect" coords="158,560,379,615" style="outline:none;" target="_self" />
-        <area alt="From faux fur stoles and coats, to winter dresses, velvet coords and cosy knitwear we at VOGOS are here to make sure we cover all you style needs this season!" title="SHOP NOW" href="<?php echo G5_SHOP_URL; ?>/listtype.php?type=1" shape="rect" coords="700,560,880,615" style="outline:none;" target="_self" />
-        </map>
-    </div>
+    <section class="sct_wrap f8f8f8" style="background:url('<?php echo G5_SHOP_SKIN_URL ?>/img/black_friday_bg.jpg');padding:20px 0;">
     <!-- Shipping Banner 시작 { -->
-    <div id="inv_ship_view" style="text-align:center;padding-bottom:35px">
-        <img src="<?php echo G5_SHOP_SKIN_URL ?>/img/shipping_info_kr.jpg" border="0" width="1110" alt="We offer FREE express shipping worldwide on orders of $80 +" title="We offer FREE express shipping worldwide on orders of $80 +">
+    <div id="inv_ship_view" style="text-align:center">
+        <a href="<?php echo G5_SHOP_URL; ?>/list.php?ca_id=90"><img src="<?php echo G5_SHOP_SKIN_URL ?>/img/shipping_info_kr.jpg" border="0" width="1110" alt="지금 보고스에서 50,000원 이상 구매하면 배송이 무료!" title="지금 보고스에서 50,000원 이상 구매하면 배송이 무료!"></a>
     </div>
     <!-- } Shipping Banner 끝 -->
     </section>
@@ -72,14 +65,15 @@ include_once(G5_SHOP_PATH.'/shop.head.php');
     <section class="sct_wrap">
     <div class="fullWidth">
         <header>
-            <h2><a href="#"><img src="<?php echo G5_SHOP_SKIN_URL ?>/img/title_vogos_newarrivals.jpg" alt="VOGOS NEW ARRIVALS"></a></h2>
+            <h2 class="new_arrivals"><a href="<?php echo G5_SHOP_URL; ?>/listtype.php?type=3">NEW ARRIVALS</a></h2>
         </header>
         <?php
         $order_by = 'it_order asc';
-
         $list = new item_list();
         $list->set_type(3);
         $list->set_order_by($order_by);
+        $list->set_list_mod(2);
+        $list->set_list_row(5);
         $list->set_view('it_id', false);
         $list->set_view('it_name', true);
         $list->set_view('it_basic', true);

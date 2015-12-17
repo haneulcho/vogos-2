@@ -9,8 +9,12 @@ add_javascript('<script src="'.G5_SHOP_SKIN_URL.'/js/jquery.shop.list.js"></scri
 <!-- 상품진열 20 시작 { -->
 <?php
 for ($i=0; $row=sql_fetch_array($result); $i++) {
-    if ($i == 0) {
-        $sct_last = ' sct_big'; // 줄 첫번째
+    if ($i == 0 || $i == 5) {
+        if ($i == 0) {
+            $sct_last = ' sct_big'; // 줄 첫번째
+        } else {
+            $sct_last = ' sct_big_2'; // 줄 첫번째
+        }
         $sct_img_width = 550;
         $sct_img_height = 770;
     } else {
@@ -27,7 +31,11 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
         }
     }
 
-    echo "<li class=\"sct_li{$sct_last}\" style=\"width:{$sct_img_width}px\">\n";
+    if ($i > 5) {
+        echo "<li class=\"sct_li{$sct_last}\" style=\"width:{$sct_img_width}px;margin:0 0 10px 10px\">\n";
+    } else {
+        echo "<li class=\"sct_li{$sct_last}\" style=\"width:{$sct_img_width}px\">\n";
+    }
 
     if ($this->href) {
         echo "<div class=\"sct_img\"><a href=\"{$this->href}{$row['it_id']}\" class=\"sct_a\">\n";
@@ -45,8 +53,8 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     if ($this->href) {
         echo "<div class=\"sct_des\"><div class=\"sct_txt\"><a href=\"{$this->href}{$row['it_id']}\" class=\"sct_a\">\n";
 
-        if ($i == 0) {
-            echo "<span class=\"sct_txt_big\">VOGOS F/W COLLECTION</span>";
+        if ($i == 0 || $i == 5) {
+            echo "<span class=\"sct_txt_big\"><i class=\"ion-camera\"></i>LOCATION SHOOTING</span>";
         }
     }
 
