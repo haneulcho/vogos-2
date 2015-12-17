@@ -15,7 +15,7 @@ if($this->total_count > 0) {
 
 for ($i=1; $row=sql_fetch_array($result); $i++) {
     if ($i == 1) {
-        echo "<div class=\"owl-carousel owlbest\" style=\"width:".$owlbestWidth."px\">\n";
+        echo "<div class=\"owlbest\" style=\"width:".$owlbestWidth."px\">\n";
     }
 
     if ($i < $countRow) {

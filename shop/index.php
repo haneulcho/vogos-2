@@ -50,7 +50,7 @@ include_once(G5_SHOP_PATH.'/shop.head.php');
 
     <?php if($default['de_type1_list_use']) { ?>
     <!-- Black Friday 시작 { -->
-    <section class="sct_wrap f8f8f8" style="background:url('<?php echo G5_SHOP_SKIN_URL ?>/img/black_friday_bg.jpg');padding:20px 0;">
+    <section class="sct_wrap f8f8f8" style="background:url('<?php echo G5_SHOP_SKIN_URL ?>/img/black_friday_bg.jpg');margin:60px 0 -1px;padding:20px 0;">
     <!-- Shipping Banner 시작 { -->
     <div id="inv_ship_view" style="text-align:center">
         <a href="<?php echo G5_SHOP_URL; ?>/list.php?ca_id=90"><img src="<?php echo G5_SHOP_SKIN_URL ?>/img/shipping_info_kr.jpg" border="0" width="1110" alt="지금 보고스에서 50,000원 이상 구매하면 배송이 무료!" title="지금 보고스에서 50,000원 이상 구매하면 배송이 무료!"></a>
@@ -62,7 +62,7 @@ include_once(G5_SHOP_PATH.'/shop.head.php');
 
     <?php if($default['de_type3_list_use']) { ?>
     <!-- New Arrivals 시작 { -->
-    <section class="sct_wrap">
+    <section class="sct_wrap inIndex">
     <div class="fullWidth">
         <header>
             <h2 class="new_arrivals"><a href="<?php echo G5_SHOP_URL; ?>/listtype.php?type=3">NEW ARRIVALS</a></h2>

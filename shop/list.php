@@ -61,10 +61,10 @@ var itemlist_ca_id = "<?php echo $ca_id; ?>";
     // 상단 HTML
     echo '<div id="sct_hhtml">'.conv_content($ca['ca_head_html'], 1).'</div>';
 
-    $cate_skin = $skin_dir.'/listcategory.skin.php';
-    if(!is_file($cate_skin))
-        $cate_skin = G5_SHOP_SKIN_PATH.'/listcategory.skin.php';
-    include $cate_skin;
+    // $cate_skin = $skin_dir.'/listcategory.skin.php';
+    // if(!is_file($cate_skin))
+    //    $cate_skin = G5_SHOP_SKIN_PATH.'/listcategory.skin.php';
+    //include $cate_skin;
 
     // 분류 Best Item
     $best_skin = $skin_dir.'/bestitem.skin.php';
