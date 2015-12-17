@@ -30,7 +30,11 @@ for ($i=1; $row=sql_fetch_array($result); $i++) {
 
     if ($this->view_it_img) {
         echo get_it_image_best($row['it_id'], 222, 300, 8, '', '', 'original', stripslashes($row['it_name']))."\n";
-        echo get_it_image_best($row['it_id'], 222, 300, 2, '', '', 'sub', stripslashes($row['it_name']))."\n";
+        if(!empty($row['it_img2'])) {
+            echo get_it_image_best($row['it_id'], 222, 300, 2, '', '', 'sub', stripslashes($row['it_name']))."\n";
+        } else {
+            echo get_it_image_best($row['it_id'], 222, 300, 1, '', '', 'sub', stripslashes($row['it_name']))."\n";
+        }
     }
 
     if ($this->href) {

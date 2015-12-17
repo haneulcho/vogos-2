@@ -384,7 +384,7 @@ box-shadow: 0px 1px 3px 0px rgba(233, 228, 223, 0.46);
 .sv_nojs .sv {display:block}
 
 /* 페이징 */
-.pg_wrap {clear:both;margin:0 0 35px;padding:20px 0 0;text-align:center}
+.pg_wrap {clear:both;margin:0 0 40px;padding:20px 0 0;text-align:center}
 .pg {}
 .pg_page, .pg_current, .qa_page {float:left;display:inline-block;width:7px;height:11px;margin:0 0 0 9px;padding:12px 14px 11px;color:#373737;letter-spacing:0;line-height:1;vertical-align:middle;
   background-color: #fff;

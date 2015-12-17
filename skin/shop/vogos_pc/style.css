@@ -101,21 +101,21 @@ a.gnb_1da {display:inline-block;margin-top:19px;padding:11px 17px 13px;text-over
 #sbn_idx ul li.sbn_first{display:block}
 
 /* 베스트 스킨 제작 */
-#sct_best {position:relative;padding:0 0 25px;background:url('img/best_title_bg.png') repeat-x #f3f3f0;}
+#sct_best {position:relative;padding:0;background:url('img/best_title_bg.png') repeat-x #f3f3f0;}
 #sct_best header {height:38px;padding:27px 0 0 0;color:#fff;}
 #sct_best header h2 {float:left;margin:0;padding:0;font-size:18px;font-weight:700;line-height:1em;height:auto;}
 #sct_best header h2>span {margin-left:15px;font-size:14px;font-weight:400;}
 #sct_best header>span {display:block;float:left;font-size:18px;}
 .sct_best_blit_left {margin-right:22px;}
 .sct_best_blit_right {margin-left:22px;}
-.owlbest {margin:0 auto;height:350px;}
+.owlbest {margin:0 auto;height:353px;}
 .owlbest .item {float:left;}
 .owlbest .item_last:after {display:block;visibility:hidden;clear:both;content:""}
 .owlbest .item .slider_img {position:relative;width:222px;height:300px;overflow:hidden;background-color:#fff;}
 .owlbest .item .slider_img a {display:block;overflow:hidden;width:100%;height:100%;}
 .owlbest .item .slider_img a>img {position:absolute;top:0;left:0;}
 .owlbest .item .slider_img .sub {display:none;}
-.owlbest .item .slider_txt {height:42px;padding:11px 13px 0;background-color:#373737;}
+.owlbest .item .slider_txt {height:42px;padding:11px 13px 0;background-color:#696063;}
 .owlbest .item .slider_txt a {color:#fefefe;font-size:12px;}
 .owlbest .item .slider_txt a .sct_cost {font-weight:700;font-size:13px;}
 
@@ -615,7 +615,7 @@ transition: opacity 300ms ease-out, top 300ms ease-out;
 .sch_list .sct_des_bottom .sct_txt a {font-size:14px;color:#2d2d2d;}
 .sch_list .sct_des_bottom .sct_basic {margin:0 0 15px;padding:0;line-height:1.5em}
 .sch_list .sct_cost {padding:0 18px;font-size:15px;font-weight:700;color:#2d2d2d;}
-.sch_list .sct_cost strike {display:inline-block;margin:0 5px 0 0;color:#999;font-weight:normal;font-size:13px;}
+.sch_list .sct_cost strike {display:inline-block;margin:0 5px 0 0;color:#FB9D8E;font-weight:normal;font-size:13px;}
 
 .sch_list .sct_cart_m .sct_cart_op{position:absolute;top:-395px;left:-200px;width:230px;height:320px;padding:20px;background:url('img/bg_01.png') repeat;display:none;}
 .sch_list .sct_cart_m .sct_cart_op label{display:block;padding:10px 10px 5px;color:#fff;font-weight:700;font-size:12px;}
@@ -898,7 +898,7 @@ transition: opacity 300ms ease-out, top 300ms ease-out;
 #sct_ct_3 li {float:left;margin:0 10px 10px 0;width:120px}
 
 /* 상품 정렬 리스트 스타일 선택 공통 */
-#sct_sortlst {zoom:1}
+#sct_sortlst {padding-top:25px;zoom:1}
 #sct_sortlst:after {display:block;visibility:hidden;clear:both;content:""}
 
 /* 상품 정렬 */

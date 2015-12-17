@@ -8,6 +8,12 @@ if (G5_IS_MOBILE) {
 
 $sql = " select * from {$g5['g5_shop_category_table']} where ca_id = '$ca_id' and ca_use = '1'  ";
 $ca = sql_fetch($sql);
+
+$row = sql_fetch(" select count(*) as cnt
+                from {$g5['g5_shop_item_table']}
+                where ( ca_id like '$ca_id%' or ca_id2 like '$ca_id%' or ca_id3 like '$ca_id%' )
+                  and it_use = '1' ");
+$ca_count = $row['cnt'];
 if (!$ca['ca_id'])
     alert('등록된 분류가 없습니다.');
 
@@ -67,10 +73,12 @@ var itemlist_ca_id = "<?php echo $ca_id; ?>";
     //include $cate_skin;
 
     // 분류 Best Item
-    $best_skin = $skin_dir.'/bestitem.skin.php';
-    if(!is_file($best_skin))
-        $best_skin = G5_SHOP_SKIN_PATH.'/bestitem.skin.php';
-    include $best_skin;
+    if($ca_count > 5) {
+        $best_skin = $skin_dir.'/bestitem.skin.php';
+        if(!is_file($best_skin))
+            $best_skin = G5_SHOP_SKIN_PATH.'/bestitem.skin.php';
+        include $best_skin;
+    }
 
 
     echo "<div class=\"fullWidth\">";
