@@ -77,7 +77,7 @@ $admin = get_admin("super");
         </div>
         <p>Tel: +1 323-319-3888 / help@vogos.com<br>
         Tel: +44 (0)20-3239-8282 / 8 Berwick Street, London W1F 0PH, United Kingdom<br>
-        Tel: +82 (0)70-7771-5527 / B2 Floor, 31, Teheran-ro 33-gil Gangnam-gu, Seoul, Korea<br>
+        Tel: +82 (2)1644-3828 / B2 Floor, 31, Teheran-ro 33-gil Gangnam-gu, Seoul, Korea<br>
         Business License: 123-88-00091 / Online Sales License: 2015-서울강남-02347호<br></p>
         <div id="ft_pay">
             <img src="<?php echo G5_SHOP_SKIN_URL ?>/img/payment.png">

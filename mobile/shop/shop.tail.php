@@ -23,7 +23,7 @@ $admin = get_admin("super");
     </p>
     <p class="ft_part">
         <b>VOGOS KOREA</b><br>
-        Tel: +82 (0)70-7771-5527<br>
+        Tel: +82 (2)1644-3828<br>
         B2 Floor, 31, Teheran-ro 33-gil Gangnam-gu, Seoul, Korea<br>
     </p>
     <p class="ft_part">
