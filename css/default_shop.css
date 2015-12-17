@@ -21,7 +21,7 @@ a:hover, a:focus, a:active {color:#000;text-decoration:none}
 
 #coreWrapper {margin:0;padding:0;}
 .fullWidth {margin:0 auto;width:1110px;}
-.p60 {padding-top:60px;}
+.p60 {padding-top:130px;}
 /* 팝업레이어 */
 #hd_pop {z-index:1000;position:relative;margin:0 auto;width:1200px;height:0}
 #hd_pop h2 {position:absolute;font-size:0;line-height:0;overflow:hidden}
@@ -35,8 +35,8 @@ a:hover, a:focus, a:active {color:#000;text-decoration:none}
   background-color: #fff;
   box-shadow: 0px 3px 4px 0px rgba(137, 137, 137, 0.1);z-index:999;
 }
-#hd {height:60px;}
-#hd h1 {float:left;width:130px;height:22px;margin-top:21px;}
+#hd {height:65px;}
+#hd h1 {float:left;width:156px;height:27px;margin-top:38px;}
 #hd h1 a {display:block;}
 #hd_h1 {position:absolute;font-size:0;line-height:0;overflow:hidden}
 
@@ -46,19 +46,19 @@ a:hover, a:focus, a:active {color:#000;text-decoration:none}
 #logo {float:left;padding:0;background:#262439;height:55px;width:150px;padding-left:20px}
 #logo a{display:inline-block;vertical-align:middle;margin-top:13px}
 
-.fr {padding-top:18px;}
+.fr {float:right;padding-top:14px;}
 /*상단_로그인*/
-#tnb {float:right;margin-top:3px !important;}
-#tnb li{float:left;margin-right:4px;}
-#tnb li a{display:block;padding:5px 7px 4px;color:#6b6b6b;font-size:11px;font-family:"Calibri";font-weight:bold;background:#fff;border-radius:3px;border:1px solid #beb9ba;}
-#tnb li a i {margin-right:3px;color:#605457;}
-#tnb li a:hover {background-color:#696062 !important;color:#fff !important;border-color:#696062;}
-#tnb li a:hover i {color:#fff;}
-#tnb li.tnb_adm a{background:tomato !important;border:1px solid tomato}
-#tnb li.tnb_adm a, #tnb li.tnb_adm a i {color:#fff}
+#tnb {float:left;height:30px;margin-right:20px !important;}
+#tnb li{float:left;margin:9px 0 0 14px;}
+#tnb li a{display:block;background: url('../skin/shop/vogos_pc/img/tnb_bg.png') no-repeat;margin:0;padding:0;font-size:0;line-height:0;text-indent:-9999em;overflow:hidden;height:12px;}
+#tnb li.tnb_adm a {width:54px;background-position:-1px -3px;}
+#tnb li.tnb_mypage a {width:65px;background-position:-72px -3px;}
+#tnb li.tnb_cart a {width:46px;background-position:-148px -3px;}
+#tnb li.tnb_login a {width:86px;background-position:-208px -3px;}
+#tnb li.tnb_logout a {width:68px;background-position:-227px -23px;}
 
 /* 전체 검색 */
-#hd_sch {float:right;margin-left:5px;}
+#hd_sch {float:right;}
 #hd_sch:after {display:block;visibility:hidden;clear:both;content:""}
 #hd_sch span {position:absolute;margin:0;padding:0;font-size:0;line-height:0;text-indent:-9999em;overflow:hidden;}
 #hd_sch #sch_str {width:88px;height:8px;padding:10px 8px;border:1px solid #efefef;box-shadow: inset 0px 2px 2px 0px rgba(0, 0, 0, 0.05);
@@ -79,7 +79,7 @@ background-color:#f3f3f3; color:#a7a7a7;outline:0;font-weight:bold;
 #wrapper, #idx_wrap {z-index:5;margin:0px auto;width:100%;zoom:1;background:#fff/*#ededed*/}
 #wrapper:after, #idx_wrap:after {display:block;visibility:hidden;clear:both;content:""}
 #wrapper_title {margin-bottom:20px;font-size:1.2em;font-weight:bold}
-#idx_wrap {padding-top:60px;background-color:#ececec;}
+#idx_wrap {padding-top:130px;background-color:#ececec;}
 
 /*상품배너*/
 /*#idx_wrap{width:1220px;margin:0 auto;position:relative;}
@@ -541,3 +541,226 @@ background-color:#f3f3f3; color:#a7a7a7;outline:0;font-weight:bold;border-radius
 /* 쿠폰 */
 #coupon .td_numbig {width:150px}
 #coupon .td_datetime {width:180px}
+
+
+/* 
+ *  Owl Carousel - Animate Plugin
+ */
+.owl-carousel .animated {
+  -webkit-animation-duration: 1000ms;
+  animation-duration: 1000ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.owl-carousel .owl-animated-in {
+  z-index: 0;
+}
+.owl-carousel .owl-animated-out {
+  z-index: 1;
+}
+.owl-carousel .fadeOut {
+  -webkit-animation-name: fadeOut;
+  animation-name: fadeOut;
+}
+
+@-webkit-keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* 
+ * 	Owl Carousel - Auto Height Plugin
+ */
+.owl-height {
+  -webkit-transition: height 500ms ease-in-out;
+  -moz-transition: height 500ms ease-in-out;
+  -ms-transition: height 500ms ease-in-out;
+  -o-transition: height 500ms ease-in-out;
+  transition: height 500ms ease-in-out;
+}
+
+/* 
+ *  Core Owl Carousel CSS File
+ */
+.owl-carousel {
+  display: none;
+  width: 100%;
+  -webkit-tap-highlight-color: transparent;
+  /* position relative and z-index fix webkit rendering fonts issue */
+  position: relative;
+  z-index: 1;
+}
+.owl-carousel .owl-stage {
+  position: relative;
+  -ms-touch-action: pan-Y;
+}
+.owl-carousel .owl-stage:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+.owl-carousel .owl-stage-outer {
+  position: relative;
+  overflow: hidden;
+  /* fix for flashing background */
+  -webkit-transform: translate3d(0px, 0px, 0px);
+}
+.owl-carousel .owl-controls .owl-nav .owl-prev,
+.owl-carousel .owl-controls .owl-nav .owl-next,
+.owl-carousel .owl-controls .owl-dot {
+  cursor: pointer;
+  cursor: hand;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.owl-carousel.owl-loaded {
+  display: block;
+}
+.owl-carousel.owl-loading {
+  opacity: 0;
+  display: block;
+}
+.owl-carousel.owl-hidden {
+  opacity: 0;
+}
+.owl-carousel .owl-refresh .owl-item {
+  display: none;
+}
+.owl-carousel .owl-item {
+  position: relative;
+  min-height: 1px;
+  float: left;
+  -webkit-backface-visibility: hidden;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.owl-carousel .owl-item img {
+  display: block;
+  width: 100%;
+  -webkit-transform-style: preserve-3d;
+}
+.owl-carousel.owl-text-select-on .owl-item {
+  -webkit-user-select: auto;
+  -moz-user-select: auto;
+  -ms-user-select: auto;
+  user-select: auto;
+}
+.owl-carousel .owl-grab {
+  cursor: move;
+  cursor: -webkit-grab;
+  cursor: -o-grab;
+  cursor: -ms-grab;
+  cursor: grab;
+}
+.owl-carousel.owl-rtl {
+  direction: rtl;
+}
+.owl-carousel.owl-rtl .owl-item {
+  float: right;
+}
+
+/* No Js */
+.no-js .owl-carousel {
+  display: block;
+}
+
+/* 
+ * 	Owl Carousel - Lazy Load Plugin
+ */
+.owl-carousel .owl-item .owl-lazy {
+  opacity: 0;
+  -webkit-transition: opacity 400ms ease;
+  -moz-transition: opacity 400ms ease;
+  -ms-transition: opacity 400ms ease;
+  -o-transition: opacity 400ms ease;
+  transition: opacity 400ms ease;
+}
+.owl-carousel .owl-item img {
+  transform-style: preserve-3d;
+}
+
+/* 
+ * 	Owl Carousel - Video Plugin
+ */
+.owl-carousel .owl-video-wrapper {
+  position: relative;
+  height: 100%;
+  background: #000;
+}
+.owl-carousel .owl-video-play-icon {
+  position: absolute;
+  height: 80px;
+  width: 80px;
+  left: 50%;
+  top: 50%;
+  margin-left: -40px;
+  margin-top: -40px;
+  background: url("owl.video.play.png") no-repeat;
+  cursor: pointer;
+  z-index: 1;
+  -webkit-backface-visibility: hidden;
+  -webkit-transition: scale 100ms ease;
+  -moz-transition: scale 100ms ease;
+  -ms-transition: scale 100ms ease;
+  -o-transition: scale 100ms ease;
+  transition: scale 100ms ease;
+}
+.owl-carousel .owl-video-play-icon:hover {
+  -webkit-transition: scale(1.3, 1.3);
+  -moz-transition: scale(1.3, 1.3);
+  -ms-transition: scale(1.3, 1.3);
+  -o-transition: scale(1.3, 1.3);
+  transition: scale(1.3, 1.3);
+}
+.owl-carousel .owl-video-playing .owl-video-tn,
+.owl-carousel .owl-video-playing .owl-video-play-icon {
+  display: none;
+}
+.owl-carousel .owl-video-tn {
+  opacity: 0;
+  height: 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  -webkit-background-size: contain;
+  -moz-background-size: contain;
+  -o-background-size: contain;
+  background-size: contain;
+  -webkit-transition: opacity 400ms ease;
+  -moz-transition: opacity 400ms ease;
+  -ms-transition: opacity 400ms ease;
+  -o-transition: opacity 400ms ease;
+  transition: opacity 400ms ease;
+}
+.owl-carousel .owl-video-frame {
+  position: relative;
+  z-index: 1;
+}
+.owl_btns {position:relative;}
+.owl_btns .owl_btn {position:absolute;top:150px;width:50px;font-size:70px;color:#fff;z-index:9;text-align:center;cursor:pointer;}
+.owl_btns .nextBtn {right:-10px;}
+.owl_btns .prevBtn {left:-10px;}
+.owl-theme .owl-controls{margin-top:10px;text-align:center;-webkit-tap-highlight-color:transparent}.owl-theme .owl-controls .owl-nav [class*=owl-]{color:#fff;font-size:14px;margin:5px;padding:4px 7px;background:#d6d6d6;display:inline-block;cursor:pointer;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px}.owl-theme .owl-controls .owl-nav [class*=owl-]:hover{background:#869791;color:#fff;text-decoration:none}.owl-theme .owl-controls .owl-nav .disabled{opacity:.5;cursor:default}.owl-theme .owl-dots .owl-dot{display:inline-block;zoom:1;*display:inline}.owl-theme .owl-dots .owl-dot span{width:10px;height:10px;margin:5px 7px;background:#d6d6d6;display:block;-webkit-backface-visibility:visible;-webkit-transition:opacity 200ms ease;-moz-transition:opacity 200ms ease;-ms-transition:opacity 200ms ease;-o-transition:opacity 200ms ease;transition:opacity 200ms ease;-webkit-border-radius:30px;-moz-border-radius:30px;border-radius:30px}.owl-theme .owl-dots .owl-dot.active span,.owl-theme .owl-dots .owl-dot:hover span{background:#869791}
