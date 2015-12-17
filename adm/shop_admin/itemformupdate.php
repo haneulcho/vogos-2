@@ -495,6 +495,7 @@ $sql_common = " ca_id               = '$ca_id',
                 it_mobile_tail_html = '$it_mobile_tail_html',
                 it_ip               = '{$_SERVER['REMOTE_ADDR']}',
                 it_order            = '$it_order',
+                it_order_newarrivals = '$it_order_newarrivals',
                 it_tel_inq          = '$it_tel_inq',
                 it_info_gubun       = '$it_info_gubun',
                 it_info_value       = '$it_info_value',
@@ -658,6 +659,7 @@ if(is_checked('chk_ca_it_skin'))                $ca_fields .= " , it_skin = '$it
 if(is_checked('chk_ca_it_mobile_skin'))         $ca_fields .= " , it_mobile_skin = '$it_mobile_skin' ";
 if(is_checked('chk_ca_it_basic'))               $ca_fields .= " , it_basic = '$it_basic' ";
 if(is_checked('chk_ca_it_order'))               $ca_fields .= " , it_order = '$it_order' ";
+if(is_checked('chk_ca_it_order_newarrivals'))   $ca_fields .= " , it_order_newarrivals = '$it_order_newarrivals' ";
 if(is_checked('chk_ca_it_type'))                $ca_fields .= " , it_type1 = '$it_type1', it_type2 = '$it_type2', it_type3 = '$it_type3', it_type4 = '$it_type4', it_type5 = '$it_type5' ";
 if(is_checked('chk_ca_it_maker'))               $ca_fields .= " , it_maker = '$it_maker' ";
 if(is_checked('chk_ca_it_origin'))              $ca_fields .= " , it_origin = '$it_origin' ";
@@ -710,6 +712,7 @@ if(is_checked('chk_all_it_skin'))                $all_fields .= " , it_skin = '$
 if(is_checked('chk_all_it_mobile_skin'))         $all_fields .= " , it_mobile_skin = '$it_mobile_skin' ";
 if(is_checked('chk_all_it_basic'))               $all_fields .= " , it_basic = '$it_basic' ";
 if(is_checked('chk_all_it_order'))               $all_fields .= " , it_order = '$it_order' ";
+if(is_checked('chk_all_it_order_newarrivals'))   $all_fields .= " , it_order_newarrivals = '$it_order_newarrivals' ";
 if(is_checked('chk_all_it_type'))                $all_fields .= " , it_type1 = '$it_type1', it_type2 = '$it_type2', it_type3 = '$it_type3', it_type4 = '$it_type4', it_type5 = '$it_type5' ";
 if(is_checked('chk_all_it_maker'))               $all_fields .= " , it_maker = '$it_maker' ";
 if(is_checked('chk_all_it_origin'))              $all_fields .= " , it_origin = '$it_origin' ";

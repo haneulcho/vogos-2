@@ -70,14 +70,14 @@ $(function() {
     dots: false,
     autoHeight: true
     });
-    sync1.on('mousewheel', '.owl-stage', function (e) {
-        if (e.deltaY>0) {
-            sync1.trigger('next.owl');
-        } else {
-            sync1.trigger('prev.owl');
-        }
-        e.preventDefault();
-    });
+    //sync1.on('mousewheel', '.owl-stage', function (e) {
+    //    if (e.deltaY>0) {
+    //        sync1.trigger('next.owl');
+    //    } else {
+    //        sync1.trigger('prev.owl');
+    //    }
+    //    e.preventDefault();
+    // });
     // Go to the next item
     $('.nextBtn').click(function() {
         sync1.trigger('next.owl.carousel');

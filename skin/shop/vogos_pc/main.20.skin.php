@@ -101,6 +101,7 @@ if($i == 0) echo "<p class=\"sct_noitem\">등록된 상품이 없습니다.</p>\
 <!-- } 상품진열 20 끝 -->
 
 <script type="text/javascript">
+/*
 $(function() {
     var $li20 = $('.sct_20 li');
     $li20.each(function() {
@@ -118,4 +119,5 @@ $(function() {
         });
     });
 });
+*/
 </script>

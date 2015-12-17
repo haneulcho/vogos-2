@@ -458,6 +458,7 @@ CREATE TABLE IF NOT EXISTS `g5_shop_item` (
   `it_update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `it_ip` varchar(25) NOT NULL DEFAULT '',
   `it_order` int(11) NOT NULL DEFAULT '0',
+  `it_order_newarrivals` int(11) NOT NULL DEFAULT '0',
   `it_tel_inq` tinyint(4) NOT NULL DEFAULT '0',
   `it_info_gubun` varchar(50) NOT NULL DEFAULT '',
   `it_info_value` text NOT NULL,
