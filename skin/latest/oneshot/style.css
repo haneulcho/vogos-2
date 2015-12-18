@@ -1,0 +1,13 @@
+@charset "utf-8";
+
+#oneshot {overflow:hidden;margin-top:-1px;}
+.list_spotted {float:left;margin-left:45px;margin-bottom:45px;}
+.spot_margin {margin-left:0;}
+.spot_img {}
+.spot_img a {}
+.spot_des ul {}
+.spot_des li {padding-left:20px;padding-right:20px;text-align:center;letter-spacing:-1px;border-left:1px solid #FDF2F2;border-right:1px solid #FDF2F2;}
+.spot_sub {padding:12px;background-color:#FBF9F9;border-bottom:1px dashed #BD8C8C;}
+.spot_sub a {color:#825757;font-size:20px;}
+.spot_content {padding:20px;}
+.spot_content a {color:#888;font-size:12px;}

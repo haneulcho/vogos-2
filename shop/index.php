@@ -90,10 +90,10 @@ include_once(G5_SHOP_PATH.'/shop.head.php');
 
     <?php if($default['de_type2_list_use']) { ?>
     <!-- runway product 시작 { -->
-    <section class="sct_wrap f8f8f8">
+    <section class="sct_wrap f8f8f8 inIndex">
     <div class="fullWidth">
         <header>
-            <h2><a href="<?php echo G5_SHOP_URL; ?>/list.php?ca_id=10"><img src="<?php echo G5_SHOP_SKIN_URL ?>/img/title_vogos_slogan.jpg" alt="VOGOS NEW ARRIVALS"></a></h2>
+            <h2 class="runway"><a href="<?php echo G5_SHOP_URL; ?>/list.php?ca_id=10">RUNWAY</a></h2>
         </header>
         <?php
         $list = new item_list();
@@ -111,6 +111,17 @@ include_once(G5_SHOP_PATH.'/shop.head.php');
     </section>
     <!-- } runway product 끝 -->
     <?php } ?>
+
+    <!-- spotted 시작 { -->
+    <section class="sct_wrap inIndex" style="margin-bottom:35px">
+    <div class="fullWidth">
+        <header>
+            <h2 class="spotted"><a href="<?php echo G5_BBS_URL; ?>/board.php?bo_table=spotted">SPOTTED</a></h2>
+            <?php echo latest("oneshot", "spotted", 9, 25); ?>
+        </header>
+    </div>
+    </section>
+    <!-- } spotted 끝 -->
 
 <?php // echo poll('shop_basic'); // 설문조사 ?>
 

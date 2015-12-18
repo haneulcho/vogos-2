@@ -138,6 +138,16 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
             </td>
         </tr>
 
+        <tr>
+            <th scope="row"><label for="wr_1">상품 코드</label></th>
+            <td><input type='text' name='wr_1' value='<?=$write['wr_1']?>'></td>
+        </tr>
+
+        <tr>
+            <th scope="row"><label for="wr_2">비메오 주소</label></th>
+            <td><input type='text' name='wr_2' value='<?=$write['wr_2']?>'></td>
+        </tr>
+
         <?php for ($i=1; $is_link && $i<=G5_LINK_COUNT; $i++) { ?>
         <tr>
             <th scope="row"><label for="wr_link<?php echo $i ?>">링크 #<?php echo $i ?></label></th>

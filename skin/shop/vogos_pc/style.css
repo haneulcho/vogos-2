@@ -433,7 +433,7 @@ box-shadow: 0px 1px 3px 0px rgba(233, 228, 223, 0.46);
 .sct_wrap .sctrl {position:absolute;top:0;right:0} /* 애니메이션 효과 사용 시 재생 정지 버튼 등 */
 .sct_wrap:after {display:block;visibility:hidden;clear:both;content:""}
 .sct_wrap header {padding:67px 0 40px;zoom:1;}
-.sct_wrap.inIndex header {margin:67px 0 -1px;padding:0;}
+.sct_wrap.inIndex header {margin:0 0 -1px;padding:67px 0 0 0;}
 .sct_wrap header:after {display:block;visibility:hidden;clear:both;content:""}
 .sct_wrap h2 {margin:0;padding:0;height:52px;}
 .sct_wrap h2 a {display:block;height:52px;background:url('img/index_title.png') no-repeat;font-size:0;line-height:0;overflow:hidden;text-indent:-99999px;
@@ -442,12 +442,17 @@ box-shadow: 0px 1px 3px 0px rgba(233, 228, 223, 0.46);
   -ms-transition: all .2s ease;
   -o-transition: all .2s ease;
   transition: all .2s ease;}
-.sct_wrap h2.new_arrivals a {width:496px;background-position:0 -1px;}
-.sct_wrap h2.new_arrivals a:hover {background-position:0 -59px;}
-.sct_wrap h2.spotted a {width:496px;background-position:0 -1px;}
-.sct_wrap h2.spotted a:hover {background-position:0 -59px;}
-.sct_wrap h2.best_items a {width:496px;background-position:0 -1px;}
-.sct_wrap h2.best_items a:hover {background-position:0 -59px;}
+.sct_wrap h2.new_arrivals a {width:496px;background-position:0 -59px;}
+.sct_wrap h2.new_arrivals a:hover {background-position:0 -1px;}
+.sct_wrap h2.spotted a {width:300px;background-position:0 -187px;}
+.sct_wrap h2.spotted a:hover {background-position:0 -130px;}
+.sct_wrap h2.best_items a {width:389px;background-position:0 -307px;}
+.sct_wrap h2.best_items a:hover {background-position:0 -249px;}
+.sct_wrap h2.runway a {width:288px;background-position:0 -435px;}
+.sct_wrap h2.runway a:hover {background-position:0 -377px;}
+
+
+
 .sct_wrap_hdesc {float:left;margin:0;padding:0;color:#777;line-height:1em}
 
 #sct {clear:both}
