@@ -58,12 +58,15 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
                 return true;
             }
             </script>
+            <div class="icon_sales"><a href=""><img src="<?php echo G5_SHOP_SKIN_URL; ?>/img/icon_sale.gif" alt="UP TO 15% OFF" /></a></div>
         </div>
+        <div 
     </div> <!-- class fr -->
     <?php include_once(G5_SHOP_SKIN_PATH.'/boxcategory.skin.php'); // 상품분류 Navigation ?>
 </header>
 </div> <!-- hd_wrap END -->
 
+<?php include(G5_SHOP_SKIN_PATH.'/boxtodayview.skin.php'); // 오늘 본 상품 ?>
 
 <!-- idx_wrap 시작 { -->
 <?php if(defined('_INDEX_') && _INDEX_) { ?>

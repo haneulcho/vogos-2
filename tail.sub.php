@@ -38,7 +38,7 @@ function logCorpAScript_full(){
 		if(h){s.src=hst+"/HTTP_MSN/UsrConfig/vogoskorea/js/ASP_Conf.js?s="+rnd;h.appendChild(s);}
 	}
 	this.init= function(){
-		document.write('<img src="'+hst+'/sr.gif?d='+rnd+'"  style="width:1px;height:1px;position:absolute;" alt="" onload="logCorpAnalysis_full.ch()" />');
+		document.write('<img src="'+hst+'/sr.gif?d='+rnd+'"  style="width:1px;height:0px;position:absolute;" alt="" onload="logCorpAnalysis_full.ch()" />');
 	}
 }
 if(typeof logCorpAnalysis_full=="undefined"){	var logCorpAnalysis_full=new logCorpAScript_full();logCorpAnalysis_full.init();}
