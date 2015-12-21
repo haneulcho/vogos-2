@@ -20,6 +20,11 @@ $(function(){
         if(mouse_event) {
             $(".gnb_1dli").removeClass("gnb_1dli_over gnb_1dli_over2 gnb_1dli_on");
             $(this).parent().addClass("gnb_1dli_over gnb_1dli_on");
+            $conHeight = $(this).parent().children('.gnb_con').find('.gnb_2dul').height() + 85;
+
+            if($conHeight > 180) {
+                $(this).parent().children('.gnb_con').css('height', $conHeight + 'px');
+            }
             hide_menu = false;
         }
     });

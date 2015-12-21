@@ -29,18 +29,47 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_SKIN_URL.'/style.css">', 
                 $sql3 = " select ca_id, ca_name from {$g5['g5_shop_category_table']} where LENGTH(ca_id) = '6' and SUBSTRING(ca_id,1,4) = '{$row2['ca_id']}' and ca_use = '1' order by ca_order, ca_id ";
                 $result3 = sql_query($sql3);
 
-                if ($j==0) { echo '<div class="gnb_sub"><ul class="gnb_2dul">'; }
+                if ($j==0) { echo '<div class="gnb_con"><div class="gnb_sub"><div class="gnb_sub_m"><h2>'.$row['ca_name'].'</h2><ul class="gnb_2dul">'; }
             ?>
                 <li class="gnb_2dli"><a href="<?php echo G5_SHOP_URL; ?>/list.php?ca_id=<?php echo $row2['ca_id']; ?>" class="gnb_2da"><?php echo $row2['ca_name']; ?></a>
                     <?php for ($k=0; $row3=sql_fetch_array($result3); $k++) {
                         if ($k==0) { echo '<ul class="gnb_3dul">'; }
                     ?>
-                        <li class="gnb_3dli"><a href="<?php echo G5_SHOP_URL; ?>/list.php?ca_id=<?php echo $row3['ca_id']; ?>" class="gnb_3da"><?php echo $row3['ca_name']; ?></li>
+                        <li class="gnb_3dli"><a href="<?php echo G5_SHOP_URL; ?>/list.php?ca_id=<?php echo $row3['ca_id']; ?>" class="gnb_3da"><?php echo $row3['ca_name']; ?></a></li>
                     <?php }
                     if ($k>0) { echo '</ul>';} ?>
                 </li>
-            <?php }
-            if ($j>0) { echo '</ul></div>'; } ?>
+            <?php } // row2 for END
+            if ($j>0) {
+                echo '</ul></div>';
+            ?>
+            <div class="gnb_sub_s">
+                <h3><?php echo $row['ca_name']; ?><span> / NEW ARRIVALS</span></h3>
+                <?php
+                    $set_cate = $row['ca_id'];
+                    $order_by = 'it_time desc';
+                    $list = new item_list();
+                    $list->set_category($set_cate, 1);
+                    $list->set_order_by($order_by);
+                    $list->set_list_mod(3);
+                    $list->set_list_row(1);
+                    $list->set_img_size(168, 55);
+                    $list->set_list_skin(G5_SHOP_SKIN_PATH.'/list.60.skin.php');
+                    $list->set_view('it_img', true);
+                    $list->set_view('it_id', true);
+                    $list->set_view('it_name', true);
+                    $list->set_view('it_basic', false);
+                    $list->set_view('it_cust_price', true);
+                    $list->set_view('it_price', true);
+                    $list->set_view('it_icon', false);
+                    $list->set_view('sns', false);
+                    echo $list->run();
+                ?>
+            </div>
+            <?php
+                echo '</div></div>'; // gnb_sub, gnb_con END
+                } // $j>0 END
+            ?>
         </li>
         <?php } ?>
         <li class="gnb_1dli">
