@@ -16,15 +16,17 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 <!--h2 id="container_title"><?php echo $board['bo_subject'] ?><span class="sound_only"> 목록</span></h2-->
 
 <!-- 게시판 타이틀 시작 -->
+<?php if(empty($wr_id)) { ?>
 <div id="sod_title" class="mif">
     <header class="fullWidth">
         <h2><?php echo $board['bo_subject'] ?><span class="cart_item_num" style="width:170px"><i class="ion-heart"></i> Celebrity's Choice</a></span></h2>
     </header>
 </div>
+<?php } ?>
 <!-- 게시판 목록 시작 { -->
 <div id="sct" class="sct_wrap">
 <div class="fullWidth">
-<div id="bo_list" style="width:<?php echo $width; ?>">
+<div id="bo_list" style="width:<?php echo $width; ?>;padding-top:0">
 
     <!-- 게시판 카테고리 시작 { -->
     <?php if ($is_category) { ?>
@@ -66,95 +68,98 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
     <div class="tbl_wrap">
         <table>
         <!--thead>
-			<tr>
-				<th scope="col" class="th2" colspan=<?php echo $colspan2 ?>>
-				<?php echo subject_sort_link('wr_datetime', $qstr2, 1) ?>날짜순</a>
-				| <?php echo subject_sort_link('wr_hit', $qstr2, 1) ?>조회순</a>
-				<?php if ($is_good) { ?> | <?php echo subject_sort_link('wr_good', $qstr2, 1) ?>추천순</a><?php } ?>
-				<?php if ($is_nogood) { ?> | <?php echo subject_sort_link('wr_nogood', $qstr2, 1) ?>비추천순</a><?php } ?>
-			</tr>
+            <tr>
+                <th scope="col" class="th2" colspan=<?php echo $colspan2 ?>>
+                <?php echo subject_sort_link('wr_datetime', $qstr2, 1) ?>날짜순</a>
+                | <?php echo subject_sort_link('wr_hit', $qstr2, 1) ?>조회순</a>
+                <?php if ($is_good) { ?> | <?php echo subject_sort_link('wr_good', $qstr2, 1) ?>추천순</a><?php } ?>
+                <?php if ($is_nogood) { ?> | <?php echo subject_sort_link('wr_nogood', $qstr2, 1) ?>비추천순</a><?php } ?>
+            </tr>
         </thead-->
         <tbody>
         <?php
         for ($i=0; $i<count($list); $i++) {
-         ?>
-			<tr class="<?php if ($list[$i]['is_notice']) echo "bo_notice"; ?><?php if ($board[1]) echo "bo_sideview"; ?>">
-				<!--td class="td_num">
-				<?php
-				if ($list[$i]['is_notice']) // 공지사항
-					echo '<strong>공지</strong>';
-				else if ($wr_id == $list[$i]['wr_id'])
-					echo "<span class=\"bo_current\">열람중</span>";
-				else
-					echo $list[$i]['num'];
-				 ?>
-				</td-->
-				<td class="td_subject" colspan=<?php echo $colspan2; ?> valign="top"<?php if ($is_admin) { ?><?php } else { ?> style="border-bottom:0;"<?php } ?>>
-					<?php
-					echo $list[$i]['icon_reply'];
-					if ($is_category && $list[$i]['ca_name']) {
-					 ?>
-					<a href="<?php echo $list[$i]['ca_name_href'] ?>" class="bo_cate_link"><?php echo $list[$i]['ca_name'] ?></a>
-					<?php } ?>
+            if($wr_id != $list[$i]['wr_id']) {
+        ?>
+            <tr class="<?php if ($list[$i]['is_notice']) echo "bo_notice"; ?><?php if ($board[1]) echo "bo_sideview"; ?>">
+                <!--td class="td_num">
+                <?php
+                if ($list[$i]['is_notice']) // 공지사항
+                    echo '<strong>공지</strong>';
+                else if ($wr_id == $list[$i]['wr_id'])
+                    echo "<span class=\"bo_current\">열람중</span>";
+                else
+                    echo $list[$i]['num'];
+                 ?>
+                </td-->
+                <td class="td_subject" colspan=<?php echo $colspan2; ?> valign="top"<?php if ($is_admin) { ?><?php } else { ?> style="border-bottom:0;"<?php } ?>>
+                    <?php
+                    echo $list[$i]['icon_reply'];
+                    if ($is_category && $list[$i]['ca_name']) {
+                     ?>
+                    <a href="<?php echo $list[$i]['ca_name_href'] ?>" class="bo_cate_link"><?php echo $list[$i]['ca_name'] ?></a>
+                    <?php } ?>
 
-					<!-- 본문리스트 추가부분 시작 { -->
-					<article id="bo_v">
-						<header>
-					<?php if ($is_admin) {?>
-						<h1 id="bo_v_title">
-							<a href="<?php echo $list[$i]['href'] ?>"><?php echo $list[$i]['subject'] ?></a>
-						</h1>
-					<?php } else { ?>
-						<h1 id="bo_v_title">
-						<span><?php if ($category_name) echo $list[$i]['ca_name'].' | '; // 분류 출력 끝
-							echo cut_str(get_text($list[$i]['wr_subject']), 70); // 글제목 출력
-						 ?></span>
-						</h1>
-					<?php } ?>
-						</header>
-						<section id="bo_v_info">
-							<h2>페이지 정보</h2>
+                    <!-- 본문리스트 추가부분 시작 { -->
+                    <article id="bo_v">
+                        <header>
+                    <?php if ($is_admin) {?>
+                        <h1 id="bo_v_title">
+                            <a href="<?php echo $list[$i]['href'] ?>"><?php echo $list[$i]['subject'] ?></a>
+                        </h1>
+                    <?php } else { ?>
+                        <h1 id="bo_v_title">
+                        <span><?php if ($category_name) echo $list[$i]['ca_name'].' | '; // 분류 출력 끝
+                            echo cut_str(get_text($list[$i]['wr_subject']), 70); // 글제목 출력
+                         ?></span>
+                        </h1>
+                    <?php } ?>
+                        </header>
+                        <section id="bo_v_info">
+                            <h2>페이지 정보</h2>
                             <!-- 
-							작성자 <strong><?php //echo $list[$i]['wr_name'] ?><?php //if ($is_ip_view) { echo "&nbsp;(".$list[$i]['wr_ip'].")"; } ?></strong>
+                            작성자 <strong><?php //echo $list[$i]['wr_name'] ?><?php //if ($is_ip_view) { echo "&nbsp;(".$list[$i]['wr_ip'].")"; } ?></strong>
                             -->
                             <?php if ($is_checkbox) { ?>
                                 <label for="chk_wr_id_<?php echo $i ?>" class="sound_only"><?php echo $list[$i]['subject'] ?></label>
                                 <input type="checkbox" name="chk_wr_id[]" value="<?php echo $list[$i]['wr_id'] ?>" id="chk_wr_id_<?php echo $i ?>">
                             <?php } ?>
                             <span class="sound_only">작성일</span><strong><?php echo date("ymd", strtotime($list[$i]['wr_datetime'])) ?></strong>
-							<!--
-							조회<strong><?php echo number_format($list[$i]['wr_hit']) ?>회</strong>
-							댓글<strong><?php echo number_format($list[$i]['wr_comment']) ?>건</strong>
-							-->
-						</section>
-						<section id="bo_v_atc">
-							<h2 id="bo_v_atc_title">본문</h2>
-							<?php // 파일출력
-							$v_img_count = count($list[$i]['file']);
-							if($v_img_count) {
-								//echo "<div id=\"bo_v_img\">\n";
-								for ($i2=0; $i2<=count($list[$i]['file']); $i2++) {
-									if ($list[$i]['file'][$i2]['view']) {
-										//echo $view['file'][$i]['view'];
-										echo get_view_thumbnail($list[$i]['file'][$i2]['view']);
-									}
-								}
-								//echo "</div>\n";
-							}
-							 ?>
-							<!-- 본문 내용 시작 { -->
-							<div id="bo_v_con"><?php echo get_view_thumbnail($list[$i]['wr_content']); ?></div>
-							<?php echo $view['rich_content']; // {이미지:0} 과 같은 코드를 사용할 경우 ?>
-							<!-- } 본문 내용 끝 -->
-							<?php if ($is_signature) { ?><p><?php echo $signature ?></p><?php } ?>
+                            <!--
+                            조회<strong><?php echo number_format($list[$i]['wr_hit']) ?>회</strong>
+                            댓글<strong><?php echo number_format($list[$i]['wr_comment']) ?>건</strong>
+                            -->
+                        </section>
+                        <section id="bo_v_atc">
+                            <h2 id="bo_v_atc_title">본문</h2>
+
+
+                            <?php // 파일출력
+                            /* $v_img_count = count($list[$i]['file']);
+                            if($v_img_count) {
+                                //echo "<div id=\"bo_v_img\">\n";
+                                for ($i2=0; $i2<=count($list[$i]['file']); $i2++) {
+                                    if ($list[$i]['file'][$i2]['view']) {
+                                        //echo $view['file'][$i]['view'];
+                                        echo get_view_thumbnail($list[$i]['file'][$i2]['view']);
+                                    }
+                                }
+                                //echo "</div>\n";
+                            } */
+                             ?>
+                            <!-- 본문 내용 시작 { -->
+                            <div id="bo_v_con"><?php echo get_view_thumbnail($list[$i]['wr_content']); ?></div>
+                            <!-- } 본문 내용 끝 -->
                             <?php if ($is_admin) { ?>
-                            <a href="<?php echo G5_BBS_URL ?>/write.php?w=u&bo_table=<?php echo $bo_table ?>&wr_id=<?php echo $list[$i]['wr_id'] ?>&page=<?php echo $page ?>">[수정]</a>
-                            <a href="<?php echo G5_BBS_URL ?>/delete.php?w=d&bo_table=<?php echo $bo_table ?>&wr_id=<?php echo $list[$i]['wr_id'] ?>&page=<?php echo $page ?>" onclick="del(this.href); return false;">[삭제]</a>
+                            <a style="margin-right:10px" href="<?php echo G5_BBS_URL ?>/write.php?w=u&bo_table=<?php echo $bo_table ?>&wr_id=<?php echo $list[$i]['wr_id'] ?>&page=<?php echo $page ?>" class="btn_admin">수정</a>
+                            <a href="<?php echo G5_BBS_URL ?>/delete.php?w=d&bo_table=<?php echo $bo_table ?>&wr_id=<?php echo $list[$i]['wr_id'] ?>&page=<?php echo $page ?>" class="btn_admin" onclick="del(this.href); return false;">삭제</a>
                             <?php } ?>
-						</section>
-					</article>
-					<!-- } 본문리스트 추가부분 끝 -->
-					<?php } ?>
+                        </section>
+                    </article>
+                    <!-- } 본문리스트 추가부분 끝 -->
+                    <?php } //if END
+                    } // for END
+                    ?>
 <div id="bo_footer">
 <!-- 게시판 검색 시작 {
 <fieldset id="bo_sch">
@@ -179,9 +184,9 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 <!-- 페이지 -->
 <?php echo $write_pages;  ?>
 </div>
-				</td>
-			</tr>
-			<?php if (count($list) == 0) { echo '<tr><td colspan="'.$colspan.'" class="empty_table">게시물이 없습니다.</td></tr>'; } ?>
+                </td>
+            </tr>
+            <?php if (count($list) == 0) { echo '<tr><td colspan="'.$colspan.'" class="empty_table">게시물이 없습니다.</td></tr>'; } ?>
         </tbody>
         </table>
     </div>
@@ -190,8 +195,8 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
     <div class="bo_fx">
         <?php if ($is_checkbox) { ?>
         <ul class="btn_bo_adm">
-			<li class="btn_chk"><label for="chkall" class="sound_only">현재 페이지 게시물 전체</label>
-			<input type="checkbox" id="chkall" value="Check" onclick="if (this.checked) all_checked(true); else all_checked(false);"></li>
+            <li class="btn_chk"><label for="chkall" class="sound_only">현재 페이지 게시물 전체</label>
+            <input type="checkbox" id="chkall" value="Check" onclick="if (this.checked) all_checked(true); else all_checked(false);"></li>
             <li><input type="submit" name="btn_submit" value="선택삭제" onclick="document.pressed=this.value" /></li>
             <li><input type="submit" name="btn_submit" value="선택복사" onclick="document.pressed=this.value" /></li>
             <li><input type="submit" name="btn_submit" value="선택이동" onclick="document.pressed=this.value" /></li>
@@ -201,6 +206,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
         <?php if ($list_href || $write_href) { ?>
         <ul class="btn_bo_user">
             <?php if ($list_href) { ?><li><a href="<?php echo $list_href ?>" class="btn_b01">목록</a></li><?php } ?>
+            <?php if ($admin_href) { ?><li><a href="<?php echo $admin_href ?>" class="btn_admin">관리자</a></li><?php } ?>
             <?php if ($write_href) { ?><li><a href="<?php echo $write_href ?>" class="btn_b02">글쓰기</a></li><?php } ?>
         </ul>
         <?php } ?>

@@ -4,7 +4,13 @@ if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 // add_stylesheet('css 구문', 출력순서); 숫자가 작을 수록 먼저 출력됨
 add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0);
 ?>
-
+<!-- 게시판 타이틀 시작 -->
+<div id="sod_title" class="mif">
+    <header class="fullWidth">
+        <h2><?php echo $board['bo_subject'] ?> 글쓰기 화면<span class="cart_item_num" style="width:170px"><i class="ion-heart"></i> Celebrity's Choice</a></span></h2>
+    </header>
+</div>
+<div class="fullWidth">
 <section id="bo_w">
     <h2 id="container_title"><?php echo $g5['title'] ?></h2>
 
@@ -275,4 +281,5 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
     }
     </script>
 </section>
+</div> <!-- fullWidth END -->
 <!-- } 게시물 작성/수정 끝 -->

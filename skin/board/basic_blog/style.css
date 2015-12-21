@@ -58,6 +58,7 @@
 #bo_v td.empty_table {}
 
 /* 쓰기 테이블 */
+#bo_w {padding:20px 0;}
 #bo_w table {}
 #bo_w caption {}
 #bo_w .frm_info {}
@@ -116,7 +117,7 @@
 .td_subject img {margin-left:3px;}
 
 /* 게시판 목록 공통 */
-.bo_fx {margin-bottom:5px; zoom:1;}
+.bo_fx {padding-bottom:50px; zoom:1;}
 .bo_fx:after {display:block; visibility:hidden; clear:both; content:"";}
 .bo_fx ul {margin:0; padding:0; list-style:none;}
 #bo_list_total {float:left; padding-top:5px;}
@@ -179,7 +180,7 @@ html.no-overflowscrolling #autosave_pop {height:auto; max-height:10000px !import
 #bo_v_title {padding:0; font-size:1.2em;line-height:1em;}
 #bo_v_title a, #bo_v_title span {background-color:rgba(255,232,71,0.6);}
 
-#bo_v_info {padding:0 0 15px;text-align:center;font-size:150px;position:absolute;top:-42px;right:-15px;color:#f3f3f0;letter-spacing:-4px;border-bottom:3px dashed #E6E6E6;}
+#bo_v_info {width:550px;padding:0 0 15px;text-align:right;font-size:150px;position:absolute;top:-42px;right:-15px;color:#f3f3f0;letter-spacing:-4px;border-bottom:3px dashed #E6E6E6;}
 #bo_v_info h2 {position:absolute; font-size:0; line-height:0; overflow:hidden;}
 #bo_v_info strong {display:inline-block; margin:0 10px 0 0; font-weight:normal;}
 #bo_v_info .sv_member,
@@ -204,7 +205,7 @@ html.no-overflowscrolling #autosave_pop {height:auto; max-height:10000px !import
 #bo_v_link a:focus, #bo_v_link a:hover, #bo_v_link a:active {text-decoration:none;}
 .bo_v_link_cnt {display:inline-block; margin:0 0 3px 16px;}
 
-#bo_v_top {margin:0 0 10px; padding:10px 0; zoom:1;}
+#bo_v_top {margin:0 0 10px; padding:10px 0 50px; zoom:1;}
 #bo_v_top:after {display:block; visibility:hidden; clear:both; content:"";}
 #bo_v_top h2 {position:absolute; font-size:0; line-height:0; overflow:hidden;}
 #bo_v_top ul {margin:0; padding:0; list-style:none;}
