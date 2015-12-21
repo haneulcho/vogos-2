@@ -15,7 +15,19 @@ if (!$ev['ev_id'])
 
 $g5['title'] = $ev['ev_subject'];
 include_once('./_head.php');
+?>
 
+<!-- 게시판 타이틀 시작 -->
+<div id="sod_title" class="mif">
+    <header class="fullWidth">
+        <h2><?php echo $ev['ev_subject'] ?><span class="cart_item_num" style="width:170px"><i class="ion-heart"></i> VOGOS SALE</a></span></h2>
+    </header>
+</div>
+
+<div id="sct">
+<div class="fullWidth" style="overflow:hidden">
+
+<?php
 if ($is_admin)
     echo '<div class="sev_admin"><a href="'.G5_ADMIN_URL.'/shop_admin/itemeventform.php?w=u&amp;ev_id='.$ev['ev_id'].'" class="btn_admin">이벤트 관리</a></div>';
 ?>
@@ -45,11 +57,15 @@ if ($skin)
 
 define('G5_SHOP_CSS_URL', G5_SHOP_SKIN_URL);
 
+echo '<div id="sct_sortlst" class="fullWidth">';
+
 // 리스트 유형별로 출력
 $list_file = G5_SHOP_SKIN_PATH."/{$ev['ev_skin']}";
 if (file_exists($list_file))
 {
     include G5_SHOP_SKIN_PATH.'/list.sort.skin.php';
+
+    echo '</div>';
 
     // 상품 보기 타입 변경 버튼
     // include G5_SHOP_SKIN_PATH.'/list.sub.skin.php';
@@ -100,7 +116,7 @@ if (file_exists($timg))
     echo '<div id="sev_timg" class="sev_img"><img src="'.G5_DATA_URL.'/event/'.$ev_id.'_t" alt=""></div>';
 ?>
 <!-- } 이벤트 끝 -->
-
+</div></div>
 <?php
 include_once('./_tail.php');
 ?>
