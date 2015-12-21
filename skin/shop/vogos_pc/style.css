@@ -32,7 +32,7 @@ a.gnb_1da {display:inline-block;margin-top:19px;padding:11px 17px 13px;text-over
 .gnb_2dul {overflow:hidden;display:block;}
 .gnb_con {display:none;position:absolute;top:130px;left:0;width:100%;min-height:180px;height:180px;background-color:rgba(0,0,0,0.8);}
 .gnb_1dli_over .gnb_con {display:block;}
-.gnb_sub {margin:0 auto;padding:24px 185px 24px 45px;width:1010px;height:132px;}
+.gnb_sub {margin:0 auto;padding:24px 45px;width:1010px;height:132px;}
 .gnb_sub_m {float:left;width:389px;overflow:hidden;min-height:132px;border-right:1px solid #444;}
 .gnb_sub_m > h2 {margin:0 auto 12px;line-height:1;font-size:24px;font-family:'Lato', sans-serif;text-align:left;color:#c9c7be;letter-spacing:-1px;}
 .gnb_sub_s {float:left;width:590px;padding-left:30px;}
@@ -118,13 +118,13 @@ a.gnb_1da {display:inline-block;margin-top:19px;padding:11px 17px 13px;text-over
 
 /* 베스트 스킨 제작 */
 #sct_best {position:relative;padding:0;background:url('img/best_title_bg.png') repeat-x #f3f3f0;}
-#sct_best header {height:38px;padding:27px 140px 0 0;color:#fff;}
+#sct_best header {height:38px;padding:27px 0 0 0;color:#fff;}
 #sct_best header h2 {float:left;margin:0;padding:0;font-size:18px;font-weight:700;line-height:1em;height:auto;}
 #sct_best header h2>span {margin-left:15px;font-size:14px;font-weight:400;}
 #sct_best header>span {display:block;float:left;font-size:18px;}
 .sct_best_blit_left {margin-right:22px;}
 .sct_best_blit_right {margin-left:22px;}
-.owlbest {margin:0 auto;padding-right:140px;height:353px;}
+.owlbest {margin:0 auto;height:353px;}
 .owlbest .item {float:left;}
 .owlbest .item_last:after {display:block;visibility:hidden;clear:both;content:""}
 .owlbest .item .slider_img {position:relative;width:222px;height:300px;overflow:hidden;background-color:#fff;}
@@ -146,7 +146,7 @@ a.gnb_1da {display:inline-block;margin-top:19px;padding:11px 17px 13px;text-over
 
 /* 마이 페이지 */
 #smb_my {background-color:#f8f8f8;}
-#smb_my > .fullWidth {padding:15px 140px 30px 0;}
+#smb_my > .fullWidth {padding:15px 0 30px;}
 #smb_my .sct_iqv_tbl2 {width:100%;margin-bottom:35px;}
 #smb_my .btn_edit_info {font-style:italic;}
 #smb_my .btn_edit_info a {display:inline-block;margin:0 6px;color:#ff6347;font-weight:700;text-decoration:underline;}
@@ -338,7 +338,7 @@ box-shadow: inset 0px 3px 1px 0px rgba(237,237,237,1);}
 
 /* 장바구니 */
 #sod_title {position:relative;padding:0;background:url('img/best_title_bg.png') repeat-x #f3f3f0;}
-#sod_title header {height:38px;padding:35px 140px 26px 0;color:#fff;background:url('img/cart/title_cart.png') no-repeat;}
+#sod_title header {height:38px;padding:35px 0 26px;color:#fff;background:url('img/cart/title_cart.png') no-repeat;}
 #sod_title header h2 {margin-top:-4px;padding:0 0 0 146px;font-size:24px;font-weight:700;color:#d2cfc3;}
 #sod_title header h2>span {display:inline-block;width:40px;height:34px;margin-left:18px;padding-top:6px;vertical-align:1px;text-align:center;font-size:22px;font-weight:700;border-radius:20px;-webkit-border-radius:20px;-moz-border-radius:20px;-o-border-radius:20px;background-color:#d2cfc3;color:#6c6164;}
 #sod_title header>span {display:block;float:left;font-size:18px;}
@@ -959,7 +959,7 @@ transition: opacity 300ms ease-out, top 300ms ease-out;
 .sit_title h2>span {display:inline-block;margin-left:10px;font-size:13px;vertical-align:6px;}
 .sit_title .btn_admin {padding:5px 10px;background-color:tomato;}
 .sit_left {left:25px;text-align:left;}
-.sit_right {right:165px;text-align:right;}
+.sit_right {right:25px;text-align:right;}
 
 /* 상품 상세보기 - 개요 */
 #sit_ov_bg {  -webkit-transition: all .4s ease;
@@ -1322,4 +1322,11 @@ color:#8a8a8a;font-size: 1.083em;line-height: 30px;height:30px;border:1px solid 
 
 @media screen and (min-width:1300px) {
   #stv {display:block;}
+  #inv_ship_view {padding-right:140px;}
+  .gnb_sub {padding:24px 45px;}
+  #sct_best header {height:38px;padding:27px 140px 0 0;color:#fff;}
+  .owlbest {margin:0 auto;padding-right:140px;height:353px;}
+  #smb_my > .fullWidth {padding:15px 140px 30px 0;}
+  #sod_title header {height:38px;padding:35px 140px 26px 0;color:#fff;background:url('img/cart/title_cart.png') no-repeat;}
+  .sit_right {right:165px;text-align:right;}
 }
