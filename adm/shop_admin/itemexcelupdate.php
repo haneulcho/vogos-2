@@ -148,6 +148,7 @@ if($_FILES['excelfile']['tmp_name']) {
                          ca_id2 = '$ca_id2',
                          ca_id3 = '$ca_id3',
                          it_order = '$it_order',
+                         it_order_newarrivals = '',
                          it_place_ddm = '$it_place_ddm',
                          it_name_ddm = '$it_name_ddm',
                          it_price_ddm = '$it_price_ddm',
