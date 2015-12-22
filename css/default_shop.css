@@ -46,7 +46,7 @@ a:hover, a:focus, a:active {color:#000;text-decoration:none}
 #logo {float:left;padding:0;background:#262439;height:55px;width:150px;padding-left:20px}
 #logo a{display:inline-block;vertical-align:middle;margin-top:13px}
 
-.fr {float:right;padding-top:14px;}
+.fr {float:right;position:relative;padding-top:14px;}
 /*상단_로그인*/
 #tnb {float:left;height:30px;margin-right:20px !important;}
 #tnb li{float:left;margin:9px 0 0 14px;}
@@ -61,7 +61,7 @@ a:hover, a:focus, a:active {color:#000;text-decoration:none}
 #hd_sch {float:right;}
 #hd_sch:after {display:block;visibility:hidden;clear:both;content:""}
 #hd_sch span {position:absolute;margin:0;padding:0;font-size:0;line-height:0;text-indent:-9999em;overflow:hidden;}
-#hd_sch #sch_str {width:88px;height:8px;padding:10px 8px;border:1px solid #efefef;box-shadow: inset 0px 2px 2px 0px rgba(0, 0, 0, 0.05);
+#hd_sch #sch_str {width:99px;height:8px;padding:10px 8px;border:1px solid #efefef;box-shadow: inset 0px 2px 2px 0px rgba(0, 0, 0, 0.05);
 -webkit-box-shadow: inset 0px 2px 2px 0px rgba(0, 0, 0, 0.05);
 -moz-box-shadow: inset 0px 2px 2px 0px rgba(0, 0, 0, 0.05);
 -o-box-shadow: inset 0px 2px 2px 0px rgba(0, 0, 0, 0.05);
@@ -137,8 +137,9 @@ background-color:#f3f3f3; color:#a7a7a7;outline:0;font-weight:bold;
 /* 하단 레이아웃 */
 #ft{clear:both;background:#353535;padding:30px 0 25px;}
 #ft:after {display:block;visibility:hidden;clear:both;content:""}
-#ft_wr{overflow:hidden;margin:0 auto;min-width:1100px;}
+#ft_wr{float:left;width:760px;overflow:hidden;margin:0 auto;}
 #ft_wr h1{padding-top:35px;}
+#ft_like {float:right;}
 
 #ft_about h2, #ft_help h2, #ft_like h2, #ft_copy {text-indent:100%;white-space:nowrap;overflow:hidden;background:url('../skin/shop/vogos_pc/img/ft_sprite.png') no-repeat;}
 #ft_about h2, #ft_help h2, #ft_like h2 {height:31px;margin-bottom:12px;}
@@ -146,9 +147,9 @@ background-color:#f3f3f3; color:#a7a7a7;outline:0;font-weight:bold;
 #ft_help h2 {width:117px;background-position:-284px -3px;}
 #ft_like h2 {width:106px;background-position:-133px -3px;}
 #ft_copy h2 {width:265px;height:33px;background-position:-5px -46px;}
-#ft_about, #ft_help, #ft_like {float:left;}
+#ft_about, #ft_help, #ft_bottom {float:left;}
 #ft_about {margin:0 78px 0 0;}
-#ft_help {margin:0 175px 0 0;}
+#ft_help {margin:0 0 18px 0;}
 #ft_about ul, #ft_help ul {margin-left:11px;}
 #ft_about li, #ft_help li {float:left;margin-right:30px;}
 #ft_about li a, #ft_help li a {display:block;font-size:11px;font-family:'Lato';font-weight:400;color:#bbb;}
@@ -165,7 +166,7 @@ background-color:#f3f3f3; color:#a7a7a7;outline:0;font-weight:bold;
 #ft_like .ft_sns a:hover span.ft_sns_yt {background-position:-1px -163px;}
 #ft_like .ft_sns a:hover span.ft_sns_pt {background-position:-1px -42px;}
 
-.ft_bottom {overflow:hidden;width:760px;margin-top:-63px;padding-top:16px;border-top:1px solid #3f3f40;}
+.ft_bottom {overflow:hidden;width:760px;padding-top:16px;border-top:1px solid #3f3f40;}
 .ft_bottom p {font-size:11px;font-family:'Lato';font-weight:400;color:#888;line-height:140%;}
 #ft_copy{float:left;width:265px;height:33px;margin-right:40px;margin-bottom:40px;background-position:-5px -46px;}
 #ft_pay {float:left;margin-top:12px;}
