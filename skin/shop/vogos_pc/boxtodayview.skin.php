@@ -89,7 +89,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_SKIN_URL.'/style.css">', 
 
         <?php } else { // 오늘 본 상품이 없을 때 ?>
 
-        <p>없음</p>
+        <p>오늘 본 상품이<br>없습니다.</p>
 
         <?php } ?>
 

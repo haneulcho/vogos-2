@@ -8,6 +8,8 @@ body {min-width:1110px;}
   border-radius:3px;
   -moz-border-radius:3px;
   -o-border-radius:3px;}
+.icon_sales {position:absolute;left:-155px;}
+.icon_sales a {display:block;}
 /* aside:gnb */
 #gnb {float:left;clear:both;margin:0;}
 #gnb:after {display:block;visibility:hidden;clear:both;content:""}
@@ -636,7 +638,7 @@ transition: opacity 300ms ease-out, top 300ms ease-out;
 .sch_list .sct_des_bottom .sct_txt a {font-size:14px;color:#2d2d2d;}
 .sch_list .sct_des_bottom .sct_basic {margin:0 0 15px;padding:0;line-height:1.5em}
 .sch_list .sct_cost {padding:0 18px;font-size:15px;font-weight:700;color:#2d2d2d;}
-.sch_list .sct_cost strike {display:inline-block;margin:0 5px 0 0;color:#FB9D8E;font-weight:normal;font-size:13px;}
+.sch_list .sct_cost strike {display:inline-block;margin:0 5px 0 0;color:#EF4D32;font-weight:normal;font-size:13px;}
 
 .sch_list .sct_cart_m .sct_cart_op{position:absolute;top:-395px;left:-200px;width:230px;height:320px;padding:20px;background:url('img/bg_01.png') repeat;display:none;}
 .sch_list .sct_cart_m .sct_cart_op label{display:block;padding:10px 10px 5px;color:#fff;font-weight:700;font-size:12px;}

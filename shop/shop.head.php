@@ -23,6 +23,7 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
 <header id="hd" class="fullWidth">
     <h1><a href="<?php echo G5_SHOP_URL; ?>"><img src="<?php echo G5_SHOP_SKIN_URL ?>/img/logo2.png" alt="<?php echo $config['cf_title']; ?>"></a></h1>
     <div class="fr">
+        <div class="icon_sales"><a href="<?php echo G5_SHOP_URL; ?>/event.php?ev_id=1450682888"><img src="<?php echo G5_SHOP_SKIN_URL; ?>/img/icon_sale.gif" alt="UP TO 15% OFF" title="UP TO 15% OFF"></a></div>
         <ul id="tnb">
             <?php if ($is_member) {  ?>
             <?php if ($is_admin) {  ?>
@@ -58,9 +59,7 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
                 return true;
             }
             </script>
-            <div class="icon_sales"><a href=""><img src="<?php echo G5_SHOP_SKIN_URL; ?>/img/icon_sale.gif" alt="UP TO 15% OFF" /></a></div>
         </div>
-        <div 
     </div> <!-- class fr -->
     <?php include_once(G5_SHOP_SKIN_PATH.'/boxcategory.skin.php'); // 상품분류 Navigation ?>
 </header>

@@ -17,12 +17,12 @@ $imgheight = 440; //표시할 이미지의 세로사이즈
     <div class="list_spotted<?php echo $margin_class; ?>">
         <div class="spot_des" style="width:<?php echo $imgwidth; ?>px">
             <ul>
-                <li class="spot_sub"><strong><a href="<?php echo $list[$i]['href'] ?>"><?php echo cut_str($list[$i]['subject'], 20, "..") ?></a></strong></li>
-                <li class="spot_content"><a href="<?php echo $list[$i]['href'] ?>"><?php echo get_text(cut_str(strip_tags($list[$i][wr_content]), 50, '...' )) ?></a></li>
+                <li class="spot_sub"><strong><a href="<?php echo $list[$i]['href']; ?>"><?php echo cut_str($list[$i]['subject'], 20, "..") ?></a></strong></li>
+                <li class="spot_content"><a href="<?php echo $list[$i]['href']; ?>"><?php echo get_text(cut_str(strip_tags($list[$i]['wr_content']), 50, '...' )) ?></a></li>
             </ul>
         </div>
     	<div class="spot_img" style="width:<?php echo $imgwidth ?>px; height:<?php echo $imgheight ?>px">
-            <a href="<?php echo $list[$i]['href'] ?>">
+            <a href="<?php echo $list[$i]['href']; ?>">
             <?php                
                                 $thumb = get_list_thumbnail($bo_table, $list[$i]['wr_id'], $imgwidth, $imgheight);    					            
                                 if($thumb['src']) {
