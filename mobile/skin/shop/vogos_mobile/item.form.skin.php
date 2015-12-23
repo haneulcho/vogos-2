@@ -261,6 +261,7 @@ if(!empty($it['it_2'])) { // 모바일일 때
 
         <div id="sit_ov_btn">
             <?php if ($is_orderable) { ?>
+            <input type="submit" onclick="document.pressed=this.value;" value="ADD TO CART" id="sit_btn_cart">
             <input type="submit" onclick="document.pressed=this.value;" value="BUY NOW" id="sit_btn_buy">
             <?php } ?>
         </div>
