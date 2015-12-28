@@ -52,11 +52,11 @@ include_once(G5_SHOP_PATH.'/shop.head.php');
     <!-- Black Friday 시작 { -->
     <section class="sct_wrap f8f8f8" style="padding:20px 0;">
     <!-- Shipping Banner 시작 { -->
-    <div id="sync2">
-        <div id="inv_ship_view" style="text-align:center;">
+    <div id="sync2" class="fullWidth">
+        <div style="text-align:center;">
             <a href="<?php echo G5_SHOP_URL; ?>/event.php?ev_id=1450682888"><img src="<?php echo G5_SHOP_SKIN_URL ?>/img/1224_banner_index.png" border="0" width="1110" alt="지금 보고스에서는 에디터 선정 상품 15% 할인 중!" title="지금 보고스에서는 에디터 선정 상품 15% 할인 중!"></a>
         </div>
-        <div id="inv_ship_view" style="text-align:center;">
+        <div style="text-align:center;">
             <a href="<?php echo G5_SHOP_URL; ?>/list.php?ca_id=90"><img src="<?php echo G5_SHOP_SKIN_URL ?>/img/shipping_info_kr.jpg" border="0" width="1110" alt="지금 보고스에서 50,000원 이상 구매하면 배송이 무료!" title="지금 보고스에서 50,000원 이상 구매하면 배송이 무료!"></a>
         </div>
     </div>

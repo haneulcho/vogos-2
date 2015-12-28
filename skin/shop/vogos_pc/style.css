@@ -10,6 +10,7 @@ body {min-width:1110px;}
   -o-border-radius:3px;}
 .icon_sales {position:absolute;left:-155px;}
 .icon_sales a {display:block;}
+#sync2 {width:1110px;}
 /* aside:gnb */
 #gnb {float:left;clear:both;margin:0;}
 #gnb:after {display:block;visibility:hidden;clear:both;content:""}
@@ -1324,7 +1325,6 @@ color:#8a8a8a;font-size: 1.083em;line-height: 30px;height:30px;border:1px solid 
 
 @media screen and (min-width:1300px) {
   #stv {display:block;}
-  #inv_ship_view {padding-right:140px;}
   .gnb_sub {padding:24px 45px;}
   #sct_best header {height:38px;padding:27px 140px 0 0;color:#fff;}
   .owlbest {margin:0 auto;padding-right:140px;height:353px;}
