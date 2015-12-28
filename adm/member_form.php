@@ -41,6 +41,7 @@ else if ($w == 'u')
     $mb['mb_addr1'] = get_text($mb['mb_addr1']);
     $mb['mb_addr2'] = get_text($mb['mb_addr2']);
     $mb['mb_addr3'] = get_text($mb['mb_addr3']);
+    $mb['mb_addr_jibeon'] = get_text($mb['mb_addr_jibeon']);
     $mb['mb_signature'] = get_text($mb['mb_signature']);
     $mb['mb_recommend'] = get_text($mb['mb_recommend']);
     $mb['mb_profile'] = get_text($mb['mb_profile']);
