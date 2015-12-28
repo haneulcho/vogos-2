@@ -63,8 +63,8 @@ if ($sca != "" || $stx != "") {
 */
 
 if (!$sst) {
-    $sst  = "ddm_name";
-    $sod = "asc";
+    $sst  = "ddm_sample_num";
+    $sod = "desc";
 }
 $sql_order = "order by $sst $sod";
 
@@ -124,6 +124,7 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
 </form>
 
 <div class="btn_add01 btn_add">
+    <a href="./ddmaddresssync.php" target="_blank" onclick="return popitup('./ddmaddresssync.php', '사입처에 받아온 샘플 동기화', '700', '500')">사입처에서 받아온 샘플 동기화</a>
     <a href="./ddmaddressform.php">사입처 등록(개발중 누르지 마시오)</a>
 </div>
 
@@ -149,7 +150,7 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
         <th scope="col"><?php echo subject_sort_link('ddm_place2', 'sca='.$sca); ?>사입처 상세위치</a></th>
         <th scope="col"><?php echo subject_sort_link('ddm_name', 'sca='.$sca, 1); ?>사입처명</a></th>
         <th scope="col"><?php echo subject_sort_link('ddm_tel', 'sca='.$sca, 1); ?>사입처 전화번호</a></th>
-        <th scope="col">이 사입처에 받아온 샘플</th>
+        <th scope="col"><?php echo subject_sort_link('ddm_sample_num', 'sca='.$sca, 1); ?>이 사입처에 받아온 샘플</th>
         <th scope="col">이 사입처와 거래한 상품</th>
         <th scope="col">관리</th>
     </tr>
@@ -177,17 +178,35 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
             //$sql_match  = "select it_name, it_price, it_2, it_place_ddm, it_name_ddm, it_price_ddm from {$g5['g5_shop_ddmaddress_table']} where it_place_ddm like '$ddm_place2%'";
             //$result_match = sql_query($sql);
             //for ($j=0; $row=mysql_fetch_array($result_match); $j++) {
-            $sql2 = " select count(*) as cnt1 from {$g5['g5_shop_item_table']} where it_place_ddm = '$it_extract_name'";
+            // 이 사입처에서 받아온 샘플 수
+            $sql2 = " select count(*) as cnt from {$g5['g5_shop_item_table']} where it_place_ddm = '$it_extract_name'";
             $row2 = sql_fetch($sql2);
-            if($row2['cnt1'] > 0) {
-                $total_count = '<a href="'.$detail_link.'" target="_blank" onclick="return popitup(\''.$detail_link.'\', \'VOGOS 사입처에 받아온 샘플\', \'700\', \'500\')"><span style="color:#ff0000;font-weight:bold;">'.$row2['cnt1'].'개</span> <i class="ion-ios-search-strong" style="margin:0 2px 0 8px;font-style:normal"></i>자세히</a>';
+            // 이 사입처에서 받아온 샘플 중 품절 수
+            $sql3 = " select count(*) as cnt from {$g5['g5_shop_item_table']} where it_place_ddm = '$it_extract_name' and it_soldout = '1'";
+            $row3 = sql_fetch($sql3);
+            // 이 사입처와 거래한 상품 (실질 주문 상품 수)
+            $sql4 = " select count(*) as cnt from {$g5['g5_shop_order_table']} as A, {$g5['g5_shop_cart_table']} as B, {$g5['g5_shop_item_table']} as C where A.od_id = B.od_id and A.od_status != '취소' and C.it_id = B.it_id and C.it_place_ddm = '$it_extract_name' ";
+            $row4 = sql_fetch($sql4);
+
+            if($row2['cnt'] > 0) {
+                $total_count = '<a href="'.$detail_link.'" target="_blank" onclick="return popitup(\''.$detail_link.'\', \'VOGOS 사입처에 받아온 샘플\', \'700\', \'500\')">'.$row2['cnt'].'개</a>';
+                if($row3['cnt'] > 0) {
+                    $it_soldout_count = $row3['cnt'];
+                    $total_count = '<a href="'.$detail_link.'" target="_blank" onclick="return popitup(\''.$detail_link.'\', \'VOGOS 사입처에 받아온 샘플\', \'700\', \'500\')">'.$row2['cnt'].'개 (품절 '.$it_soldout_count.'개)</a>';
+                }
             } else {
                 $total_count = '<span style="color:#bbb;">없음</span>';
+            }
+
+            if($row4['cnt'] > 0) {
+                $order_count = '<a href="'.$detail_link.'" target="_blank" onclick="return popitup(\''.$detail_link.'\', \'VOGOS 사입처에 받아온 샘플\', \'700\', \'500\')"><span style="color:#ff0000;font-weight:bold;">'.$row4['cnt'].'개</span> <i class="ion-ios-search-strong" style="margin:0 2px 0 8px;font-style:normal"></i>자세히</a>';
+            } else {
+                $order_count = '<span style="color:#bbb;">없음</span>';
             }
         ?>
         <?php echo $total_count; ?>
         </td>
-        <td class="td_num">개발중...</td>
+        <td class="td_num"><?php echo $order_count; ?></td>
         <td class="td_mng">
             <a href="./ddmaddressform.php?w=u&amp;ddm_place2=<?php echo $row['ddm_place2']; ?>&amp;<?php echo $qstr; ?>"><span class="sound_only"><?php echo htmlspecialchars2(cut_str($row['ddm_place2'],250, "")); ?> </span>수정</a>
         </td>

@@ -392,6 +392,7 @@ CREATE TABLE IF NOT EXISTS `g5_shop_ddmaddress` (
   `ddm_place2` varchar(255) NOT NULL DEFAULT '',
   `ddm_name` varchar(255) NOT NULL DEFAULT '',
   `ddm_tel` varchar(255) NOT NULL DEFAULT '',
+  `ddm_sample_num` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ddm_name`),
   KEY `ddm_place1` (`ddm_place1`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
