@@ -59,15 +59,9 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
         <table>
         <caption>부가정보 입력</caption>
         <tr>
-            <th scope="row"><label for="reg_mb_name">First Name (이름)<strong class="sound_only">*</strong></label></th>
+            <th scope="row"><label for="reg_mb_name">Name<strong class="sound_only">*</strong></label></th>
             <td>
                 <input type="text" id="reg_mb_name" name="mb_name" value="<?php echo $member['mb_name'] ?>" <?php echo $required ?> class="frm_input <?php echo $required ?>">
-            </td>
-        </tr>
-        <tr>
-            <th scope="row"><label for="reg_mb_name_last">Last Name (성)<strong class="sound_only">*</strong></label></th>
-            <td>
-                <input type="text" id="reg_mb_name_last" name="mb_name_last" value="<?php echo $member['mb_name_last'] ?>" <?php echo $required ?> class="frm_input <?php echo $required ?>">
             </td>
         </tr>
         <?php if ($config['cf_use_tel']) { ?>

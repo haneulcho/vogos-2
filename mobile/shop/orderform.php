@@ -307,12 +307,8 @@ require_once(G5_MSHOP_PATH.'/'.$default['de_pg_service'].'/orderform.1.php');
             <tbody>
             <tr><td colspan="2" style="height:12px"></td></tr>
             <tr>
-                <th scope="row"><label for="od_name">First Name (이름)<strong class="sound_only"> *필수</strong></label></th>
+                <th scope="row"><label for="od_name">Name<strong class="sound_only"> *필수</strong></label></th>
                 <td><input type="text" name="od_name" value="<?php echo $member['mb_name']; ?>" id="od_name" required class="frm_input required" maxlength="20"></td>
-            </tr>
-            <tr>
-                <th scope="row"><label for="od_name_last">Last Name (성)<strong class="sound_only"> *필수</strong></label></th>
-                <td><input type="text" name="od_name_last" value="<?php echo $member['mb_name_last']; ?>" id="od_name_last" required class="frm_input required" maxlength="20"></td>
             </tr>
 
             <?php if (!$is_member) { // 비회원이면 ?>
@@ -417,12 +413,8 @@ require_once(G5_MSHOP_PATH.'/'.$default['de_pg_service'].'/orderform.1.php');
             <tbody>
             <tr><td colspan="2" style="height:12px"></td></tr>
             <tr>
-                <th scope="row"><label for="od_b_name">First Name (이름)<strong class="sound_only"> *필수</strong></label></th>
+                <th scope="row"><label for="od_b_name">Name<strong class="sound_only"> *필수</strong></label></th>
                 <td><input type="text" name="od_b_name" id="od_b_name" required class="frm_input required" maxlength="20"></td>
-            </tr>
-            <tr>
-                <th scope="row"><label for="od_b_name_last">Last Name (성)<strong class="sound_only"> *필수</strong></label></th>
-                <td><input type="text" name="od_b_name_last" id="od_b_name_last" required class="frm_input required" maxlength="20"></td>
             </tr>
             <tr>
                 <th scope="row"><label for="od_b_tel">전화번호<strong class="sound_only"> *필수</strong></label></th>
@@ -920,17 +912,16 @@ $(function() {
 
             var f = document.forderform;
             f.od_b_name.value        = addr[0];
-            f.od_b_name_last.value   = addr[1];
-            f.od_b_tel.value         = addr[2];
-            f.od_b_zip.value         = addr[3] + addr[4];
-            f.od_b_addr1.value       = addr[5];
-            f.od_b_addr2.value       = addr[6];
-            f.od_b_addr3.value       = addr[7];
-            f.od_b_addr_jibeon.value = addr[8];
-            f.ad_subject.value       = addr[9];
+            f.od_b_tel.value         = addr[1];
+            f.od_b_zip.value         = addr[2] + addr[3];
+            f.od_b_addr1.value       = addr[4];
+            f.od_b_addr2.value       = addr[5];
+            f.od_b_addr3.value       = addr[6];
+            f.od_b_addr_jibeon.value = addr[7];
+            f.ad_subject.value       = addr[8];
 
-            var zip1 = addr[3].replace(/[^0-9]/g, "");
-            var zip2 = addr[4].replace(/[^0-9]/g, "");
+            var zip1 = addr[2].replace(/[^0-9]/g, "");
+            var zip2 = addr[3].replace(/[^0-9]/g, "");
 
             if(zip1 != "" && zip2 != "") {
                 var code = String(zip1) + String(zip2);
@@ -1196,7 +1187,7 @@ function pay_approval()
             break;
     }
     f.P_AMT.value = f.good_mny.value;
-    f.P_UNAME.value = pf.od_name_last + pf.od_name.value;
+    f.P_UNAME.value = pf.od_name.value;
     f.P_MOBILE.value = pf.od_hp.value;
     f.P_EMAIL.value = pf.od_email.value;
     <?php if($default['de_tax_flag_use']) { ?>
@@ -1422,7 +1413,6 @@ function gumae2baesong(checked) {
 
     if(checked == true) {
         f.od_b_name.value        = f.od_name.value;
-        f.od_b_name_last.value   = f.od_name_last.value;
         f.od_b_tel.value         = f.od_tel.value;
         f.od_b_hp.value          = f.od_hp.value;
         f.od_b_zip.value         = f.od_zip.value;
@@ -1434,7 +1424,6 @@ function gumae2baesong(checked) {
         calculate_sendcost(String(f.od_b_zip.value));
     } else {
         f.od_b_name.value        = "";
-        f.od_b_name_last.value   = "";
         f.od_b_tel.value         = "";
         f.od_b_hp.value          = "";
         f.od_b_zip.value         = "";

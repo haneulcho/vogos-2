@@ -20,7 +20,7 @@ if ($w == "" || $w == "u") {
     if ($is_admin) {
         $is_name     = trim($_POST['is_name']);
     } else {
-        $is_name     = addslashes($member['mb_name_last']).addslashes($member['mb_name']);
+        $is_name     = addslashes($member['mb_name']);
     }
     $is_password = $member['mb_password'];
 

@@ -32,7 +32,6 @@ else if ($w == 'u')
     $html_title = '수정';
 
     $mb['mb_name'] = get_text($mb['mb_name']);
-    $mb['mb_name_last'] = get_text($mb['mb_name_last']);
     $mb['mb_email'] = get_text($mb['mb_email']);
     $mb['mb_homepage'] = get_text($mb['mb_homepage']);
     $mb['mb_birth'] = get_text($mb['mb_birth']);
@@ -161,10 +160,8 @@ add_javascript(G5_POSTCODE_JS, 0);    //다음 주소 js
         <td><input type="password" name="mb_password" id="mb_password" <?php echo $required_mb_password ?> class="frm_input <?php echo $required_mb_password ?>" size="15" maxlength="20"></td>
     </tr>
     <tr>
-        <th scope="row"><label for="mb_name">이름 First Name<strong class="sound_only">필수</strong></label></th>
+        <th scope="row"><label for="mb_name">이름<strong class="sound_only">필수</strong></label></th>
         <td><input type="text" name="mb_name" value="<?php echo $mb['mb_name'] ?>" id="mb_name" required class="required frm_input" size="15" minlength="2" maxlength="20"></td>
-        <th scope="row"><label for="mb_name_last">이름 Last Name<strong class="sound_only">필수</strong></label></th>
-        <td><input type="text" name="mb_name_last" value="<?php echo $mb['mb_name_last'] ?>" id="mb_name_last" required class="required frm_input" size="15" minlength="2" maxlength="20"></td>
     </tr>
     <tr>
         <th scope="row"><label for="mb_level">회원 권한</label></th>

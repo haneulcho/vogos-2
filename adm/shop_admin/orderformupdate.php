@@ -9,7 +9,6 @@ if($_POST['mod_type'] == 'info') {
     $od_b_zip2 = substr($_POST['od_b_zip'], 3);
     $sql = " update {$g5['g5_shop_order_table']}
                 set od_name = '$od_name',
-                    od_name_last = '$od_name_last',
                     od_tel = '$od_tel',
                     od_hp = '$od_hp',
                     od_zip1 = '$od_zip1',
@@ -20,7 +19,6 @@ if($_POST['mod_type'] == 'info') {
                     od_addr_jibeon = '$od_addr_jibeon',
                     od_email = '$od_email',
                     od_b_name = '$od_b_name',
-                    od_b_name_last = '$od_b_name_last',
                     od_b_tel = '$od_b_tel',
                     od_b_hp = '$od_b_hp',
                     od_b_zip1 = '$od_b_zip1',

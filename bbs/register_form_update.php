@@ -33,7 +33,6 @@ if(!$mb_id)
 $mb_password    = trim($_POST['mb_password']);
 $mb_password_re = trim($_POST['mb_password_re']);
 $mb_name        = isset($_POST['mb_name'])          ? trim($_POST['mb_name'])        : "";
-$mb_name_last   = isset($_POST['mb_name_last'])     ? trim($_POST['mb_name_last'])   : "";
 // $mb_nick        = trim($_POST['mb_nick']); 보고스 쇼핑몰에서는 닉네임과 이름을 동기화 함
 $mb_nick        = isset($_POST['mb_name'])          ? trim($_POST['mb_name'])        : "";
 $mb_email       = isset($_POST['mb_email'])         ? trim($_POST['mb_email'])         : "";
@@ -122,7 +121,6 @@ if ($w == '' || $w == 'u') {
 }
 
 $mb_name        = clean_xss_tags($mb_name);
-$mb_name_last   = clean_xss_tags($mb_name_last);
 $mb_email       = get_email_address($mb_email);
 $mb_homepage    = clean_xss_tags($mb_homepage);
 $mb_tel         = clean_xss_tags($mb_tel);
@@ -185,7 +183,6 @@ if ($w == '') {
                 set mb_id = '{$mb_id}',
                      mb_password = '".get_encrypt_string($mb_password)."',
                      mb_name = '{$mb_name}',
-                     mb_name_last = '{$mb_name_last}',
                      mb_nick = '{$mb_nick}',
                      mb_nick_date = '".G5_TIME_YMD."',
                      mb_email = '{$mb_email}',
@@ -296,7 +293,6 @@ if ($w == '') {
 
     $sql = " update {$g5['member_table']}
                 set mb_name = '{$mb_name}',
-                    mb_name_last = '{$mb_name_last}',
                     mb_nick = '{$mb_nick}',
                     mb_mailling = '{$mb_mailling}',
                     mb_sms = '{$mb_sms}',

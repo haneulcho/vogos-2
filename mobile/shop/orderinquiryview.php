@@ -355,7 +355,7 @@ $_SESSION['ord_num'] = $od_id;
                 <tbody>
                 <tr>
                     <th scope="row">Name</th>
-                    <td><?php echo get_text($od['od_name']).' '.get_text($od['od_name_last']); ?></td>
+                    <td><?php echo get_text($od['od_name']); ?></td>
                 </tr>
                 <?php
                 if (!empty($od['od_tel'])) {
@@ -394,7 +394,7 @@ $_SESSION['ord_num'] = $od_id;
                 <tbody>
                 <tr>
                     <th scope="row">Name</th>
-                    <td><?php echo get_text($od['od_b_name']).' '.get_text($od['od_b_name_last']); ?></td>
+                    <td><?php echo get_text($od['od_b_name']); ?></td>
                 </tr>
                 <?php
                 if (!empty($od['od_b_tel'])) {

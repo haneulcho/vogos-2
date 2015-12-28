@@ -33,8 +33,7 @@ $mb_zip1 = substr($_POST['mb_zip'], 0, 3);
 $mb_zip2 = substr($_POST['mb_zip'], 3);
 
 $sql_common = "  mb_name = '{$_POST['mb_name']}',
-                 mb_name_last = '{$_POST['mb_name_last']}',
-                 mb_nick = '{$_POST['mb_name_last']} {$_POST['mb_name']}',
+                 mb_nick = '{$_POST['mb_name']}',
                  mb_email = '{$_POST['mb_email']}',
                  mb_homepage = '{$_POST['mb_homepage']}',
                  mb_tel = '{$_POST['mb_tel']}',

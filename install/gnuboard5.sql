@@ -437,7 +437,6 @@ CREATE TABLE IF NOT EXISTS `g5_member` (
   `mb_id` varchar(20) NOT NULL default '',
   `mb_password` varchar(255) NOT NULL default '',
   `mb_name` varchar(255) NOT NULL default '',
-  `mb_name_last` varchar(255) NOT NULL default '',
   `mb_nick` varchar(255) NOT NULL default '',
   `mb_nick_date` date NOT NULL default '0000-00-00',
   `mb_email` varchar(255) NOT NULL default '',

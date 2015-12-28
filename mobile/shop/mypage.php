@@ -65,19 +65,11 @@ for($k=0; $cp=sql_fetch_array($res); $k++) {
                 <?php } ?>
             </tr>
             <tr>
-                <th scope="row">First Name (이름)</th>
+                <th scope="row">Name</th>
                 <?php if(empty($member['mb_name'])) { ?>
                 <td class="btn_edit_info"><a href="<?php echo G5_BBS_URL; ?>/member_confirm.php?url=register_form.php"><i class="ion-compose"></i> 내 정보 수정</a>을 눌러 부가 정보를 입력하세요.</td>
                 <? } else { ?>
                 <td><?php echo $member['mb_name']; ?></td>
-                <?php } ?>
-            </tr>
-            <tr>
-                <th scope="row">Last Name (성)</th>
-                <?php if(empty($member['mb_name_last'])) { ?>
-                <td class="btn_edit_info"><a href="<?php echo G5_BBS_URL; ?>/member_confirm.php?url=register_form.php"><i class="ion-compose"></i> 내 정보 수정</a>을 눌러 부가 정보를 입력하세요.</td>
-                <? } else { ?>
-                <td><?php echo $member['mb_name_last']; ?></td>
                 <?php } ?>
             </tr>
             <tr>
