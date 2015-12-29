@@ -156,7 +156,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 
         <?php for ($i=0; $is_file && $i<$file_count; $i++) { ?>
         <tr>
-            <th scope="row">파일 #<?php echo $i+1 ?></th>
+            <th scope="row">파일 #<?php echo $i+1 ?><?php if($i==0) { echo '<br><span style="color:#ff0000">썸네일 사진</span>'; } if($i==1) { echo '<br><span style="color:#ff0000">상품 사진: 최소 200x200</span>'; } ?></th>
             <td>
                 <input type="file" name="bf_file[]" title="파일첨부 <?php echo $i+1 ?> : 용량 <?php echo $upload_max_filesize ?> 이하만 업로드 가능" class="frm_file frm_input">
                 <?php if ($is_file_content) { ?>

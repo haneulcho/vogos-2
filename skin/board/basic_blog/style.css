@@ -177,6 +177,31 @@ html.no-overflowscrolling #autosave_pop {height:auto; max-height:10000px !import
 #bo_v header {position:absolute;width:450px;top:75px;left:-85px;padding:0;font-size:60px;text-align:left;}
 #bo_v_table {position:absolute; top:0; right:16px; margin:0; padding:0 5px; height:25px; background:#ff3061; color:#fff; font-weight:bold; line-height:2.2em;}
 
+.bo_styleguide {width:305px;margin:145px 0 0 85px;padding-top:20px;background-color:#fcfcfc;}
+.bo_styleguide > img {display:block;margin:-45px 0 28px -15px;}
+.bo_item {}
+.bo_item_img {float:left;overflow:hidden;width:155px;height:155px;margin-left:-80px;border:5px solid #fefefe;
+border-radius:80px;
+-webkit-border-radius:80px;
+-moz-border-radius:80px;
+-o-border-radius:80px;}
+.bo_item_img a > img {margin:0;width:100%;}
+.bo_item_info {height:155px;padding:28px 0 0 85px;}
+.bo_item_info a, .bo_item_price, .bo_item_buynow {display:block;padding-left:20px;}
+.bo_item_info h2 {height:auto;margin-bottom:5px;font-size:14px;line-height:1;color:#ed5440;}
+.bo_item_price .item_price {display:block;font-size:18px;font-weight:700;color:#ed5440;letter-spacing:-1px;}
+.bo_item_price .cust_price {color:#999;margin-right:10px;font-size:15px;text-decoration:line-through;}
+.bo_item_buynow {margin-top:12px;padding-top:20px;border-top:1px solid #f26832;}
+.bo_item_buynow a {display:block;width:80px;padding:5px 15px;font-size:12px;font-weight:900;color:#5f5555;background-color:#f0f0f0;
+  -webkit-transition: all 500s ease;
+  -moz-transition: all .3s ease;
+  -ms-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  transition: all .3s ease;}
+.bo_item_buynow a:hover {color:#fff;background-color:#6a5f62;}
+.bo_item_buynow a i {margin-right:5px;font-size:18px;vertical-align:-2px;}
+.bo_video {width:245px;margin:0 auto;padding-bottom:40px;}
+
 #bo_v_title {padding:0; font-size:1.2em;line-height:1em;}
 #bo_v_title a, #bo_v_title span {background-color:rgba(255,232,71,0.6);}
 

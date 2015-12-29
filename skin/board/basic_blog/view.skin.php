@@ -67,6 +67,42 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
             ?>
             </span>
         </h1>
+        <div class="bo_styleguide">
+            <img src="<?php echo $board_skin_url; ?>/img/icon_ask.png" alt="착용한 의상이 궁금하다면?!" />
+            <div class="bo_item">
+                <div class="bo_item_img">
+                <?php
+                // 상품 정보 (상품 이름, 상품 가격) 출력
+                $bo_it_id = $view['wr_1'];
+                $sql1 = " select it_name, it_price, it_cust_price from {$g5['g5_shop_item_table']} where it_id = '{$bo_it_id}' ";
+                $spotted = sql_fetch($sql1);
+                ?>
+                <a class="buynow" href="<?php echo G5_SHOP_URL.'/item.php?it_id='.$bo_it_id; ?>">
+                <?php
+                // 연관 상품 이미지 출력
+                if (!empty($view['file'][1]['view'])) {
+                    echo get_view_thumbnail2($view['file'][1]['view'], 300);
+                }
+                ?>
+                </a>
+                </div>
+                <div class="bo_item_info">
+                    <a href="<?php echo G5_SHOP_URL.'/item.php?it_id='.$bo_it_id; ?>"><h2><?php echo $spotted['it_name']; ?></h2></a>
+                    <div class="bo_item_price">
+                        <span class="item_price"><?php if(!empty($spotted['it_cust_price'])) { echo '<span class="cust_price">'.display_price($spotted['it_cust_price']).'</span>'; } echo display_price($spotted['it_price']); ?></span>
+                    </div>
+                    <div class="bo_item_buynow">
+                        <a href="<?php echo G5_SHOP_URL.'/item.php?it_id='.$bo_it_id; ?>"><i class="ion-checkmark-round"></i>BUY NOW</a>
+                    </div>
+                </div>
+            </div>
+            <div class="bo_video">
+                <?php
+                    $video_src = 'https://player.vimeo.com/video/'.$view['wr_2'].'?autoplay=0&loop=1&color=333333&title=0&byline=0&portrait=0';
+                    echo "<iframe src=\"".$video_src."\" width=\"245\" height=\"433\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>";
+                ?>
+            </div>
+        </div>
     </header>
 
     <section id="bo_v_info">
