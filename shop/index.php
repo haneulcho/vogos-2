@@ -109,11 +109,11 @@ $(function() {
     <?php } ?>
 
     <!-- spotted 시작 { -->
-    <section class="sct_wrap f8f8f8 inIndex">
+    <section class="sct_wrap f3f3f0 inIndex">
     <div class="fullWidth">
         <header>
             <h2 class="spotted"><a href="<?php echo G5_BBS_URL; ?>/board.php?bo_table=spotted">SPOTTED</a></h2>
-            <?php echo latest("oneshot", "spotted", 9, 25); ?>
+            <?php echo latest("oneshot", "spotted", 15, 25); ?>
         </header>
     </div>
     </section>

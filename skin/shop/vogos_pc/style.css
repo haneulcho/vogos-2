@@ -449,6 +449,7 @@ box-shadow: 0px 1px 3px 0px rgba(233, 228, 223, 0.46);
 /* 공통 */
 .sct_wrap {position:relative;margin:0 0 70px;zoom:1}
 .sct_wrap.f8f8f8 {margin-bottom:0;padding-bottom:27px;background-color:#f8f8f8;}
+.sct_wrap.f3f3f0 {margin-bottom:0;padding-bottom:27px;background-color:#f3f3f0;}
 .sct_wrap .sctrl {position:absolute;top:0;right:0} /* 애니메이션 효과 사용 시 재생 정지 버튼 등 */
 .sct_wrap:after {display:block;visibility:hidden;clear:both;content:""}
 .sct_wrap header {padding:67px 0 40px;zoom:1;}
