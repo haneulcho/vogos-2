@@ -281,9 +281,11 @@ function remove_item(remove_id) {
     var f = document.frmcartlist;
     var cnt = f.records.value;
 
-    f.act.value = "onedelete";
-    f.it_del_id.value = remove_id;
-    f.submit();
+    if(confirm('이 상품을 장바구니에서 삭제할까요?')) {
+        f.act.value = "onedelete";
+        f.it_del_id.value = remove_id;
+        f.submit();
+    }
 }
 
 function form_check(act) {
@@ -302,8 +304,10 @@ function form_check(act) {
     }
     else if (act == "alldelete")
     {
-        f.act.value = act;
-        f.submit();
+        if(confirm('정말 장바구니를 비우시겠습니까?')) {
+            f.act.value = act;
+            f.submit();
+        }
     }
     else if (act == "seldelete")
     {
@@ -311,9 +315,10 @@ function form_check(act) {
             alert("삭제하실 상품을 하나이상 선택해 주십시오.");
             return false;
         }
-
-        f.act.value = act;
-        f.submit();
+        if(confirm('선택한 상품을 장바구니에서 삭제할까요?')) {
+            f.act.value = act;
+            f.submit();
+        }
     }
 
     return true;

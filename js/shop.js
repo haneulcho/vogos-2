@@ -373,7 +373,7 @@ function add_sel_option(type, id, option, price, stock)
     opt += "<input type=\"hidden\" class=\"io_price\" value=\""+price+"\">";
     opt += "<input type=\"hidden\" class=\"io_stock\" value=\""+stock+"\">";
     opt += "<span class=\"sit_opt_subj\">"+option+"</span>";
-    if(parseFloat(price) > 0) {
+    if(parseInt(price) != 0) {
         opt += "<span class=\"sit_opt_prc\">"+opt_prc+"</span>";    
     }
     opt += "<div>";
