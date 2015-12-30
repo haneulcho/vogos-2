@@ -224,9 +224,8 @@ $it_send_cost = 0;
 <!-- 네이버 프리미엄로그분석 전환페이지 설정_ 장바구니담기 -->
  <script type="text/javascript" src="http://wcs.naver.net/wcslog.js"> </script> 
  <script type="text/javascript">
-var $interValue = "<?php echo $tot_price; ?>";
 var _nasa={};
- _nasa["cnv"] = wcs.cnv("3",$interValue);
+ _nasa["cnv"] = wcs.cnv("3","10");
 </script>
 
 <script>
