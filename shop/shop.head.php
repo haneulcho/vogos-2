@@ -21,6 +21,7 @@ include_once(G5_LIB_PATH.'/latest.lib.php');
     include G5_BBS_PATH.'/newwin.inc.php'; // 팝업레이어
  } ?>
 <header id="hd" class="fullWidth">
+    <div class="icon_flag"><a href="http://en.vogos.com"><img src="<?php echo G5_SHOP_SKIN_URL; ?>/img/icon_flag_en.png" alt="VOGOS LONDON" /></a></div>
     <h1><a href="<?php echo G5_SHOP_URL; ?>"><img src="<?php echo G5_SHOP_SKIN_URL ?>/img/logo2.png" alt="<?php echo $config['cf_title']; ?>"></a></h1>
     <div class="fr">
         <div class="icon_sales"><a href="<?php echo G5_SHOP_URL; ?>/event.php?ev_id=1450682888"><img src="<?php echo G5_SHOP_SKIN_URL; ?>/img/icon_sale.gif" alt="UP TO 15% OFF" title="UP TO 15% OFF"></a></div>

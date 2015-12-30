@@ -3,6 +3,9 @@
 body {min-width:1110px;}
 .default_contents {padding:50px 100px;background-color:#f3f3f0;}
 .f3f3f0 {background-color:#f3f3f0;}
+#hd {position:relative;}
+#hd .icon_flag {position:absolute;top:8px;left:0;}
+#hd .icon_flag img {width:75px;}
 #forderform select {height:35px;background-color:#f8f8f8;color:#6c6165;font-weight:bold;
 	-webkit-border-radius:3px;
   border-radius:3px;
