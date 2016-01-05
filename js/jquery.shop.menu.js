@@ -41,6 +41,10 @@ $(function(){
         hide_menu = true;
     });
 
+    $(".gnb_sub_s .sct_li").mouseover(function() {
+        hide_menu = false;
+    });
+
     $gnb.focusin(function() {
         $(".gnb_1dli").removeClass("gnb_1dli_over gnb_1dli_over2 gnb_1dli_on");
         $(this).parent().addClass("gnb_1dli_over gnb_1dli_on");
