@@ -250,14 +250,25 @@ if(defined('G5_SET_DEVICE')) {
 // G5_MOBILE_AGENT : config.php 에서 선언
 //------------------------------------------------------------------------------
 if (G5_USE_MOBILE && $set_device) {
-    if ($_REQUEST['device']=='pc')
+    if ($_SERVER['HTTP_HOST'] == 'm.vogos.com') {
+        if ($_REQUEST['device']=='pc') {
+            $is_mobile = false;
+        } else if ($_REQUEST['device']=='mobile') {
+            $is_mobile = true;
+        } else if (is_mobile()) {
+            $is_mobile = true;
+        } else {
+            $is_mobile = true;
+        }
+    } else if ($_REQUEST['device']=='pc') {
         $is_mobile = false;
-    else if ($_REQUEST['device']=='mobile')
+    } else if ($_REQUEST['device']=='mobile') {
         $is_mobile = true;
-    else if (isset($_SESSION['ss_is_mobile']))
+    } else if (isset($_SESSION['ss_is_mobile'])) {
         $is_mobile = $_SESSION['ss_is_mobile'];
-    else if (is_mobile())
+    } else if (is_mobile()) {
         $is_mobile = true;
+    }
 } else {
     $set_device = false;
 }
