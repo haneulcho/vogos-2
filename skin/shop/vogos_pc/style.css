@@ -141,12 +141,12 @@ a.gnb_1da {display:inline-block;margin-top:19px;padding:11px 17px 13px;text-over
 .owlbest .item .slider_txt a .sct_cost {font-weight:700;font-size:13px;}
 
 /* 관련상품 스킨 제작 */
-#sct_cate {position:relative;padding:0 0 10px;background-color:#F3F3F1;}
-#sct_cate header {height:38px;padding:27px 0 0 0;color:#6c6164;}
+#sct_cate {position:relative;padding:0 0 20px;background-color:#F3F3F1;}
+#sct_cate header {height:38px;padding:30px 0 0 0;color:#6c6164;}
 #sct_cate header h2 {float:left;margin:0;padding:0;font-size:18px;font-weight:700;line-height:1em;height:auto;}
 #sct_cate header h2>span {margin-left:15px;font-size:14px;font-weight:400;}
 #sct_cate header>span {display:block;float:left;font-size:18px;}
-.sct_cate_blit_left {margin-right:22px;}
+.sct_cate_blit_left {margin:0 22px 0 59px;}
 .sct_cate_blit_right {margin-left:22px;}
 
 .owlcate {margin:0 auto;height:353px;}
@@ -172,14 +172,26 @@ transition: all 300ms;
 -o-transition: all 300ms;}
 .owlcate .item .slider_txt a .sct_basic {padding:8px 0;color:#777;font-size:12px;letter-spacing:-1px;line-height:1.4;}
 .owlcate .item .slider_txt a .sct_cost {font-weight:700;font-size:13px;}
+.owlcate .item .slider_txt a .sct_cost strike {display:inline-block;margin:0 5px 0 0;color:#EF4D32;font-weight:normal;font-size:12px;}
 .owlcate .item:hover .slider_txt a {background-color:rgba(255,232,71,0.6);transition: all 300ms;
 -webkit-transition: all 300ms;
 -moz-transition: all 300ms;
 -o-transition: all 300ms;}
 .owlcate_btns {position:relative;}
-.owlcate_btns .owlcate_btn {position:absolute;top:125px;width:50px;font-size:70px;color:#9E8D92;z-index:9;text-align:center;cursor:pointer;}
-.owlcate_btns .nextBtn {right:70px;}
-.owlcate_btns .prevBtn {left:55px;}
+.owlcate_btns .owlcate_btn {position:absolute;top:125px;width:50px;font-size:60px;color:#9E8D92;z-index:9;text-align:center;cursor:pointer;
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  -ms-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  transition: all .3s ease;}
+.owlcate_btns:hover .owlcate_btn {color:#ef4d32;
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  -ms-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  transition: all .3s ease;}
+.owlcate_btns .nextBtn {right:50px;}
+.owlcate_btns .prevBtn {left:50px;}
 
 /* 배너 */
 #sbn_side{width:1000px;height:150px;overflow:hidden;position:relative}
@@ -1322,8 +1334,10 @@ color:#8a8a8a;font-size: 1.083em;line-height: 30px;height:30px;border:1px solid 
   #stv {display:block;}
   .gnb_sub {padding:24px 45px;}
   #sct_best header {height:38px;padding:27px 140px 0 0;color:#fff;}
-  #sct_cate header {height:38px;padding:27px 140px 0 255px;color:#6c6164;}
+  #sct_cate header {height:38px;padding:27px 0 0 0;color:#6c6164;}
   .owlbest {margin:0 auto;padding-right:140px;height:353px;}
+  .owlcate_btns .nextBtn {right:120px;}
+  .owlcate_btns .prevBtn {left:120px;}
   #smb_my > .fullWidth {padding:15px 140px 30px 0;}
   #sod_title header {height:38px;padding:35px 140px 26px 0;color:#fff;background:url('img/cart/title_cart.png') no-repeat;}
   .sit_right {right:165px;text-align:right;}
