@@ -64,9 +64,4 @@ if ($i > 0) echo "</ul>\n";
 
 if($i == 0) echo "<p class=\"sct_noitem\">Your search returns no results.</p>\n";
 ?>
-<script>
-  jQuery(function($){ 
-    $(".sct li:nth-child(odd)").addClass("odd_margin");
-  }); 
-</script>
 <!-- } 상품진열 60 서브 카테고리 우측 상품 리스트 끝 -->

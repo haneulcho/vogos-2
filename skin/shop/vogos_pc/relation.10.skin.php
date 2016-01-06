@@ -5,7 +5,7 @@ if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0);
 ?>
 
-<!-- 상품진열 10 시작 { -->
+<!-- 관련상품진열 10 시작 { -->
 <?php
 for ($i=1; $row=sql_fetch_array($result); $i++) {
     if ($this->list_mod >= 2) { // 1줄 이미지 : 2개 이상
@@ -21,7 +21,7 @@ for ($i=1; $row=sql_fetch_array($result); $i++) {
         if ($this->css) {
             echo "<ul class=\"{$this->css}\">\n";
         } else {
-            echo "<ul class=\"sct sct_rel_20\">\n";
+            echo "<ul class=\"sct sch_list sct_rel_20\">\n";
         }
     }
 
@@ -123,5 +123,4 @@ $(function() {
     });
 });
 </script>
-<!-- } 상품진열 20 끝 -->
-<!-- } 상품진열 10 끝 -->
+<!-- } 관련상품진열 10 끝 -->

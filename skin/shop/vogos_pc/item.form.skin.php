@@ -327,6 +327,46 @@ $video_frame = "<iframe src=\"".$video_src."\" width=\"330\" height=\"590\" fram
 <!-- } 관련상품 끝 -->
 <?php } ?>
 
+<?php
+$ca1 = sql_fetch(" select ca_id from {$g5['g5_shop_item_table']} where it_id = '{$it['it_id']}' ");
+$cate = substr($ca1['ca_id'], 0, 2);
+$ca2 = sql_fetch(" select ca_name from {$g5['g5_shop_category_table']} where ca_id = '$cate' ");
+$cate_name = $ca2['ca_name'];
+?>
+
+<!-- 카테고리 분류상품 시작 { -->
+<div id="sct_cate" class="item best_item">
+    <header class="fullWidth">
+        <span class="sct_cate_blit_left">/</span><h2><?php echo $cate_name; ?> <span>NEW ARRIVALS</span></h2><span class="sct_cate_blit_right">/</span>
+    </header>
+<?php
+    $set_it_cate = substr($cate, 0, 2);
+    $order_by = 'it_time desc';
+    $list_mod = 5;
+    $list_row = 3;
+    $cate_img_width = 170;
+    $cate_img_height = 220;
+
+    $list = new item_list();
+    $list->set_category($set_it_cate, 1);
+    $list->set_order_by($order_by);
+    $list->set_list_mod($list_mod);
+    $list->set_list_row($list_row);
+    $list->set_img_size($cate_img_width, $cate_img_height);
+    $list->set_list_skin(G5_SHOP_SKIN_PATH.'/relation.20.skin.php');
+    $list->set_view('it_img', true);
+    $list->set_view('it_id', true);
+    $list->set_view('it_name', true);
+    $list->set_view('it_basic', true);
+    $list->set_view('it_cust_price', true);
+    $list->set_view('it_price', true);
+    $list->set_view('it_icon', false);
+    $list->set_view('sns', false);
+    echo $list->run();
+?>
+</div>
+<!-- } 카테고리 분류상품 끝 -->
+
 </section> <!-- sit_ov_bg END -->
 
 </form>
