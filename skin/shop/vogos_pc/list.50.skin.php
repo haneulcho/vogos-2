@@ -6,7 +6,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
 add_javascript('<script src="'.G5_SHOP_SKIN_URL.'/js/jquery.shop.list.js"></script>', 10);
 ?>
  
-<!-- 상품진열 20 (분류 기본 리스트) 시작 { -->
+<!-- 상품진열 50 (검색 분류 기본 리스트) 시작 { -->
 <?php
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     if ($i % $this->list_mod == 0) { // 1줄 이미지 : 2개 이상
@@ -30,7 +30,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     }
 
     if ($this->view_it_img) {
-        echo get_it_image_best($row['it_id'], $this->img_width, $this->img_height, 8, '', '', 'original', stripslashes($row['it_name']))."\n";
+        echo get_it_image_best($row['it_id'], $this->img_width, $this->img_height, 8, '', '', 'original', stripslashes($row['it_name']))."</a>\n";
     }
 
     if ($this->href) {
@@ -39,7 +39,6 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 
     if ($this->view_it_name) {
         echo stripslashes($row['it_name'])."\n";
-        echo "</a>\n";
     }
 
     if ($this->href) {
@@ -47,7 +46,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     }
 
     if ($this->view_it_basic && $row['it_basic']) {
-        echo "<div class=\"sct_basic\">".stripslashes($row['it_basic'])."</div>\n";
+        echo "<div class=\"sct_basic\"><a href=\"{$this->href}{$row['it_id']}\" class=\"sct_a\">".stripslashes($row['it_basic'])."</a></div>\n";
     }
 
     if ($this->href) {
@@ -129,4 +128,4 @@ $(function() {
     });
 });
 </script>
-<!-- } 상품진열 20 끝 -->
+<!-- } 상품진열 50 끝 -->
