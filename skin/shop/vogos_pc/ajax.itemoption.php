@@ -13,8 +13,12 @@ $is_soldout = is_soldout($it['it_id']);
 
 // 주문가능체크
 $is_orderable = true;
-if(!$it['it_use'] || $it['it_tel_inq'] || $is_soldout)
-    die(json_encode(array('error' => '상품을 구매할 수 없습니다.')));
+if(!$it['it_use'] || $it['it_tel_inq']) {
+    die(json_encode(array('error' => '현재 판매중인 상품이 아닙니다.')));
+}
+if($is_soldout) {
+    die(json_encode(array('error' => '품절된 상품입니다.')));
+}
 ?>
 <?php
 $item_ct_qty = 1;

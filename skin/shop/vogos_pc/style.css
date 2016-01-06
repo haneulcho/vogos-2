@@ -583,16 +583,31 @@ box-shadow: 0px 1px 3px 0px rgba(233, 228, 223, 0.46);
 
 /*셀렉트박스*/
 .fancy-select {position: relative;font-weight: bold;text-transform: uppercase;color: #fff;margin-right:5px;margin:0 10px;}
-.fancy-select .trigger {border-radius:3px;cursor:pointer;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;position:relative;border:1px solid #fff;color:#333;width:205px;text-indent:5px;height:27px;padding-left:5px;line-height:27px;-webkit-appearance: none;font-weight:normal;background: url(img/select_btn.gif) no-repeat right #fff;}
-.fancy-select .trigger:hover{background-color:#f0f0f0}
-.fancy-select .trigger.open {background-color:#eeeeee}
-.fancy-select ul.options {width:219px;list-style: none;margin: 0;position: absolute;top: 28px !important;left: 0;visibility: hidden;z-index: 50;max-height: 200px;overflow: auto;background:#fff;min-width:100px;text-align:left;font-size:1em;font-weight:normal;}
-.fancy-select ul.options.open {visibility: visible;top: 50px;
-transition: opacity 300ms ease-out, top 300ms ease-out;
--webkit-transition: opacity 300ms ease-out, top 300ms ease-out;-moz-transition: opacity 300ms ease-out, top 300ms ease-out;
--ms-transition: opacity 300ms ease-out, top 300ms ease-out;-o-transition: opacity 300ms ease-out, top 300ms ease-out;}
-.fancy-select ul.options li {padding: 8px 12px;color: #999;cursor: pointer}
-.fancy-select ul.options li.hover {background:#eee;color:#666}
+.fancy-select .trigger {border-radius:3px;cursor:pointer;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;position:relative;color:#333;width:207px;text-indent:5px;height:30px;padding-left:5px;line-height:27px;-webkit-appearance: none;font-weight:normal;background: url(img/select_btn.gif) no-repeat right #fff;
+-webkit-border-radius:3px;
+-moz-border-radius:3px;
+-o-border-radius:3px;}
+.fancy-select .trigger:hover{background-color:#E6E6E6}
+.fancy-select .trigger.open {background-color:#ddd;
+box-shadow:0px 2px 5px 0px rgba(109, 109, 109, 0.3) inset;
+-webkit-box-shadow:0px 2px 5px 0px rgba(109, 109, 109, 0.3) inset;
+-moz-box-shadow:0px 2px 5px 0px rgba(109, 109, 109, 0.3) inset;
+-o-box-shadow:0px 2px 5px 0px rgba(109, 109, 109, 0.3) inset;}
+.fancy-select ul.options {width:190px;list-style:none;margin: 0;position: absolute;top:30px !important;left:11px;visibility: hidden;z-index: 50;max-height: 200px;overflow: auto;background:#353535;min-width:100px;text-align:left;font-size:1em;font-weight:normal;border-radius:0 0 3px 3px;
+-webkit-border-radius:0 0 3px 3px;
+-moz-border-radius:0 0 3px 3px;
+-o-border-radius:0 0 3px 3px;}
+.fancy-select ul.options.open {visibility: visible;top: 50px;}
+.fancy-select ul.options li {padding: 10px 14px;color:#ddd;cursor:pointer;
+box-shadow:0px 2px 5px 0px rgba(109, 109, 109, 0.1) inset;
+-webkit-box-shadow:0px 2px 5px 0px rgba(109, 109, 109, 0.1) inset;
+-moz-box-shadow:0px 2px 5px 0px rgba(109, 109, 109, 0.1) inset;
+-o-box-shadow:0px 2px 5px 0px rgba(109, 109, 109, 0.1) inset;
+transition: all 300ms;
+-webkit-transition: all 300ms;
+-moz-transition: all 300ms;
+-o-transition: all 300ms;}
+.fancy-select ul.options li.hover {background:#f7dc56;color:#000}
 
 
 /* 검색 리스트 목록 스킨 50 */

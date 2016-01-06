@@ -3,6 +3,7 @@ if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 
 // add_stylesheet('css 구문', 출력순서); 숫자가 작을 수록 먼저 출력됨
 add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0);
+add_javascript('<script src="'.G5_SHOP_SKIN_URL.'/js/jquery.shop.list.js"></script>', 10);
 ?>
 
 <!-- 관련상품진열 10 시작 { -->
@@ -32,7 +33,7 @@ for ($i=1; $row=sql_fetch_array($result); $i++) {
     }
 
     if ($this->view_it_img) {
-        echo get_it_image_best($row['it_id'], $this->img_width, $this->img_height, 8, '', '', 'original', stripslashes($row['it_name']))."\n";
+        echo get_it_image_best($row['it_id'], $this->img_width, $this->img_height, 8, '', '', 'original', stripslashes($row['it_name']))."</a>\n";
     }
 
     if ($this->href) {
@@ -41,7 +42,6 @@ for ($i=1; $row=sql_fetch_array($result); $i++) {
 
     if ($this->view_it_name) {
         echo stripslashes($row['it_name'])."\n";
-        echo "</a>\n";
     }
 
     if ($this->href) {
@@ -49,7 +49,7 @@ for ($i=1; $row=sql_fetch_array($result); $i++) {
     }
 
     if ($this->view_it_basic && $row['it_basic']) {
-        echo "<div class=\"sct_basic\">".stripslashes($row['it_basic'])."</div>\n";
+        echo "<div class=\"sct_basic\"><a href=\"{$this->href}{$row['it_id']}\" class=\"sct_a\">".stripslashes($row['it_basic'])."</a></div>\n";
     }
 
     if ($this->href) {
@@ -93,8 +93,9 @@ for ($i=1; $row=sql_fetch_array($result); $i++) {
 
         echo"<div class=\"sct_cart_m\">
             <div class=\"sct_cart_btn\" style=\"width:70px;height:40px\">
-                <button type=\"button\" class=\"btn_cart_m\" onclick=\"location.href='{$this->href}{$row['it_id']}'\"><i class=\"ion-android-cart\"></i>CART</button>
+                <button type=\"button\" class=\"btn_cart_m\" data-it_id=\"{$row['it_id']}\"><i class=\"ion-android-cart\"></i>CART</button>
             </div>
+            <div class=\"sct_cart_op\"></div>
         </div>\n";
 
         echo "</div>\n";

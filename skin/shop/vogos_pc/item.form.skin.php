@@ -8,11 +8,6 @@ add_javascript('<script src="'.G5_SHOP_SKIN_URL.'/js/jquery.primarycolor.min.js"
 add_javascript('<script src="'.G5_SHOP_SKIN_URL.'/js/jquery.magnific-popup.min.js"></script>', 0);
 ?>
 
-<form name="fitem" method="post" action="<?php echo $action_url; ?>" onsubmit="return fitem_submit(this);">
-<input type="hidden" name="it_id[]" value="<?php echo $it_id; ?>">
-<input type="hidden" name="sw_direct">
-<input type="hidden" name="url">
-
 <div id="sit_ov_title">
     <div class="fullWidth">
         <div class="sit_left">
@@ -49,6 +44,10 @@ $video_frame = "<iframe src=\"".$video_src."\" width=\"330\" height=\"590\" fram
 ?>
 
 <section id="sit_ov_bg">
+<form name="fitem" method="post" action="<?php echo $action_url; ?>" onsubmit="return fitem_submit(this);">
+<input type="hidden" name="it_id[]" value="<?php echo $it_id; ?>">
+<input type="hidden" name="sw_direct">
+<input type="hidden" name="url">
 <div id="sit_ov_wrap" class="fullWidth">
     <!-- 상품이미지 미리보기 시작 { -->
     <div id="sit_pvi">
@@ -311,7 +310,7 @@ $video_frame = "<iframe src=\"".$video_src."\" width=\"330\" height=\"590\" fram
     </section>
     <!-- } 상품문의 끝 -->
 </div>
-
+</form>
 <?php if ($default['de_rel_list_use']) { ?>
 <!-- 관련상품 시작 { -->
     <?php
@@ -368,9 +367,6 @@ $cate_name = $ca2['ca_name'];
 <!-- } 카테고리 분류상품 끝 -->
 
 </section> <!-- sit_ov_bg END -->
-
-</form>
-
 
 <script>
 $(function(){
