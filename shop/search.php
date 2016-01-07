@@ -177,7 +177,7 @@ $total_page  = ceil($total_count / $items); // 전체 페이지 계산
         <li><a href="#" class="btn01" onclick="set_sort('it_sum_qty', 'desc'); return false;">most popular</a></li>
         <li><a href="#" class="btn01" onclick="set_sort('it_price', 'asc'); return false;">price (Low to High)</a></li>
         <li><a href="#" class="btn01" onclick="set_sort('it_price', 'desc'); return false;">price (High to Low)</a></li>
-        <li><a href="#" class="btn01" onclick="set_sort('it_update_time', 'desc'); return false;">latest</a></li>
+        <li><a href="#" class="btn01" onclick="set_sort('it_time', 'desc'); return false;">latest</a></li>
     </ul>
     <!-- } 검색된 분류 끝 -->
 

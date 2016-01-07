@@ -30,7 +30,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_CSS_URL.'/style.css">', 0
     </ul> -->
 
     <ul id="ssch_sort">
-        <li><a href="<?php echo $sct_sort_href; ?>it_update_time&amp;sortodr=desc" class="btn01">latest</a></li>
+        <li><a href="<?php echo $sct_sort_href; ?>it_time&amp;sortodr=desc" class="btn01">latest</a></li>
         <li><a href="<?php echo $sct_sort_href; ?>it_sum_qty&amp;sortodr=desc" class="btn01">popular</a></li>
         <li><a href="<?php echo $sct_sort_href; ?>it_price&amp;sortodr=asc" class="btn01">price<i class="ion-chevron-down"></i></a></li>
         <li><a href="<?php echo $sct_sort_href; ?>it_price&amp;sortodr=desc" class="btn01">price<i class="ion-chevron-up"></i></a></li>

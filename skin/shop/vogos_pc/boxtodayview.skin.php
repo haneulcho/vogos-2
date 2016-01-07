@@ -96,6 +96,7 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_SHOP_SKIN_URL.'/style.css">', 
         <ul id="stv_nb">
             <li><a href="<?php echo G5_SHOP_URL; ?>/cart.php"><i class="ion-android-cart"></i> CART</a></li>
             <li><a href="<?php echo G5_SHOP_URL; ?>/orderinquiry.php"><i class="ion-ios-paper-outline"></i> MY ORDER</a></li>
+            <li><a href="<?php echo G5_BBS_URL; ?>/qalist.php"><i class="ion-help-circled"></i> 1:1 Q&amp;A</a></li>
             <li><a href="<?php echo G5_BBS_URL; ?>/board.php?bo_table=notice"><i class="ion-chatbubble-working"></i> NOTICE &amp; EVENT</a></li>
         </ul>
     </div>

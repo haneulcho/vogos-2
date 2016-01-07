@@ -88,7 +88,7 @@ var itemlist_ca_id = "<?php echo $ca_id; ?>";
 
     // 상품 출력순서가 있다면
     if ($sort != "")
-        $order_by = $sort.' '.$sortodr.' , it_order, it_id desc';
+        $order_by = $sort.' '.$sortodr.' , it_order, it_time desc';
     else
         $order_by = 'it_order, it_time desc';
 
