@@ -7,7 +7,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
     if($is_admin) // 관리자이면 답변등록
     {
     ?>
-    <h2>답변등록</h2>
+    <h2><span class="glyphicon glyphicon-exclamation-sign"></span>답변을 기다리는 문의입니다. 지금 답변을 작성해주세요!</h2>
 
     <form name="fanswer" method="post" action="./qawrite_update.php" onsubmit="return fwrite_submit(this);" autocomplete="off">
     <input type="hidden" name="qa_id" value="<?php echo $view['qa_id']; ?>">
@@ -40,7 +40,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
         <?php } ?>
         <tr>
             <th><label for="qa_subject">제목</label></th>
-            <td><input type="text" name="qa_subject" value="" id="qa_subject" required class="frm_input required" size="50" maxlength="255"></td>
+            <td><input type="text" name="qa_subject" value="" id="qa_subject" required class="frm_input required" size="50" maxlength="255" style="width:auto"></td>
         </tr>
         <tr>
         <th scope="row"><label for="qa_content">내용<strong class="sound_only">필수</strong></label></th>

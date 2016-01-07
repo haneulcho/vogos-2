@@ -2,9 +2,17 @@
 if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 
 // add_stylesheet('css 구문', 출력순서); 숫자가 작을 수록 먼저 출력됨
-add_stylesheet('<link rel="stylesheet" href="'.$qa_skin_url.'/style.css">', 0);
+add_stylesheet('<link rel="stylesheet" href="'.$qa_skin_url.'/css/style.css">', 0);
+add_stylesheet('<link rel="stylesheet" href="'.$qa_skin_url.'/inlcude/bootstrap.css">', 0);
 ?>
 
+<div id="sct" class="sct_wrap">
+<div id="sod_title" class="rtap">
+    <header class="fullWidth">
+        <h2>1:1 Q &amp; A<span class="cart_item_num" style="width:170px"><i class="ion-heart"></i> <span style="font-size:13px;vertical-align:3px">무엇이든 물어보세요!</span></span></h2>
+    </header>
+</div>
+<div class="fullWidth">
 <section id="bo_w">
     <!-- 게시물 작성/수정 시작 { -->
     <form name="fwrite" id="fwrite" action="<?php echo $action_url ?>" onsubmit="return fwrite_submit(this);" method="post" enctype="multipart/form-data" autocomplete="off">
@@ -112,7 +120,6 @@ add_stylesheet('<link rel="stylesheet" href="'.$qa_skin_url.'/style.css">', 0);
 
     <div class="btn_confirm">
         <input type="submit" value="작성완료" id="btn_submit" accesskey="s" class="btn_submit">
-        <a href="<?php echo $list_href; ?>" class="btn_cancel">목록</a>
     </div>
     </form>
 
@@ -181,4 +188,5 @@ add_stylesheet('<link rel="stylesheet" href="'.$qa_skin_url.'/style.css">', 0);
     }
     </script>
 </section>
+</div></div>
 <!-- } 게시물 작성/수정 끝 -->
